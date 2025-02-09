@@ -1,0 +1,55 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="nav.css" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+      @theme {
+        --color-main: #f5004f;
+        --color-navbg: #181818;
+        --color-navbghover: #1f1f1f;
+        --color-navbgactive: #242424;
+        --color-inputnav: #1b1b1b;
+        --color-bodybg: #1c1c1c;
+      }
+    </style>
+  </head>
+  <body class="bg-bodybg">
+    <nav class="bg-navbg h-[70px] border-b-2 border-main flex items-center">
+      <div class="container flex items-center gap-[30px]">
+        <div class="h-[40px] aspect-square rounded-md bg-main cnt">M</div>
+        <div class="flex items-center h-[40px] w-[400px] relative">
+          <input
+            type="text"
+            class="navinput w-full h-full bg-inputnav rounded-lg outline-none tracking-wider transition-colors hover:bg-navbghover focus:bg-navbgactive"
+            placeholder="ძებნა..."
+          />
+          <button
+            class="cnt absolute h-[40px] aspect-square bg-main right-0 rounded-lg"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.0775 14.1L16.6441 16.6667M15.9033 9.65084C15.9033 13.14 13.0841 15.9683 9.60663 15.9683C6.12996 15.9683 3.31079 13.14 3.31079 9.65167C3.31079 6.16083 6.12996 3.33333 9.60663 3.33333C13.0841 3.33333 15.9033 6.16167 15.9033 9.65084Z"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>

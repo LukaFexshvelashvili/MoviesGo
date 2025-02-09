@@ -1,0 +1,58 @@
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: mbold;
+  src: url("./assets/fonts/OnService-Bold.ttf");
+}
+@font-face {
+  font-family: mmedium;
+  src: url("./assets/fonts/OnService-Medium.ttf");
+}
+@font-face {
+  font-family: mregular;
+  src: url("./assets/fonts/OnService-Regular.ttf");
+}
+@font-face {
+  font-family: msemibold;
+  src: url("./assets/fonts/OnService-SemiBold.ttf");
+}
+body {
+  color: white;
+  font-family: msemibold;
+}
+.cnt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
