@@ -1,3 +1,55 @@
 .navinput {
-  padding: 0 15px;
-} /*# sourceMappingURL=nav.css.map */
+  padding-left: 16px;
+}
+
+.navcats {
+  color: rgba(255, 255, 255, 0.9);
+}
+.navcats p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+.navcats p::before {
+  position: absolute;
+  content: "";
+  height: 2px;
+  bottom: -10px;
+  border-radius: 5px;
+  width: 0%;
+  transition: width 0.4s;
+  box-shadow: 0 -8px 18px var(--main);
+  background-color: var(--main);
+}
+.navcats p:hover:before {
+  width: 100%;
+}
+
+.navprofile {
+  height: 40px;
+  aspect-ratio: 1/1;
+  border-radius: 8px;
+  border: 2px solid var(--main);
+  padding: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.navprofile div {
+  background-color: #212121;
+  transition: background-color 0.2s;
+  height: 100%;
+  width: 100%;
+}
+.navprofile div:hover {
+  background-color: #272727;
+}
+
+.navicons {
+  height: 25px;
+  cursor: pointer;
+}
+.navicons svg {
+  height: 22px;
+}/*# sourceMappingURL=nav.css.map */

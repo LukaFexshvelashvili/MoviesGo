@@ -1,0 +1,135 @@
+.mg_slider {
+  overflow: hidden;
+  .mg_slider_shadow {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+      to top,
+      #1c1c1c,
+      rgba(28, 28, 28, 0.6),
+      rgba(28, 28, 28, 0.1)
+    );
+  }
+  .mg_slider_img {
+    object-position: 0 -130px;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+}
+.mg_slider_indicators {
+  position: absolute;
+  z-index: 3;
+  bottom: 15px;
+  align-items: center;
+  gap: 8px;
+  div {
+    height: 10px;
+    border-radius: 3px;
+    aspect-ratio: 1/ 1;
+    background-color: rgba(72, 72, 72, 0.3);
+    cursor: pointer;
+  }
+  .mg_slider_indicator_active {
+    background-color: var(--main);
+  }
+}
+.mg_slider_actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  .mg_slider_icon {
+    background: rgba(28, 28, 28, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    backdrop-filter: blur(20px);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &:hover {
+      background: rgba(28, 28, 28, 0.8);
+    }
+  }
+  .mg_slider_love {
+    svg path {
+      transition: fill 0.3s;
+    }
+  }
+  .mg_slider_watchlater {
+    svg path {
+      transition: fill 0.3s;
+    }
+  }
+  .mg_slider_love_active {
+    svg path {
+      fill: var(--main);
+    }
+  }
+  .mg_slider_watchlater_active {
+    svg path {
+      fill: var(--main);
+    }
+  }
+}
+.mg_slider_info {
+  gap: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  .mg_slider_subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+  .mg_slider_title {
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+    font-size: 24px;
+  }
+  .mg_slider_imdb {
+    color: #ffbb00;
+    font-size: 14px;
+  }
+  .mg_slider_genres {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    div {
+      cursor: pointer;
+      padding: 6px 15px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      font-family: msemibold;
+      font-size: 14px;
+      background: rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+      &:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+    div:nth-child(1) {
+      color: #d10345;
+    }
+    div:nth-child(2) {
+      color: #ebac00;
+    }
+    div:nth-child(3) {
+      color: #00aad9;
+    }
+  }
+}

@@ -1,3 +1,53 @@
 .navinput {
-  padding: 10px 0;
+  padding-left: 16px;
+}
+.navcats {
+  color: rgba(255, 255, 255, 0.9);
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    &::before {
+      position: absolute;
+      content: "";
+      height: 2px;
+      bottom: -10px;
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.4s;
+      box-shadow: 0 -8px 18px var(--main);
+      background-color: var(--main);
+    }
+    &:hover:before {
+      width: 100%;
+    }
+  }
+}
+
+.navprofile {
+  height: 40px;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  border: 2px solid var(--main);
+  padding: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  div {
+    background-color: #212121;
+    transition: background-color 0.2s;
+    height: 100%;
+    width: 100%;
+    &:hover {
+      background-color: #272727;
+    }
+  }
+}
+.navicons {
+  height: 25px;
+  cursor: pointer;
+  svg {
+    height: 22px;
+  }
 }
