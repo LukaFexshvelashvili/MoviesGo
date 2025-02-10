@@ -1,6 +1,5 @@
 .mg_card {
   position: relative;
-
   .mg_img_side {
     display: flex;
     justify-content: center;
@@ -9,50 +8,11 @@
     height: 360px;
     width: 240px;
     border-radius: 10px;
+    overflow: hidden;
+
     cursor: pointer;
     user-select: none;
-    .mg_card_description {
-      position: absolute;
-      width: 100%;
-      max-height: 100%;
-      background-color: #212121;
-      left: calc(100% + 10px);
-      top: 0;
-      border-radius: 10px;
-      padding: 15px;
-      transition: visibility 0.1s, opacity 0.6s;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      visibility: hidden;
-      opacity: 0;
-      h3 {
-        color: rgba(255, 255, 255, 0.9);
-        font-family: msemibold;
-        letter-spacing: 0.5px;
-        font-size: 14px;
-      }
-      p,
-      .mg_card_description_p {
-        color: rgba(255, 255, 255, 0.6);
-        font-family: mmedium;
-        letter-spacing: 0.5px;
-        font-size: 14px;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 11;
-        -webkit-box-orient: vertical;
-      }
-      p {
-        text-align: start;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        span {
-          color: rgba(255, 255, 255, 0.9);
-        }
-      }
-    }
+
     img {
       height: 100%;
       width: 100%;
@@ -78,10 +38,6 @@
       }
     }
     &:hover {
-      .mg_card_description {
-        visibility: visible;
-        opacity: 1;
-      }
       .mg_card_play {
         opacity: 1;
       }
@@ -91,7 +47,6 @@
     }
     .mg_card_shadow {
       border-radius: 10px;
-
       z-index: 2;
       top: 0;
       left: 0;
@@ -176,5 +131,63 @@
 
       color: var(--main);
     }
+  }
+}
+.mg_info_grab {
+  display: none;
+}
+
+.mg_card_description {
+  pointer-events: none;
+  position: fixed;
+  z-index: 6;
+  width: 280px;
+  height: 270px;
+  background-color: #212121;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+  padding: 15px;
+  transition: visibility 0.1s, opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  visibility: hidden;
+  opacity: 0;
+
+  h3 {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: msemibold;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+  }
+  p,
+  .mg_card_description_p {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: mmedium;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 11;
+    -webkit-box-orient: vertical;
+  }
+  p {
+    text-align: start;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    span {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+.mg_card_description_active {
+  visibility: visible;
+  opacity: 1;
+}
+@media (max-width: 800px) {
+  .mg_card_description {
+    display: none !important;
   }
 }

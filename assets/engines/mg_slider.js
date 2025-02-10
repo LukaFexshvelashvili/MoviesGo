@@ -11,7 +11,6 @@ mg_slider_indicators.classList.add("flex", "mg_slider_indicators");
 mg_slider.appendChild(mg_slider_indicators);
 
 let activeSlider = 0;
-let maxSlider = 0;
 function changeSlider(slide) {
   let maxSlider = mg_slider_row.children.length;
 
@@ -52,20 +51,20 @@ let startX;
 let isMouseDown = false;
 
 // Touch Events
-document.addEventListener("touchstart", (e) =>
+mg_slider.addEventListener("touchstart", (e) =>
   startSwipe(e.touches[0].clientX)
 );
-document.addEventListener("touchend", (e) =>
+mg_slider.addEventListener("touchend", (e) =>
   endSwipe(e.changedTouches[0].clientX)
 );
 
 // Mouse Events
-document.addEventListener("mousedown", (e) => {
+mg_slider.addEventListener("mousedown", (e) => {
   isMouseDown = true;
   startSwipe(e.clientX);
 });
 
-document.addEventListener("mouseup", (e) => {
+mg_slider.addEventListener("mouseup", (e) => {
   if (isMouseDown) {
     endSwipe(e.clientX);
     isMouseDown = false;
