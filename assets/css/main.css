@@ -20,19 +20,19 @@ html {
 
 @font-face {
   font-family: mbold;
-  src: url("./assets/fonts/OnService-Bold.ttf");
+  src: url("../fonts/OnService-Bold.ttf");
 }
 @font-face {
   font-family: mmedium;
-  src: url("./assets/fonts/OnService-Medium.ttf");
+  src: url("../fonts/OnService-Medium.ttf");
 }
 @font-face {
   font-family: mregular;
-  src: url("./assets/fonts/OnService-Regular.ttf");
+  src: url("../fonts/OnService-Regular.ttf");
 }
 @font-face {
   font-family: msemibold;
-  src: url("./assets/fonts/OnService-SemiBold.ttf");
+  src: url("../fonts/OnService-SemiBold.ttf");
 }
 body {
   color: white;

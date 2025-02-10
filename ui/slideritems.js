@@ -1,0 +1,45 @@
+export const mg_slider_items = [
+  {
+    id: 3123,
+    image: "./assets/images/1.png",
+    altimage: "",
+    link: "",
+    title: "SNOWFALL - თოვა",
+    subtitle: "3 სეზონი | 12 სერია",
+    genres: ["დრამა", "მძაფრსიუჟეტიანი", "დეტექტივი"],
+    title: "SNOWFALL",
+    imdb: 8.4,
+  },
+  {
+    id: 4001,
+    image: "https://i.redd.it/cruw1r2imjy71.jpg",
+    altimage: "",
+    link: "",
+    title: "Breaking Point",
+    subtitle: "1 სეზონი | 8 სერია",
+    genres: ["თრილერი", "დრამა", "მძაფრსიუჟეტიანი"],
+    imdb: 7.9,
+  },
+  {
+    id: 4002,
+    image:
+      "https://www.bollywoodhungama.com/wp-content/uploads/2022/11/Pathaan-6.jpg",
+    altimage: "",
+    link: "",
+    title: "Dark Horizon",
+    subtitle: "2 სეზონი | 10 სერია",
+    genres: ["ფანტასტიკა", "დრამა", "მისტიკა"],
+    imdb: 8.2,
+  },
+  {
+    id: 4003,
+    image:
+      "https://www.hdwallpapers.in/download/sonic_the_hedgehog_5_hd_movies-1920x1080.jpg",
+    altimage: "",
+    link: "",
+    title: "Silent Echo",
+    subtitle: "1 სეზონი | 6 სერია",
+    genres: ["დრამა", "საოჯახო", "მუსიკალური"],
+    imdb: 7.5,
+  },
+];
