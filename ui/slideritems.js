@@ -1,7 +1,7 @@
 export const mg_slider_items = [
   {
     id: 3123,
-    image: "./assets/images/1.png",
+    image: "../assets/images/1.png",
     altimage: "",
     link: "",
     title: "SNOWFALL - თოვა",

@@ -13,7 +13,7 @@ nav.innerHTML = `
               placeholder="ძებნა..."
             />
             <button
-              class="cnt absolute h-[40px] aspect-square bg-main right-0 rounded-lg"
+              class="cnt searchnavinput"
             >
               <svg
                 width="20"

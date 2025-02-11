@@ -29,7 +29,7 @@ nav .nav_starter span {
   align-items: center;
 }
 .auth_split .auth_block {
-  flex: 1;
+  flex: 0 0 50%;
   height: 100%;
 }
 
@@ -86,4 +86,15 @@ nav .nav_starter span {
   color: var(--main);
   letter-spacing: 0.5px;
   cursor: pointer;
+}
+
+.auth_last {
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=auth.css.map */

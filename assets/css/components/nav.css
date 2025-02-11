@@ -67,15 +67,30 @@
   width: 100%;
   border-radius: 8px;
   outline: none;
-  transition: colors 0.3s;
+  transition: background-color 0.3s;
   background-color: var(--inputnav);
   letter-spacing: 0.5px;
+  font-family: mmedium;
 }
 .navinput:hover {
   background-color: var(--inputnavbghover);
 }
 .navinput:focus {
   background-color: var(--inputnavbgactive);
+}
+
+.searchnavinput {
+  position: absolute;
+  height: 40px;
+  aspect-ratio: 1/1;
+  right: 0;
+  background-color: var(--main);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.searchnavinput:hover {
+  background-color: var(--mainhover);
 }
 
 .navlogo {

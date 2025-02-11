@@ -79,7 +79,7 @@ mg_cardslider.forEach((currentSlider) => {
                   />
                 </svg>
               </div>
-              <img src="./assets/images/Snowfall.webp" />
+              <img src="../assets/images/Snowfall.webp" />
               <div class="mg_card_shadow"></div>
               <div class="mg_card_bookmark cnt">
                 <svg

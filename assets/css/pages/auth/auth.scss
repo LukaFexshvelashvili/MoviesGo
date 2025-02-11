@@ -26,8 +26,9 @@ nav {
   height: 100%;
   width: 100%;
   align-items: center;
+
   .auth_block {
-    flex: 1;
+    flex: 0 0 50%;
     height: 100%;
   }
 }
@@ -82,4 +83,12 @@ nav {
   color: var(--main);
   letter-spacing: 0.5px;
   cursor: pointer;
+}
+.auth_last {
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

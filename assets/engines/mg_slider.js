@@ -1,4 +1,4 @@
-import { mg_slider_items } from "../..//ui/slideritems.js";
+import { mg_slider_items } from "../../ui/slideritems.js";
 
 const mg_slider = document.querySelector(".mg_slider");
 
