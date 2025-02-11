@@ -1,0 +1,88 @@
+:root {
+  --white: rgba(255, 255, 255, 0.9);
+  --whitelow: rgba(255, 255, 255, 0.6);
+  --texthead: rgba(255, 255, 255, 0.9);
+  --textdesc: rgba(255, 255, 255, 0.6);
+  --main: #f5004f;
+  --mainclear: rgba(245, 0, 78, 0.1);
+  --mainclearhover: rgba(245, 0, 78, 0.15);
+  --mainhover: #fd115c;
+  --sbutton: #262626;
+  --sbuttonhover: #292929;
+  --navbg: #181818;
+  --pbutton: #1f1f1f;
+  --pbuttonhover: #252525;
+  --input: #1f1f1f;
+  --inputhover: #212121;
+  --inputactive: rgb(34, 34, 34);
+  --comment: #1e1e1e;
+  --inputnav: #1b1b1b;
+  --bodybg: #1c1c1c;
+  --inputnavbghover: #1f1f1f;
+  --inputnavbgactive: #242424;
+}
+
+*::selection {
+  background-color: var(--main);
+  color: var(--texthead);
+}
+body {
+  background-color: #1c1c1c;
+}
+button {
+  outline: none;
+  border: none;
+}
+a {
+  outline: none;
+  text-decoration: none;
+}
+.dbt {
+  display: block;
+  cursor: pointer;
+  padding: 8px 25px;
+  letter-spacing: 0.5px;
+  background-color: var(--main);
+  color: var(--texthead);
+  font-size: 14px;
+  font-family: msemibold;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: var(--mainhover);
+  }
+}
+.dbts {
+  display: block;
+  cursor: pointer;
+  padding: 8px 25px;
+  letter-spacing: 0.5px;
+  background-color: var(--sbutton);
+  color: var(--texthead);
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: var(--sbuttonhover);
+  }
+}
+.dfi {
+  height: 45px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 0 15px;
+  outline: none;
+  border: none;
+  color: var(--texthead);
+  background-color: var(--input);
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  font-family: msemibold;
+  &:hover {
+    background-color: var(--inputhover);
+  }
+  &:focus {
+    background-color: var(--inputactive);
+  }
+}

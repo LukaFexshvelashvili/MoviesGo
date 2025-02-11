@@ -116,7 +116,7 @@
   letter-spacing: 0.8px;
   font-weight: 400;
   font-family: mmedium;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--texthead);
 }
 .mg_card .mg_card_info .mg_card_imdb {
   font-size: 13px;
@@ -147,14 +147,14 @@
   opacity: 0;
 }
 .mg_card_description h3 {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--texthead);
   font-family: msemibold;
   letter-spacing: 0.5px;
   font-size: 14px;
 }
 .mg_card_description p,
 .mg_card_description .mg_card_description_p {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--textdesc);
   font-family: mmedium;
   letter-spacing: 0.5px;
   font-size: 14px;
@@ -170,7 +170,7 @@
   -webkit-box-orient: vertical;
 }
 .mg_card_description p span {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--texthead);
 }
 
 .mg_card_description_active {

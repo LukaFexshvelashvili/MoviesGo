@@ -1,8 +1,15 @@
 .navinput {
   padding-left: 16px;
 }
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: var(--navbg);
+  height: 70px;
+  border-bottom: 2px solid var(--main);
+}
 .navcats {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--texthead);
   p {
     display: flex;
     justify-content: center;
@@ -50,4 +57,27 @@
   svg {
     height: 22px;
   }
+}
+.navinput {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  outline: none;
+  transition: colors 0.3s;
+  background-color: var(--inputnav);
+  letter-spacing: 0.5px;
+  &:hover {
+    background-color: var(--inputnavbghover);
+  }
+  &:focus {
+    background-color: var(--inputnavbgactive);
+  }
+}
+
+.navlogo {
+  height: 40px;
+  aspect-ratio: 1/1;
+  border-radius: 6px;
+  background-color: var(--main);
+  text-align: 24px;
 }
