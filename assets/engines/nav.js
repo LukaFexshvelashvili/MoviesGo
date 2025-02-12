@@ -1,12 +1,12 @@
 const nav = document.querySelector(".navbar");
 
 nav.innerHTML = ` 
-      <div class="container flex items-center gap-[30px] justify-between">
-        <div class="flex items-center gap-8">
+      <div class="container navcont">
+        <div class="navwrap">
           <div class="navlogo cnt">
             M
           </div>
-          <div class="flex items-center h-[40px] w-[350px] relative">
+          <div class="navinputblock">
             <input
               type="text"
               class="navinput"
@@ -33,13 +33,13 @@ nav.innerHTML = `
             </button>
           </div>
         </div>
-        <div class="flex items-center gap-8 navcats">
+        <div class="navcats">
           <p>ფილმები</p>
           <p>სერიალები</p>
           <p>ანიმაციები</p>
           <p>ანიმეები</p>
         </div>
-        <div class="flex items-center gap-3.5">
+        <div class="navactions">
           <div class="cnt navicons notifications">
             <svg
               viewBox="0 0 24 24"

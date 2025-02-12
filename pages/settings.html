@@ -1,0 +1,58 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>settings</title>
+
+    <link rel="stylesheet" href="../assets/css/components/colors.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/pages/settings/settings.css" />
+    <link rel="stylesheet" href="../assets/css/components/nav.css" />
+  </head>
+  <body>
+    <div class="mg_web_loader">
+      <div class="popcorn_container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="60"
+          height="60"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="var(--main)"
+            d="M7 22H4.75s-.75 0-.94-1.35L2.04 3.81L2 3.5C2 2.67 2.9 2 4 2s2 .67 2 1.5C6 2.67 6.9 2 8 2s2 .67 2 1.5c0-.83.9-1.5 2-1.5c1.09 0 2 .66 2 1.5c0-.83.9-1.5 2-1.5s2 .67 2 1.5c0-.83.9-1.5 2-1.5s2 .67 2 1.5l-.04.31l-1.77 16.84C20 22 19.25 22 19.25 22H7M17.85 4.93C17.55 4.39 16.84 4 16 4c-.81 0-1.64.36-2 .87L13.78 20h2.88l1.19-15.07M10 4.87C9.64 4.36 8.81 4 8 4c-.84 0-1.55.39-1.85.93L7.34 20h2.88L10 4.87Z"
+          />
+        </svg>
+      </div>
+    </div>
+    <nav class="navbar"></nav>
+    <div class="content_manager">
+      <div class="sidebar">
+        <div class="setting activesetting">
+          <p class="settingstarter">ინტერფეისი</p>
+          <p>მთავარი ფერი</p>
+          <p>თემები</p>
+          <p>სინათლე</p>
+          <p>ქასთომი</p>
+          <p>რეჟიმები</p>
+        </div>
+      </div>
+      <div class="settings_content">
+        <h2>ინტერფეისი</h2>
+        <div class="interface_blocks">
+          <div class="interface_block">
+            <p>მთავარი ფერი</p>
+            <div class="select_row colors_selector"></div>
+          </div>
+          <div class="interface_block">
+            <p>თემები</p>
+            <div class="select_row themes_selector"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="../../ui/mg_engine.js"></script>
+    <script src="../assets/engines/nav.js"></script>
+    <script type="module" src="../ui/engine.js"></script>
+  </body>
+</html>

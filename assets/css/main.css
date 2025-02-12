@@ -1,15 +1,41 @@
-html {
+html,
+:host {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  -webkit-tap-highlight-color: transparent;
+}
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  border: 0 solid;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+input,
+button {
+  outline: none;
+  border: none;
 }
 
+button,
+input,
+select,
+optgroup,
+textarea,
+::file-selector-button {
+  font: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  border-radius: 0;
+  background-color: transparent;
+  opacity: 1;
+}
 @font-face {
   font-family: mbold;
   src: url("../fonts/OnService-Bold.ttf");
@@ -30,6 +56,53 @@ body {
   color: white;
   font-family: msemibold;
 }
+.mg_web_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  background-color: var(--bodybg);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.mg_web_loader_hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.mg_web_loader svg path {
+  transition: 0.3s;
+}
+
+.popcorn_container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+}
+
+.popcorn_container svg {
+  animation: shake 1.5s infinite ease-in-out;
+}
+
 .cnt {
   display: flex;
   justify-content: center;

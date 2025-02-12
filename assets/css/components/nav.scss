@@ -5,10 +5,31 @@
   display: flex;
   align-items: center;
   background-color: var(--navbg);
-  height: 70px;
+  height: var(--navheight);
   border-bottom: 2px solid var(--main);
 }
+.navcont {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: space-between;
+}
+.navinputblock {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 40px;
+  width: 350px;
+}
+.navactions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .navcats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   color: var(--texthead);
   p {
     display: flex;
@@ -32,7 +53,11 @@
     }
   }
 }
-
+.navwrap {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
 .navprofile {
   height: 40px;
   aspect-ratio: 1 / 1;
@@ -64,9 +89,10 @@
   border-radius: 8px;
   outline: none;
   transition: background-color 0.3s;
+  color: var(--texthead);
   background-color: var(--inputnav);
   letter-spacing: 0.5px;
-  font-family: mmedium;
+  font-family: msemibold;
   &:hover {
     background-color: var(--inputnavbghover);
   }

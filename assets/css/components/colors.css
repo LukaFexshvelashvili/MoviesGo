@@ -1,12 +1,14 @@
 :root {
+  --main: var(--bodybg);
+  --mainshadow: rgba(245, 0, 78, 0.3);
+  --mainhover: rgb(253, 50, 114);
+  --mainclear: rgba(245, 0, 78, 0.1);
+  --mainclearhover: rgba(245, 0, 78, 0.15);
   --white: rgba(255, 255, 255, 0.9);
   --whitelow: rgba(255, 255, 255, 0.6);
   --texthead: rgba(255, 255, 255, 0.9);
   --textdesc: rgba(255, 255, 255, 0.6);
-  --main: #f5004f;
-  --mainhover: #fd3272;
-  --mainclear: rgba(245, 0, 78, 0.1);
-  --mainclearhover: rgba(245, 0, 78, 0.15);
+  --sidebar: #252525;
   --sbutton: #262626;
   --sbuttonhover: #292929;
   --navbg: #181818;
@@ -18,8 +20,10 @@
   --comment: #1e1e1e;
   --inputnav: #1b1b1b;
   --bodybg: #1c1c1c;
+  --bodybgclear: rgba(28, 28, 28, 0.1);
   --inputnavbghover: #1f1f1f;
   --inputnavbgactive: #242424;
+  --navheight: 70px;
 }
 
 *::-moz-selection {
@@ -33,7 +37,7 @@
 }
 
 body {
-  background-color: #1c1c1c;
+  background-color: var(--bodybg);
 }
 
 button {

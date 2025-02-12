@@ -5,7 +5,7 @@ mg_cardslider.forEach((currentSlider) => {
   const mg_cardslider_right = currentSlider.querySelector(
     ".mg_cardslider_right"
   );
-
+  const gap = 20;
   const list = ["", "", "", "", "", "", "", "", "", "", "", ""];
 
   // EVENTS
@@ -41,14 +41,14 @@ mg_cardslider.forEach((currentSlider) => {
   function scrollSliderLeft() {
     mg_cardslider_row.style.scrollBehavior = "smooth";
     mg_cardslider_row.scrollLeft -=
-      mg_cardslider_row.firstElementChild.clientWidth;
+      mg_cardslider_row.firstElementChild.clientWidth + gap;
     mg_cardslider_row.style.scrollBehavior = "unset";
   }
   function scrollSliderRight() {
     mg_cardslider_row.style.scrollBehavior = "smooth";
 
     mg_cardslider_row.scrollLeft +=
-      mg_cardslider_row.firstElementChild.clientWidth;
+      mg_cardslider_row.firstElementChild.clientWidth + gap;
     mg_cardslider_row.style.scrollBehavior = "unset";
   }
   initializeSlider();

@@ -1,0 +1,112 @@
+.content_manager {
+  display: flex;
+  align-items: start;
+  height: calc(100% - var(--navheight));
+}
+
+.sidebar {
+  background-color: var(--sidebar);
+  flex: 0 0 350px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: start;
+  padding: 30px 0px;
+}
+
+.setting {
+  position: relative;
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  letter-spacing: 0.5px;
+  width: 100%;
+}
+.setting p {
+  color: var(--textdesc);
+  font-family: mmedium;
+  cursor: pointer;
+}
+.setting .settingstarter {
+  position: relative;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: var(--texthead);
+  font-family: msemibold;
+}
+.setting::after {
+  position: absolute;
+  content: "";
+  height: 0px;
+  width: 3px;
+  background-color: var(--main);
+  right: 0;
+  border-radius: 4px 0px 0px 4px;
+  transition: opacity 0.4s, height 0.2s;
+  opacity: 0;
+}
+.setting:hover:after {
+  height: 40px;
+  opacity: 1;
+}
+
+.activesetting::after {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 3px;
+  background-color: var(--main);
+  right: 0;
+  border-radius: 4px 0px 0px 4px;
+  opacity: 1;
+}
+
+.settings_content {
+  flex: 1 1 auto;
+  padding: 30px;
+}
+.settings_content h2 {
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--texthead);
+}
+.settings_content .interface_blocks {
+  padding: 20px;
+  margin-top: 50px;
+  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.settings_content .interface_blocks .interface_block {
+  width: 400px;
+  height: 200px;
+  background-color: var(--sidebar);
+  box-shadow: 0 0 40px var(--mainshadow);
+  outline: solid 2px var(--main);
+  border-radius: 20px;
+  padding: 15px;
+}
+.settings_content .interface_blocks .interface_block p {
+  color: var(--texthead);
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+.settings_content .interface_blocks .interface_block .select_row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+.settings_content .interface_blocks .interface_block .select_row .selection {
+  cursor: pointer;
+  height: 55px;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+}
+.settings_content .interface_blocks .interface_block .select_row .selected {
+  outline: 3px solid var(--texthead);
+}/*# sourceMappingURL=settings.css.map */
