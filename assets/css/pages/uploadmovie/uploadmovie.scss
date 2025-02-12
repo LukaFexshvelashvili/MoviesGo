@@ -1,0 +1,234 @@
+h1 {
+  text-align: center;
+  color: var(--texthead);
+  font-size: 32px;
+  margin-top: 50px;
+}
+.upload_section {
+  margin-bottom: 100px;
+}
+input,
+textarea {
+  height: 40px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: var(--input);
+  border-radius: 10px;
+  color: var(--texthead);
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: 0.2s;
+  &:focus {
+    background-color: var(--inputactive);
+  }
+}
+textarea {
+  padding: 10px;
+  height: 150px;
+  resize: none;
+}
+.ai_help {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 50px 0;
+  input {
+    text-align: center;
+  }
+}
+.ai_button {
+  height: 40px;
+  width: 100%;
+  color: var(--texthead);
+  background-color: var(--main);
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 10px;
+  &:hover {
+    background-color: var(--mainhover);
+  }
+}
+.upload_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .labeled {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .clear_inp {
+      height: 28px;
+      background-color: var(--secondcolorhover);
+      display: none;
+      justify-content: center;
+      aspect-ratio: 1/1;
+      position: absolute;
+      bottom: 5px;
+      right: 7px;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: var(--triplecolor);
+      }
+      svg {
+        height: 22px;
+        path {
+          fill: var(--textdesc);
+        }
+      }
+    }
+    .ps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .nr {
+        color: var(--textdesc);
+      }
+      .dl {
+        color: var(--main);
+        cursor: pointer;
+      }
+    }
+    p {
+      padding-left: 10px;
+      color: var(--texthead);
+    }
+  }
+}
+.genres_listing,
+.types_listing {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.type_button,
+.genre_button {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background-color: var(--secondcolor);
+  transition: 0.2s;
+  color: var(--buttoncolor);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--secondcolorhover);
+  }
+  &.genre_active,
+  &.type_active {
+    color: var(--texthead);
+    background-color: var(--buttoncolor);
+  }
+}
+.players {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+.players_row {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 10px 0;
+}
+.custom_file {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  background-color: var(--secondcolor);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.fileInput {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkings {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  color: var(--red);
+  .optional {
+    color: var(--optional);
+  }
+  .checked {
+    color: var(--green);
+  }
+}
+.pictureshow {
+  position: relative;
+  max-height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  img {
+    max-height: 400px;
+  }
+}
+.mg_ai_web_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.mg_ai_web_loader_hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.mg_ai_web_loader svg path {
+  transition: 0.3s;
+}
+
+.popcorn_container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+}
+
+.popcorn_container svg {
+  animation: shake 1.5s infinite ease-in-out;
+}
+#ai_suggestion {
+  font-family: mmedium;
+  color: var(--textdesc);
+}
