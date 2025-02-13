@@ -1,0 +1,15 @@
+.watchlater_content {
+  margin-top: 50px;
+}
+.watchlater_content h2 {
+  color: var(--texthead);
+  letter-spacing: 0.5px;
+  font-size: 26px;
+}
+.watchlater_content .card_row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 10px;
+  margin-top: 50px;
+}/*# sourceMappingURL=watchlater.css.map */

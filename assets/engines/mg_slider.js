@@ -7,7 +7,7 @@ mg_slider_row.classList.add("mg_slider_row");
 mg_slider.appendChild(mg_slider_row);
 
 const mg_slider_indicators = document.createElement("div");
-mg_slider_indicators.classList.add("flex", "mg_slider_indicators");
+mg_slider_indicators.classList.add("mg_slider_indicators");
 mg_slider.appendChild(mg_slider_indicators);
 
 let activeSlider = 0;

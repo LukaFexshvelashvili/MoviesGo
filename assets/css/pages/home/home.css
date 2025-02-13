@@ -29,4 +29,24 @@
   --decorColor: #ea00bf;
   --main: #ea00bf;
   --decorBgColor: #47003a;
+}
+
+.animes_row {
+  position: relative;
+  padding: 30px 0;
+  width: 100%;
+}
+.animes_row .decor_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.2);
+  height: 100%;
+  width: 100%;
+}
+.animes_row .mg_cardslider {
+  margin: 0;
 }/*# sourceMappingURL=home.css.map */

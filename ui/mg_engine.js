@@ -1,14 +1,14 @@
 import { color_list, themes_list } from "./themes.js";
 let main_color = color_list[0].main;
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", () => {
   const mg_web_loader = document.querySelector(".mg_web_loader");
 
   mg_web_loader.classList.add("mg_web_loader_hidden");
   mg_web_loader.addEventListener("transitioned", () => {
     mg_web_loader.remove();
   });
-};
+});
 
 if (localStorage.getItem("ui")) {
   const decoded = JSON.parse(localStorage.getItem("ui"));

@@ -2,14 +2,22 @@
   padding-left: 16px;
 }
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  height: 70px;
+  max-height: 70px;
   display: flex;
   align-items: center;
   background-color: var(--navbg);
   height: var(--navheight);
   z-index: 9;
   border-bottom: 2px solid var(--main);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 .navcont {
   display: flex;
@@ -113,7 +121,7 @@
     align-items: start;
     padding: 0 5px;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
   }
   .navblockaction {
     color: var(--whitenavblock);
@@ -149,7 +157,7 @@
   width: 100%;
   border-radius: 5px;
   background-color: var(--main);
-  margin-top: 15px;
+  margin-top: 25px;
   color: var(--texthead);
   letter-spacing: 0.5px;
   transition: background-color 0.3s;
@@ -166,6 +174,9 @@
   }
 }
 .navinput {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   height: 100%;
   width: 100%;
   border-radius: 8px;
@@ -183,6 +194,9 @@
   }
 }
 .searchnavinput {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   position: absolute;
   height: 40px;
   aspect-ratio: 1/1;
@@ -202,4 +216,101 @@
   background-color: var(--main);
   color: var(--texthead);
   text-align: 24px;
+}
+.navsearch {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  overflow-y: auto;
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 450px;
+  background-color: var(--secondbg);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  top: 60px;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.3s, opacity 0.3s;
+  &.navsearchshow {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+  }
+}
+.mg_nav_card {
+  cursor: pointer;
+  transition: background-color 0.2s;
+  background-color: var(--secondbg);
+  padding: 10px;
+  height: 200px;
+  display: flex;
+  gap: 10px;
+  align-items: starts;
+  &:hover {
+    background-color: var(--secondbghover);
+  }
+  .mg_nav_image {
+    height: 100%;
+    img {
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+  .mg_nav_info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 5px 0;
+    color: var(--texthead);
+    letter-spacing: 0.5px;
+    h3:nth-child(2) {
+      color: var(--textdesc);
+    }
+    h3 {
+      font-size: 16px;
+      line-height: 20px;
+    }
+    h3,
+    p {
+      overflow: hidden;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+    }
+    .nav_card_imdb {
+      font-family: mbold;
+      color: var(--main);
+      font-size: 14px;
+    }
+    .p_info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-family: mmedium;
+      margin-top: 15px;
+      font-size: 14px;
+      span {
+        color: var(--textdesc);
+      }
+    }
+    .info_bottom {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      width: 100%;
+      .nav_card_type {
+        height: 26px;
+        width: 90px;
+        border-radius: 5px;
+        color: var(--texthead);
+        background-color: var(--main);
+        font-size: 13px;
+      }
+    }
+  }
 }

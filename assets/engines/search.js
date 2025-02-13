@@ -2,17 +2,39 @@ import { types, genres } from "../../ui/themes.js";
 
 let selected_types = [];
 let selected_genres = [];
-let selected_year = [];
-let selected_imdb = [];
-let selected_countries = [];
+let selected_year = [1900, 2025];
+let selected_imdb = [0, 10];
 
 const filter_container = document.querySelector(".filter_container");
 const filter_shadow = document.querySelector(".filter_shadow");
 const filter_types_row = document.querySelector(".filter_types_row");
 const filter_genres_row = document.querySelector(".filter_genres_row");
+const year_from = document.getElementById("year_from");
+const year_to = document.getElementById("year_to");
+const imdb_from = document.getElementById("imdb_from");
+const imdb_to = document.getElementById("imdb_to");
+
+const clearfiltersbutton = document.getElementById("clearfilters");
+const filterit = document.getElementById("filterit");
 
 const filtershowbutton = document.querySelector(".filtershowbutton");
 const close_filters = document.querySelector(".close_filters");
+
+filterit.addEventListener("click", filtermovies);
+
+function filtermovies() {
+  const filteringdata = {
+    type: selected_types.length !== 0 ? selected_types : -1,
+    genres: selected_genres.length !== 0 ? selected_genres : -1,
+    year_from: selected_year[0],
+    year_to: selected_year[1],
+    imdb_from: selected_imdb[0],
+    imdb_to: selected_imdb[1],
+  };
+  console.log(filteringdata);
+}
+
+clearfiltersbutton.addEventListener("click", clearFilters);
 filtershowbutton.addEventListener("click", () => {
   filter_container.classList.add("filter_container_show");
 });
@@ -22,46 +44,106 @@ close_filters.addEventListener("click", () => {
 filter_shadow.addEventListener("click", () => {
   filter_container.classList.remove("filter_container_show");
 });
-function showFilter(type) {}
+year_from.addEventListener("input", () => {
+  selected_year[0] = year_from.value;
+});
+year_to.addEventListener("input", () => {
+  selected_year[1] = year_to.value;
+});
+imdb_from.addEventListener("input", () => {
+  selected_imdb[0] = imdb_from.value;
+});
+imdb_to.addEventListener("input", () => {
+  selected_imdb[1] = imdb_to.value;
+});
+function clearFilters() {
+  selected_types = [];
+  selected_genres = [];
+  selected_year = [1900, 2025];
+  selected_imdb = [0, 10];
+  search_genres_row.value = "";
+  year_from.value = selected_year[0];
+  year_to.value = selected_year[1];
+  imdb_from.value = selected_imdb[0];
+  imdb_to.value = selected_imdb[1];
+
+  initializeFilters();
+}
 
 function initializeFilters() {
-  types.forEach((type) => {
-    filter_types_row.innerHTML += `
-    <div data-type="${type.id}" style="--buttoncolor:${type.color}" class="type_button" >${type.title}</div>
-    `;
-  });
-  const type_button = document.querySelectorAll(".type_button");
-  Array.from(type_button).forEach((button) => {
-    button.addEventListener("click", () => {
-      if (button.classList.contains("type_active")) {
-        button.classList.remove("type_active");
-        arrayRemove(selected_types, button.getAttribute("data-type"));
-      } else {
-        button.classList.add("type_active");
-        selected_types.unshift(button.getAttribute("data-type"));
-      }
-    });
-  });
+  let genresHTML = genres
+    .map(
+      (genre) => `
+    <div data-genre="${genre.title}" style="--buttoncolor:${genre.color}" class="genre_button">
+      ${genre.title}
+    </div>`
+    )
+    .join("");
 
-  genres.forEach((genres) => {
-    filter_genres_row.innerHTML += `
-    <div data-genre="${genres.title}" style="--buttoncolor:${genres.color}" class="genre_button" >${genres.title}</div>
-    `;
-  });
-  const genre_buttons = document.querySelectorAll(".genre_button");
-  Array.from(genre_buttons).forEach((button) => {
-    button.addEventListener("click", () => {
-      if (button.classList.contains("genre_active")) {
-        button.classList.remove("genre_active");
-        arrayRemove(selected_genres, button.getAttribute("data-genre"));
-      } else {
-        button.classList.add("genre_active");
-        selected_genres.unshift(button.getAttribute("data-genre"));
-      }
-    });
-  });
+  filter_genres_row.innerHTML = genresHTML;
+
+  let typesHTML = types
+    .map(
+      (type) => `
+    <div data-type="${type.id}" style="--buttoncolor:${type.color}" class="type_button" >${type.title}</div>`
+    )
+    .join("");
+
+  filter_types_row.innerHTML = typesHTML;
 }
 initializeFilters();
+
+filter_types_row.addEventListener("click", (event) => {
+  if (event.target.classList.contains("type_button")) {
+    const type = event.target.getAttribute("data-type");
+
+    if (selected_types.includes(type)) {
+      event.target.classList.remove("type_active");
+      arrayRemove(selected_types, type);
+    } else {
+      selected_types.unshift(type);
+      event.target.classList.add("type_active");
+    }
+  }
+});
+
+const search_genres_row = document.querySelector(".search_genres_row");
+
+search_genres_row.addEventListener("input", () => {
+  let searchValue = search_genres_row.value.toLowerCase();
+  let filteredGenres = genres.filter((item) =>
+    item.title.toLowerCase().includes(searchValue)
+  );
+
+  let genresHTML = filteredGenres
+    .map(
+      (genre) => `
+      <div data-genre="${genre.title}" style="--buttoncolor:${
+        genre.color
+      }" class="genre_button${
+        selected_genres.includes(genre.title) ? " genre_active" : ""
+      }">
+        ${genre.title}
+      </div>`
+    )
+    .join("");
+
+  filter_genres_row.innerHTML = genresHTML;
+});
+
+filter_genres_row.addEventListener("click", (event) => {
+  if (event.target.classList.contains("genre_button")) {
+    const genre = event.target.getAttribute("data-genre");
+
+    if (selected_genres.includes(genre)) {
+      event.target.classList.remove("genre_active");
+      arrayRemove(selected_genres, genre);
+    } else {
+      selected_genres.unshift(genre);
+      event.target.classList.add("genre_active");
+    }
+  }
+});
 
 function arrayRemove(array, item) {
   const index = array.indexOf(item);

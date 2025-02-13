@@ -262,8 +262,8 @@
   font-family: mbold;
   padding: 8px 25px;
   border-radius: 10px;
-  background-color: var(--mainclear);
-  color: var(--main);
+  background-color: var(--adminclear);
+  color: var(--admin);
 }
 
 .c_form {

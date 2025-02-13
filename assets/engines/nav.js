@@ -1,20 +1,70 @@
 const nav = document.querySelector(".navbar");
 
-nav.innerHTML = ` 
-      <div class="container navcont">
+nav.innerHTML = `<div class="container navcont">
         <div class="navwrap">
-          <a href="index.html" class="navlogo cnt">
-            M
-          </a>
+          <a href="index.html" class="navlogo cnt"> M </a>
           <div class="navinputblock">
-            <input
-              type="text"
-              class="navinput"
-              placeholder="ძებნა..."
-            />
-            <button
-              class="cnt searchnavinput"
-            >
+            <div class="navsearch">
+              <div class="mg_nav_card">
+                <div class="mg_nav_image">
+                  <img src="../assets/images/Snowfall.webp" alt="" />
+                </div>
+                <div class="mg_nav_info">
+                  <div class="info_top">
+                    <h3>SNOWFALL</h3>
+                    <h3>თოვა</h3>
+                    <div class="p_info">
+                      <p>წელი: <span>2017</span></p>
+                      <p>რეჟისორი: <span>ანტონიო</span></p>
+                      <div class="nav_card_imdb">IMDb: 8.7</div>
+                    </div>
+                  </div>
+                  <div class="info_bottom">
+                    <div class="nav_card_type cnt">სერიალი</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mg_nav_card">
+                <div class="mg_nav_image">
+                  <img src="../assets/images/Snowfall.webp" alt="" />
+                </div>
+                <div class="mg_nav_info">
+                  <div class="info_top">
+                    <h3>SNOWFALL</h3>
+                    <h3>თოვა</h3>
+                    <div class="p_info">
+                      <p>წელი: <span>2017</span></p>
+                      <p>რეჟისორი: <span>ანტონიო</span></p>
+                      <div class="nav_card_imdb">IMDb: 8.7</div>
+                    </div>
+                  </div>
+                  <div class="info_bottom">
+                    <div class="nav_card_type cnt">სერიალი</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mg_nav_card">
+                <div class="mg_nav_image">
+                  <img src="../assets/images/Snowfall.webp" alt="" />
+                </div>
+                <div class="mg_nav_info">
+                  <div class="info_top">
+                    <h3>SNOWFALL</h3>
+                    <h3>თოვა</h3>
+                    <div class="p_info">
+                      <p>წელი: <span>2017</span></p>
+                      <p>რეჟისორი: <span>ანტონიო</span></p>
+                      <div class="nav_card_imdb">IMDb: 8.7</div>
+                    </div>
+                  </div>
+                  <div class="info_bottom">
+                    <div class="nav_card_type cnt">სერიალი</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <input type="text" class="navinput" placeholder="ძებნა..." />
+            <button class="cnt searchnavinput">
               <svg
                 width="20"
                 height="20"
@@ -80,33 +130,32 @@ nav.innerHTML = `
             </svg>
           </div>
           <div class="navprofile">
-          <div class="navprofileblock">
-            <div class="c_profile">
-          <div class="cnt c_profile_block">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21M8 7C8 8.06087 8.42143 9.07828 9.17157 9.82843C9.92172 10.5786 10.9391 11 12 11C13.0609 11 14.0783 10.5786 14.8284 9.82843C15.5786 9.07828 16 8.06087 16 7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7Z"
-                stroke="var(--whitenavblock)"
-                stroke-opacity="0.9"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-          <div class="c_profile_name">სტუმარი</div>
-        </div>
-        <div class="navline"></div>
-          <div class="navprofileblockactions"></div>
-          <button class="navsign">შესვლა</button>
-        
-          </div>
+            <div class="navprofileblock">
+              <div class="c_profile">
+                <div class="cnt c_profile_block">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21M8 7C8 8.06087 8.42143 9.07828 9.17157 9.82843C9.92172 10.5786 10.9391 11 12 11C13.0609 11 14.0783 10.5786 14.8284 9.82843C15.5786 9.07828 16 8.06087 16 7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7Z"
+                      stroke="var(--whitenavblock)"
+                      stroke-opacity="0.9"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div class="c_profile_name">სტუმარი</div>
+              </div>
+              <div class="navline"></div>
+              <div class="navprofileblockactions"></div>
+              <button class="navsign">შესვლა</button>
+            </div>
             <div class="cnt navprofilebutton">
               <svg
                 width="14"
@@ -128,12 +177,32 @@ nav.innerHTML = `
           </div>
         </div>
       </div>
+
     `;
 const navprofilebutton = document.querySelector(".navprofilebutton");
+const navinput = document.querySelector(".navinput");
+const navsearch = document.querySelector(".navsearch");
+const navinputblock = document.querySelector(".navinputblock");
 const navprofileblock = document.querySelector(".navprofileblock");
 const navprofileblockactions = document.querySelector(
   ".navprofileblockactions"
 );
+
+navinput.addEventListener("input", () => {
+  if (navinput.value.length >= 2) {
+    // request
+  }
+});
+
+navinput.addEventListener("click", () => {
+  navsearch.classList.add("navsearchshow");
+});
+
+document.addEventListener("click", (event) => {
+  if (!navinputblock.contains(event.target)) {
+    navsearch.classList.remove("navsearchshow");
+  }
+});
 
 function initializeNavBlock() {
   profileactions.forEach((action) => {

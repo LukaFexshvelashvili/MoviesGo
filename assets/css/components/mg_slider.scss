@@ -38,7 +38,6 @@
     opacity: 1;
   }
   .mg_slider_img {
-    object-position: 0 -130px;
     top: 0;
     left: 0;
     object-fit: cover;
@@ -47,6 +46,7 @@
   }
 }
 .mg_slider_indicators {
+  display: flex;
   position: absolute;
   z-index: 5;
   bottom: 15px;
