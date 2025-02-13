@@ -5,6 +5,7 @@
   --mainclear: rgba(245, 0, 78, 0.1);
   --mainclearhover: rgba(245, 0, 78, 0.15);
   --white: rgba(255, 255, 255, 0.9);
+  --whitenavblock: rgba(255, 255, 255, 0.8);
   --whitelow: rgba(255, 255, 255, 0.6);
   --texthead: rgba(255, 255, 255, 0.9);
   --textdesc: rgba(255, 255, 255, 0.6);
@@ -20,6 +21,8 @@
   --comment: #1e1e1e;
   --inputnav: rgb(27, 27, 27);
   --bodybg: #1c1c1c;
+  --bodybghover: #252525;
+  --secondbgcolor: rgb(31, 31, 31);
   --secondcolor: rgba(49, 49, 49, 0.2);
   --secondcolorhover: rgba(49, 49, 49, 0.3);
   --triplecolor: rgba(65, 65, 65, 0.3);

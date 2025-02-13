@@ -151,6 +151,10 @@
   font-family: msemibold;
   letter-spacing: 0.5px;
   font-size: 14px;
+  line-height: 20px;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
 }
 .mg_card_description p,
 .mg_card_description .mg_card_description_p {
@@ -159,9 +163,7 @@
   letter-spacing: 0.5px;
   font-size: 14px;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 11;
-  -webkit-box-orient: vertical;
+  font-weight: 400;
 }
 .mg_card_description p {
   text-align: start;

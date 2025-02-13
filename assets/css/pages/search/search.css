@@ -1,0 +1,198 @@
+.searchform {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  gap: 10px;
+  margin-top: 50px;
+}
+.searchform .searchinput {
+  height: 40px;
+  width: 100%;
+  background-color: var(--input);
+  color: var(--texthead);
+  padding: 0 15px;
+  transition: background-color 0.3s;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+.searchform .searchinput:hover {
+  background-color: var(--inputhover);
+}
+.searchform .searchinput:focus {
+  background-color: var(--inputactive);
+}
+.searchform .searchbutton {
+  height: 40px;
+  aspect-ratio: 1/1;
+  background-color: var(--main);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.searchform .searchbutton:hover {
+  background-color: var(--mainhover);
+}
+.searchform .filtershowbutton {
+  height: 40px;
+  width: 150px;
+  min-width: 150px;
+  letter-spacing: 0.5px;
+  color: var(--whitelow);
+  cursor: pointer;
+  background-color: var(--input);
+  transition: background-color 0.3s;
+  border-radius: 10px;
+}
+.searchform .filtershowbutton:hover {
+  background-color: var(--inputhover);
+}
+
+.founded {
+  margin-top: 40px;
+  padding: 0 10px;
+  letter-spacing: 1px;
+  font-family: mmedium;
+  color: var(--whitelow);
+}
+
+.cardrows {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.filter_container {
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.2s, opacity 0.2s;
+}
+.filter_container.filter_container_show {
+  opacity: 1;
+  visibility: visible;
+}
+.filter_container .filter_shadow {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.filter_container .filter_block_c {
+  position: relative;
+  z-index: 2;
+  height: 600px;
+  max-height: 600px;
+  width: 500px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.filter_container .filter_block_c .filter_block {
+  width: 100%;
+  height: 540px;
+  max-height: 540px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: var(--bodybg);
+  padding: 20px;
+}
+.filter_container .filter_block_c .filter_block h2 {
+  color: var(--texthead);
+  letter-spacing: 0.5px;
+  font-size: 16px;
+}
+
+.close_filters {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 40px;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  background-color: var(--input);
+  cursor: pointer;
+}
+.close_filters:hover {
+  background-color: var(--inputhover);
+}
+
+.type_button,
+.genre_button {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background-color: var(--secondcolor);
+  transition: 0.2s;
+  color: var(--buttoncolor);
+  cursor: pointer;
+}
+.type_button:hover,
+.genre_button:hover {
+  background-color: var(--secondcolorhover);
+}
+.type_button.genre_active, .type_button.type_active,
+.genre_button.genre_active,
+.genre_button.type_active {
+  color: var(--texthead);
+  background-color: var(--buttoncolor);
+}
+
+.filters_rower {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  justify-content: center;
+}
+
+.filter_inp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: mmedium;
+  color: var(--textdesc);
+  margin-top: 15px;
+}
+.filter_inp input {
+  width: 100px;
+  color: var(--texthead);
+  border-radius: 10px;
+  padding: 0 10px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  font-family: msemibold;
+  height: 40px;
+  background-color: var(--input);
+}
+
+.filter_confirm_block {
+  position: absolute;
+  width: 100%;
+  background-color: var(--bodybg);
+  left: 0;
+  padding: 10px;
+  z-index: 2;
+  height: 60px;
+  display: flex;
+  gap: 15px;
+  justify-content: end;
+  bottom: 0;
+}/*# sourceMappingURL=search.css.map */

@@ -215,3 +215,158 @@ export const themes_list = [
     inputnavbgactive: "#301300",
   },
 ];
+
+export const types = [
+  {
+    id: 0,
+    title: "ფილმი",
+    color: "#D10345",
+    bgcolor: "rgba(209, 3, 68, 0.1)",
+  },
+  {
+    id: 1,
+    title: "სერიალი",
+    color: "#1699ea",
+    bgcolor: "rgba(0, 121, 235, 0.1)",
+  },
+  {
+    id: 2,
+    title: "ანიმაცია",
+    color: "#1ad15a",
+    bgcolor: "rgba(26, 209, 90, 0.1)",
+  },
+  {
+    id: 3,
+    title: "ანიმე",
+    color: "#db00eb",
+    bgcolor: "rgba(219, 0, 235, 0.1)",
+  },
+];
+export const genres = [
+  { title: "დრამა", color: "#D10345", bgcolor: "rgba(209, 3, 68, 0.1)" },
+  {
+    title: "კომედია",
+    color: "#ebb400",
+    bgcolor: "rgba(235, 180, 0, 0.1)",
+  },
+  {
+    title: "თრილერი",
+    color: "#EB2F00",
+    bgcolor: "rgba(235, 47, 0, 0.1)",
+  },
+  {
+    title: "მისტიკა",
+    color: "#DF00EB",
+    bgcolor: "rgba(223, 0, 235, 0.1)",
+  },
+  {
+    title: "მძაფრ-სიუჟეტიანი",
+    color: "#EB7D00",
+    bgcolor: "rgba(235, 125, 0, 0.1)",
+  },
+  {
+    title: "მელოდრამა",
+    color: "#EB0071",
+    bgcolor: "rgba(235, 0, 114, 0.1)",
+  },
+  {
+    title: "საახალწლო",
+    color: "#00d71d",
+    bgcolor: "rgba(0, 215, 29, 0.1)",
+  },
+  {
+    title: "სამეცნიერო",
+    color: "#00a5d7",
+    bgcolor: "rgba(0, 165, 215, 0.1)",
+  },
+  {
+    title: "ფანტასტიკა",
+    color: "#C400EB",
+    bgcolor: "rgba(196, 0, 235, 0.1)",
+  },
+  {
+    title: "რომანტიკა",
+    color: "#eb00b4",
+    bgcolor: "rgba(235, 0, 180, 0.1)",
+  },
+  {
+    title: "ანიმაციური",
+    color: "#67c800",
+    bgcolor: "rgba(103, 200, 0, 0.7718)",
+  },
+  {
+    title: "კრიმინალური",
+    color: "#b5b5b5",
+    bgcolor: "rgba(181, 181, 181, 0.1)",
+  },
+  {
+    title: "ვესტერნი",
+    color: "#eb8100",
+    bgcolor: "rgba(235, 129, 0, 0.1)",
+  },
+  {
+    title: "საბავშვო",
+    color: "#67c800",
+    bgcolor: "rgba(103, 200, 0, 0.7718)",
+  },
+  {
+    title: "ეროტიული",
+    color: "#c80000",
+    bgcolor: "rgba(200, 0, 0, 0.1)",
+  },
+  {
+    title: "სათავგადასავლო",
+    color: "#00C317",
+    bgcolor: "rgba(0, 195, 23, 0.1)",
+  },
+  {
+    title: "საშინელებათა",
+    color: "#DB0004",
+    bgcolor: "rgba(219, 0, 4, 0.1)",
+  },
+  {
+    title: "საომარი",
+    color: "#00893E",
+    bgcolor: "rgba(0, 137, 62, 0.1)",
+  },
+  {
+    title: "ისტორიული",
+    color: "#F4C60B",
+    bgcolor: "rgba(244, 197, 11, 0.1)",
+  },
+  {
+    title: "მიუზიკლი",
+    color: "#DD0051",
+    bgcolor: "rgba(221, 0, 81, 0.1)",
+  },
+  {
+    title: "ბიოგრაფიული",
+    color: "#EBAC00",
+    bgcolor: "rgba(235, 172, 0, 0.1)",
+  },
+  {
+    title: "საოჯახო",
+    color: "#0091EB",
+    bgcolor: "rgba(0, 145, 235, 0.1)",
+  },
+  {
+    title: "სპორტული",
+    color: "#FF9215",
+    bgcolor: "rgba(255, 146, 21, 0.1)",
+  },
+  {
+    title: "დოკუმენტური",
+    color: "#EB005E",
+    bgcolor: "rgba(235, 0, 94, 0.1)",
+  },
+  {
+    title: "მოკლემეტრაჟიანი",
+    color: "#EB6E00",
+    bgcolor: "rgba(235, 110, 0, 0.1)",
+  },
+  {
+    title: "დეტექტივი",
+    color: "#00AAD9",
+    bgcolor: "rgba(0, 170, 217, 0.1)",
+  },
+];

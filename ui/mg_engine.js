@@ -47,15 +47,9 @@ function changeActiveColorHand(colorID) {
   if (colors) {
     if (colors) {
       localStorage.setItem("maincolor", colors.main);
-      document.documentElement.style.setProperty("--main", colors.main);
-      document.documentElement.style.setProperty(
-        "--mainshadow",
-        colors.mainshadow
-      );
-      document.documentElement.style.setProperty(
-        "--mainhover",
-        colors.mainhover
-      );
+      Array.from(Object.keys(colors)).forEach((item) => {
+        document.documentElement.style.setProperty(`--${item}`, colors[item]);
+      });
     }
   } else {
     localStorage.setItem("ui", JSON.stringify({ color: 0 }));

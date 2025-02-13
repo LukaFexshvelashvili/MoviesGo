@@ -56,6 +56,14 @@ body {
   color: white;
   font-family: msemibold;
 }
+
+*::-webkit-scrollbar {
+  width: 6px;
+  background-color: var(--secondcolor);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--main);
+}
 .mg_web_loader {
   position: fixed;
   top: 0;

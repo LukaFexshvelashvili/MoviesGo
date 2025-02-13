@@ -111,18 +111,12 @@ function changeActiveColor(button, buttons) {
     active_colors = get_active_colors.main;
     localStorage.setItem("ui", JSON.stringify({ color: get_active_colors.id }));
     button.classList.add("selected");
-    document.documentElement.style.setProperty(
-      "--main",
-      get_active_colors.main
-    );
-    document.documentElement.style.setProperty(
-      "--mainshadow",
-      get_active_colors.mainshadow
-    );
-    document.documentElement.style.setProperty(
-      "--mainhover",
-      get_active_colors.mainhover
-    );
+    Array.from(Object.keys(get_active_colors)).forEach((item) => {
+      document.documentElement.style.setProperty(
+        `--${item}`,
+        get_active_colors[item]
+      );
+    });
   }
 }
 function getTransition() {
