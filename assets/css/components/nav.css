@@ -75,7 +75,7 @@
   margin-left: 10px;
 }
 .navprofile div {
-  background-color: #212121;
+  background-color: rgba(51, 51, 51, 0.5);
   transition: background-color 0.2s;
   height: 100%;
   width: 100%;

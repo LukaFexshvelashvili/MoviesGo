@@ -3,17 +3,33 @@ const name_eng = document.getElementById("name_eng");
 const nameInp = document.getElementById("name");
 const subtitle = document.getElementById("subtitle");
 const year = document.getElementById("year");
+const country = document.getElementById("country");
+const imdb = document.getElementById("imdb");
 const creator = document.getElementById("creator");
 const actors = document.getElementById("actors");
 const description = document.getElementById("description");
 const player = document.getElementById("player");
 
 function changeValues(answer) {
+  let get_type = types.filter((item) => item.title == answer.type)[0];
+  if (get_type) {
+    typeChangeHand(get_type.id);
+  }
+  let genre_answer = answer.genres;
+
+  if (genre_answer) {
+    genre_answer.forEach((genre) => {
+      selectGenreHand(genre);
+    });
+  }
+
   name_eng.value = answer.name_eng;
-  name.value = answer.name;
+  nameInp.value = answer.name;
   year.value = answer.year;
+  country.value = answer.country;
+  imdb.value = answer.imdb;
   creator.value = answer.creator;
-  actors.value = answer.actors;
+  actors.value = answer.actors.join(", ");
   description.value = answer.description;
   ai_suggestion.innerText = `AI შემოთავაზება: ${answer.genres}`;
 }
@@ -39,7 +55,7 @@ async function sendAIrequest() {
         messages: [
           {
             role: "user",
-            content: `give me just json answer only for movie: ${ai_input.value} as {name_eng, name, year, creator, actors, description, genres} CAUTION answers should be in georgian language except name_eng`,
+            content: `give me just json answer only for movie: ${ai_input.value} as {type (return as, "ფილმი", "სერიალი", "ანიმაცია", "ანიმე"), name_eng, name, year, country, imdb, creator, actors, description, genres ( as array)} CAUTION answers should be in georgian language except name_eng`,
           },
         ],
       }),
@@ -48,7 +64,7 @@ async function sendAIrequest() {
 
     const data = await response.json();
     const answer = JSON.parse(
-      data.choices[0].message.content.replace(/```/g, "")
+      data.choices[0].message.content.replace(/```/g, "").replace("json", "")
     );
     changeValues(answer);
   } else {
@@ -64,14 +80,16 @@ const clear_inps = document.querySelectorAll(".clear_inp");
 const inputs = document.querySelectorAll("input, textarea");
 
 Array.from(inputs).forEach((item) => {
-  item.addEventListener("input", () => {
-    let delitem = item.closest(".labeled").querySelector(".clear_inp");
-    if (item.value > 0 && delitem) {
-      delitem.style.display = "flex";
-    } else if (delitem) {
-      delitem.style.display = "hidden";
-    }
-  });
+  if (item.getAttribute("id") !== "ai_input") {
+    item.addEventListener("input", () => {
+      let delitem = item.closest(".labeled").querySelector(".clear_inp");
+      if (item.value > 0 && delitem) {
+        delitem.style.display = "flex";
+      } else if (delitem) {
+        delitem.style.display = "hidden";
+      }
+    });
+  }
 });
 
 Array.from(clear_inps).forEach((item) => {
@@ -181,6 +199,12 @@ function initializeTypes() {
     });
   });
 }
+function typeChangeHand(id) {
+  const element = document.querySelector(`[data-type="${id}"]`);
+  element.classList.add("type_active");
+  movie_type = id;
+  type_check.classList.add("checked");
+}
 
 function initializeGenres() {
   genres.forEach((genre) => {
@@ -203,6 +227,30 @@ function initializeGenres() {
       }
     });
   });
+}
+function selectGenreHand(title) {
+  if (title == "რომანტიკული") {
+    const element3 = document.querySelector(`[data-genre="რომანტიკა"]`);
+    element3.classList.add("genre_active");
+    movie_genres.unshift("რომანტიკა");
+    genres_check.classList.add("checked");
+  }
+  if (title == "მეცნიერული ფანტასტიკა") {
+    const element1 = document.querySelector(`[data-genre="სამეცნიერო"]`);
+    const element2 = document.querySelector(`[data-genre="ფანტასტიკა"]`);
+    element1.classList.add("genre_active");
+    element2.classList.add("genre_active");
+    movie_genres.unshift("სამეცნიერო");
+    movie_genres.unshift("ფანტასტიკა");
+    genres_check.classList.add("checked");
+  } else {
+    const element = document.querySelector(`[data-genre="${title}"]`);
+    if (element) {
+      element.classList.add("genre_active");
+      movie_genres.unshift(title);
+      genres_check.classList.add("checked");
+    }
+  }
 }
 
 let types = [
@@ -367,6 +415,8 @@ const name_eng_check = document.getElementById("name_eng_check");
 const name_check = document.getElementById("name_check");
 const subtitle_check = document.getElementById("subtitle_check");
 const year_check = document.getElementById("year_check");
+const country_check = document.getElementById("country_check");
+const imdb_check = document.getElementById("imdb_check");
 const creator_check = document.getElementById("creator_check");
 const actors_check = document.getElementById("actors_check");
 const description_check = document.getElementById("description_check");
@@ -400,6 +450,20 @@ year.oninput = () => {
     year_check.classList.add("checked");
   } else {
     year_check.classList.remove("checked");
+  }
+};
+country.oninput = () => {
+  if (country.value.length > 2) {
+    country_check.classList.add("checked");
+  } else {
+    country_check.classList.remove("checked");
+  }
+};
+imdb.oninput = () => {
+  if (imdb.value.length > 1) {
+    imdb_check.classList.add("checked");
+  } else {
+    imdb_check.classList.remove("checked");
   }
 };
 creator.oninput = () => {
@@ -484,6 +548,16 @@ function checkall() {
     year_check.classList.add("checked");
   } else {
     year_check.classList.remove("checked");
+  }
+  if (country.value.length > 2) {
+    country_check.classList.add("checked");
+  } else {
+    country_check.classList.remove("checked");
+  }
+  if (imdb.value.length > 1) {
+    imdb_check.classList.add("checked");
+  } else {
+    imdb_check.classList.remove("checked");
   }
   if (creator.value.length > 2) {
     creator_check.classList.add("checked");
