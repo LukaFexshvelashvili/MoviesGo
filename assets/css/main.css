@@ -20,7 +20,9 @@ button {
   outline: none;
   border: none;
 }
-
+body {
+  overflow-x: hidden;
+}
 button,
 input,
 select,

@@ -101,3 +101,14 @@
     }
   }
 }
+
+@media (max-width: 780px) {
+  .p_starter {
+    .c_profile {
+      flex-direction: column;
+    }
+    .c_profile_name {
+      text-align: center;
+    }
+  }
+}

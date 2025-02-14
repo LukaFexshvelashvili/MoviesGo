@@ -28,7 +28,7 @@
     <nav class="navbar"></nav>
     <div class="content_manager">
       <div class="sidebar">
-        <div class="setting activesetting">
+        <div class="setting interface_setting activesetting">
           <p class="settingstarter">ინტერფეისი</p>
           <p>მთავარი ფერი</p>
           <p>თემები</p>
@@ -38,7 +38,10 @@
         </div>
       </div>
       <div class="settings_content">
-        <h2>ინტერფეისი</h2>
+        <div class="starter_content">
+          <div class="mobile_back">უკან</div>
+          <h2>ინტერფეისი</h2>
+        </div>
         <div class="interface_blocks">
           <div class="interface_block">
             <p>მთავარი ფერი</p>
@@ -51,6 +54,17 @@
         </div>
       </div>
     </div>
+    <script>
+      const mobile_back = document.querySelector(".mobile_back");
+      const interface_setting = document.querySelector(".interface_setting");
+      const sidebar = document.querySelector(".sidebar");
+      mobile_back.addEventListener("click", function () {
+        sidebar.classList.remove("sidebar_hide");
+      });
+      interface_setting.addEventListener("click", function () {
+        sidebar.classList.add("sidebar_hide");
+      });
+    </script>
     <script type="module" src="../ui/mg_engine.js"></script>
     <script src="../assets/engines/nav.js"></script>
     <script type="module" src="../ui/engine.js"></script>

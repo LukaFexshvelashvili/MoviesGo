@@ -67,7 +67,7 @@
   transition: background-color 0.2s;
   cursor: pointer;
 }
-.mg_slider_indicators div:hover {
+.mg_slider_indicators div:active {
   background-color: rgba(96, 96, 96, 0.6);
 }
 .mg_slider_indicators .mg_slider_indicator_active {
@@ -98,6 +98,10 @@
           backdrop-filter: blur(20px);
   cursor: pointer;
   transition: background-color 0.3s;
+}
+.mg_slider_actions .mg_slider_icon svg {
+  height: 20px;
+  aspect-ratio: 1/1;
 }
 .mg_slider_actions .mg_slider_icon:hover {
   background: rgba(28, 28, 28, 0.8);
@@ -169,4 +173,82 @@
 }
 .mg_slider_info .mg_slider_genres div:nth-child(3) {
   color: #00aad9;
+}
+
+@media (max-width: 1200px) {
+  .mg_slider {
+    height: 400px;
+  }
+  .mg_slider .mg_slider_img {
+    -o-object-position: 0px 0px;
+       object-position: 0px 0px;
+  }
+}
+@media (max-width: 992px) {
+  .mg_slider {
+    height: 300px;
+  }
+  .mg_slider_info {
+    left: 20px;
+    bottom: 30px;
+  }
+  .mg_slider_actions {
+    right: 20px;
+    bottom: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .mg_slider_indicators {
+    gap: 5px;
+    right: 20px;
+    bottom: 20px;
+  }
+  .mg_slider_indicators div {
+    border-radius: 2px;
+    height: 8px;
+  }
+  .mg_slider_actions {
+    bottom: unset;
+    top: 20px;
+  }
+  .mg_slider_actions .mg_slider_icon {
+    height: 36px;
+    border-radius: 8px;
+    -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+  }
+  .mg_slider_actions .mg_slider_icon svg {
+    height: 18px;
+  }
+  .mg_slider {
+    height: 250px;
+  }
+  .mg_slider_info {
+    bottom: 20px;
+  }
+  .mg_slider_info .mg_slider_genres {
+    display: none;
+  }
+  .mg_slider_info .mg_slider_subtitle {
+    letter-spacing: 0.5px;
+    font-family: mmedium;
+    font-size: 14px;
+  }
+  .mg_slider_info .mg_slider_title {
+    color: var(--texthead);
+    letter-spacing: 1px;
+    font-size: 18px;
+  }
+  .mg_slider_info .mg_slider_imdb {
+    color: #ffbb00;
+    letter-spacing: 1px;
+    font-size: 12px;
+  }
+  .mg_cardslider,
+  .mg_cardslider_wide {
+    margin: 50px 0;
+  }
+  .mg_cardslider_wide {
+    margin-top: 30px;
+  }
 }/*# sourceMappingURL=mg_slider.css.map */

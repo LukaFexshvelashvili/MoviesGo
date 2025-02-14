@@ -89,4 +89,13 @@
 }
 .profile_blocks .profile_block:nth-child(4) h3 {
   color: #f50062;
+}
+
+@media (max-width: 780px) {
+  .p_starter .c_profile {
+    flex-direction: column;
+  }
+  .p_starter .c_profile_name {
+    text-align: center;
+  }
 }/*# sourceMappingURL=profile.css.map */

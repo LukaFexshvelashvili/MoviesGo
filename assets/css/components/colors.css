@@ -21,6 +21,11 @@
   --inputhover: rgba(49, 49, 49, 0.3);
   --inputactive: rgba(49, 49, 49, 0.35);
   --comment: #1e1e1e;
+  --iconbg: #1e1e1e;
+  --iconbghover: #272727;
+  --icon: rgba(255, 255, 255, 0.9);
+  --iconlow: rgba(255, 255, 255, 0.7);
+  --iconlower: rgba(255, 255, 255, 0.4);
   --inputnav: rgb(27, 27, 27);
   --bodybg: #1c1c1c;
   --bodybghover: #252525;

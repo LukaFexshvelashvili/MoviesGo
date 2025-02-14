@@ -277,7 +277,7 @@
   color: var(--textdesc);
 }
 .mg_card_wide .mg_card_info .laster .mg_card_imdb {
-  font-size: 14px;
-  font-family: mbold;
+  font-size: 12px;
+  font-family: msemibold;
   color: var(--main);
 }/*# sourceMappingURL=card.css.map */
