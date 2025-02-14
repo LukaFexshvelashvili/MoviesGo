@@ -1,4 +1,4 @@
-import { types, genres } from "../../ui/themes";
+import { types, genres } from "../../ui/themes.js";
 
 const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");
 const name_eng = document.getElementById("name_eng");
