@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>search</title>
+
+    <link rel="stylesheet" href="../assets/css/components/colors.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/pages/watchlater/watchlater.css" />
+    <link rel="stylesheet" href="../assets/css/components/nav.css" />
+    <link rel="stylesheet" href="../assets/css/components/card.css" />
+</head>
+
+<body>
+
+    <?php include_once "../components/nav.php"?>
+
+    <div class="container watchlater_content">
+        <h2>ჩანიშნული ფილმები:</h2>
+        <div class="card_row">
+            <div class="mg_card">
+                <div class="mg_info_grab">
+                    <h3 id="mg_card_display_description">
+                        მოკლე აღწერა:
+                        <span class="mg_card_description_p">
+                            სერიალი კოკაინის ეპიდემიის დაწყებაზე ლოს ანჯელესში 1980-იან
+                            წლებში. როდესაც ამერიკის ქუჩებში გაჩნდა იაფიანი კრეკი და
+                            კანონდარღვევები გაიზარდა. სამი განსხვავებული ადამიანის თვალით
+                            დანახული მოვლენები.
+                        </span>
+                    </h3>
+                    <p id="mg_card_display_genres">
+                        <span>ჟანრები:</span> დრამა, მძაფრსიუჟეტიანი, დეტექტივი
+                    </p>
+                </div>
+                <div class="mg_img_side">
+                    <div class="mg_card_play">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M133 440a35.37 35.37 0 0 1-17.5-4.67c-12-6.8-19.46-20-19.46-34.33V111c0-14.37 7.46-27.53 19.46-34.33a35.13 35.13 0 0 1 35.77.45l247.85 148.36a36 36 0 0 1 0 61l-247.89 148.4A35.5 35.5 0 0 1 133 440Z" />
+                        </svg>
+                    </div>
+                    <img loading="lazy" src="../assets/images/Snowfall.webp" />
+                    <div class="mg_card_shadow"></div>
+                    <div class="mg_card_bookmark cnt">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24">
+                            <path fill="none" stroke="var(--iconlow)" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z" />
+                        </svg>
+                    </div>
+                    <div class="mg_card_type cnt">სერიალი</div>
+                    <div class="mg_card_year cnt">2024წ</div>
+                    <div class="mg_card_imdb cnt">IMDB: 8.4</div>
+                </div>
+                <div class="mg_card_info">
+                    <div class="mg_card_info_f">
+                        <div class="card_info_text">SNOWFALL</div>
+                        <div class="card_info_text">თოვა</div>
+                    </div>
+                    <div class="mg_card_info_e">
+                        <div class="mg_card_bookmark cnt">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24">
+                                <path fill="none" stroke="var(--iconlow)" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mg_card">
+                <div class="mg_info_grab">
+                    <h3 id="mg_card_display_description">
+                        მოკლე აღწერა:
+                        <span class="mg_card_description_p">
+                            სერიალი კოკაინის ეპიდემიის დაწყებაზე ლოს ანჯელესში 1980-იან
+                            წლებში. როდესაც ამერიკის ქუჩებში გაჩნდა იაფიანი კრეკი და
+                            კანონდარღვევები გაიზარდა. სამი განსხვავებული ადამიანის თვალით
+                            დანახული მოვლენები.
+                        </span>
+                    </h3>
+                    <p id="mg_card_display_genres">
+                        <span>ჟანრები:</span> დრამა, მძაფრსიუჟეტიანი, დეტექტივი
+                    </p>
+                </div>
+                <div class="mg_img_side">
+                    <div class="mg_card_play">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M133 440a35.37 35.37 0 0 1-17.5-4.67c-12-6.8-19.46-20-19.46-34.33V111c0-14.37 7.46-27.53 19.46-34.33a35.13 35.13 0 0 1 35.77.45l247.85 148.36a36 36 0 0 1 0 61l-247.89 148.4A35.5 35.5 0 0 1 133 440Z" />
+                        </svg>
+                    </div>
+                    <img loading="lazy" src="../assets/images/Snowfall.webp" />
+                    <div class="mg_card_shadow"></div>
+                    <div class="mg_card_bookmark cnt">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24">
+                            <path fill="none" stroke="var(--iconlow)" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z" />
+                        </svg>
+                    </div>
+                    <div class="mg_card_type cnt">სერიალი</div>
+                    <div class="mg_card_year cnt">2024წ</div>
+                    <div class="mg_card_imdb cnt">IMDB: 8.4</div>
+                </div>
+                <div class="mg_card_info">
+                    <div class="mg_card_info_f">
+                        <div class="card_info_text">SNOWFALL</div>
+                        <div class="card_info_text">თოვა</div>
+                    </div>
+                    <div class="mg_card_info_e">
+                        <div class="mg_card_bookmark cnt">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24">
+                                <path fill="none" stroke="var(--iconlow)" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="module" src="../ui/mg_engine.js"></script>
+    <script src="../assets/engines/nav.js"></script>
+    <script src="../assets/engines/card.js"></script>
+</body>
+
+</html>

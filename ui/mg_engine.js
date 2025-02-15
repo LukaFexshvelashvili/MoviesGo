@@ -3,11 +3,12 @@ let main_color = color_list[0].main;
 
 document.addEventListener("DOMContentLoaded", () => {
   const mg_web_loader = document.querySelector(".mg_web_loader");
-
-  mg_web_loader.classList.add("mg_web_loader_hidden");
-  mg_web_loader.addEventListener("transitioned", () => {
-    mg_web_loader.remove();
-  });
+  if (mg_web_loader) {
+    mg_web_loader.classList.add("mg_web_loader_hidden");
+    mg_web_loader.addEventListener("transitioned", () => {
+      mg_web_loader.remove();
+    });
+  }
 });
 
 if (localStorage.getItem("ui")) {
@@ -46,7 +47,7 @@ function changeActiveColorHand(colorID) {
   const colors = color_list.filter((item) => item.id == colorID)[0];
   if (colors) {
     if (colors) {
-      localStorage.setItem("maincolor", colors.main);
+      localStorage.setItem("ui", JSON.stringify({ color: colors.id }));
       Array.from(Object.keys(colors)).forEach((item) => {
         document.documentElement.style.setProperty(`--${item}`, colors[item]);
       });

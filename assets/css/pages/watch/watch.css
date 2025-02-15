@@ -211,17 +211,18 @@
 }
 
 .movie_action_button {
-  background: var(--iconbg);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 36px;
   aspect-ratio: 1/1;
   border-radius: 8px;
-  -webkit-backdrop-filter: blur(20px);
-          backdrop-filter: blur(20px);
   cursor: pointer;
   transition: background-color 0.3s;
+}
+.movie_action_button svg {
+  height: 20px;
+  aspect-ratio: 1/1;
 }
 .movie_action_button:hover {
   background: var(--iconbghover);
@@ -246,14 +247,30 @@
   fill: var(--main);
 }
 
+.movie_l_info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .movie_hearts {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--main);
   letter-spacing: 0.5px;
   font-size: 14px;
-  font-family: mbold;
+  font-family: msemibold;
+}
+
+.movie_views {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--iconlower);
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  font-family: msemibold;
 }
 
 .movie_description {
@@ -620,6 +637,16 @@
   }
 }
 @media (max-width: 560px) {
+  .movie_l_info {
+    margin-right: auto;
+  }
+  .movie_action_button {
+    height: 32px;
+  }
+  .movie_action_button svg {
+    height: 18px;
+    aspect-ratio: 1/1;
+  }
   .movie_card_addons {
     margin-top: 15px;
     gap: 6px;

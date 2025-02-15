@@ -5,7 +5,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>upload</title>
+    <title>upload SERIES</title>
 
     <link rel="stylesheet" href="../assets/css/components/colors.css" />
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -50,13 +50,13 @@
     <?php include_once "../components/nav.php"?>
 
     <div class="container upload_section">
-      <h1>ფილმის ატვირთვა</h1>
+      <h1>სერიალის ატვირთვა</h1>
 
       <div class="ai_help">
         <input
           type="text"
           id="ai_input"
-          placeholder="ფილმის სახელი ინგლისურად"
+          placeholder="სერიალის სახელი ინგლისურად"
         />
         <button class="ai_button">გენერირება</button>
       </div>
@@ -193,14 +193,8 @@
               <div class="inputs_upload">
                 <input
                   class="inpc"
-                  placeholder="GEO"
-                  id="playergeo1"
-                  type="text"
-                />
-                <input
-                  class="inpc"
-                  placeholder="ENG"
-                  id="playereng1"
+                  placeholder="SERIES"
+                  id="player1"
                   type="text"
                 />
               </div>
@@ -287,14 +281,14 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      let players = { 1: { GEO: "", ENG: "" } };
+      let players = { 1: "" };
       let movie_type = -1;
       let movie_genres = [];
       // changing in upload.js
     </script>
     <script type="module" src="../ui/mg_engine.js"></script>
     <script src="../assets/engines/nav.js"></script>
-    <script type="module" src="../assets/engines/upload.js"></script>
+    <script type="module" src="../assets/engines/uploadseries.js"></script>
     <script src="../assets/engines/mg_cardslider.js"></script>
     <script>
       const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");

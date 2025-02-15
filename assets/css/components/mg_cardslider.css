@@ -56,4 +56,10 @@
 
 .mg_cardslider_row::-webkit-scrollbar {
   display: none;
+}
+
+@media (max-width: 600px) {
+  .mg_cardslider_row {
+    gap: 10px;
+  }
 }/*# sourceMappingURL=mg_cardslider.css.map */

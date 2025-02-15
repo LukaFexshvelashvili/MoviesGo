@@ -17,6 +17,13 @@
   transform: translateZ(0);
 }
 
+.no_results {
+  text-align: center;
+  padding: 15px;
+  color: var(--textdesc);
+  letter-spacing: 0.5px;
+}
+
 .navcont {
   display: flex;
   align-items: center;
@@ -248,7 +255,8 @@
   overflow-y: auto;
   position: absolute;
   width: 100%;
-  height: 450px;
+  height: auto;
+  max-height: 450px;
   background-color: var(--secondbg);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -284,6 +292,7 @@
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 10px;
+  min-width: 120px;
 }
 .mg_nav_card .mg_nav_info {
   flex: 1;
@@ -396,6 +405,7 @@
   top: 0;
   height: 100%;
   width: 300px;
+  padding-bottom: 20px;
   background-color: var(--navbg);
   display: flex;
   flex-direction: column;

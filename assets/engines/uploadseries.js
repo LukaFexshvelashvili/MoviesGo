@@ -10,7 +10,6 @@ const imdb = document.getElementById("imdb");
 const creator = document.getElementById("creator");
 const actors = document.getElementById("actors");
 const description = document.getElementById("description");
-const player = document.getElementById("player");
 
 function changeValues(answer) {
   let get_type = types.filter((item) => item.title == answer.type)[0];
@@ -98,16 +97,11 @@ const genres_listing = document.querySelector(".genres_listing");
 const types_listing = document.querySelector(".types_listing");
 const addplayer = document.querySelector("#addplayer");
 const clear_inps = document.querySelectorAll(".clear_inp");
-const playergeo1 = document.getElementById("playergeo1");
-const playereng1 = document.getElementById("playereng1");
+const player1 = document.getElementById("player1");
 const inputs = document.querySelectorAll("input, textarea");
 
-playergeo1.addEventListener("input", function () {
-  players[1].GEO = playergeo1.value;
-});
-
-playereng1.addEventListener("input", function () {
-  players[1].ENG = playereng1.value;
+player1.addEventListener("input", function () {
+  players[1] = player1.value;
 });
 
 Array.from(inputs).forEach((item) => {
@@ -159,9 +153,8 @@ function addplayerblock() {
       </div>
     </div>
     <div class="inputs_upload">
-      <input class="inpc" placeholder="GEO" id="playergeo${newPlayerID}" type="text" value="" />
-      <input class="inpc" placeholder="ENG" id="playereng${newPlayerID}" type="text" value="" />
-    </div>
+      <input class="inpc" placeholder="SERIES" id="player${newPlayerID}" type="text" value="" />
+</div>
   `;
 
   playersRow.appendChild(newPlayerRow);
@@ -171,20 +164,12 @@ function addplayerblock() {
     removePlayer(deleteButton, newPlayerID);
   });
 
-  players[newPlayerID] = {
-    GEO: "",
-    ENG: "",
-  };
+  players[newPlayerID] = ``;
 
-  const geoInput = newPlayerRow.querySelector(`#playergeo${newPlayerID}`);
-  const engInput = newPlayerRow.querySelector(`#playereng${newPlayerID}`);
-
-  geoInput.addEventListener("input", function () {
-    players[newPlayerID].GEO = geoInput.value;
-  });
-
-  engInput.addEventListener("input", function () {
-    players[newPlayerID].ENG = engInput.value;
+  const playerNew = newPlayerRow.querySelector(`#player${newPlayerID}`);
+  playerNew.addEventListener("input", function () {
+    players[newPlayerID] = playerNew.value;
+    console.log(players);
   });
 }
 function removePlayer(button, newPlayerID) {

@@ -154,6 +154,12 @@ textarea {
   gap: 25px;
   margin: 10px 0;
 }
+.players_row .inputs_upload {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .custom_file {
   position: relative;

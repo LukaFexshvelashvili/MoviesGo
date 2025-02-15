@@ -58,7 +58,11 @@ body {
   color: white;
   font-family: msemibold;
 }
-
+.no-scroll {
+  overflow: hidden;
+  touch-action: none;
+  height: 100vh;
+}
 *::-webkit-scrollbar {
   width: 6px;
   background-color: var(--secondcolor);

@@ -65,51 +65,22 @@
       position: absolute;
       height: 100%;
       width: 100%;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.6),
-        rgba(0, 0, 0, 0.4),
-        rgba(0, 0, 0, 0.1)
-      );
+      background: rgba(0, 0, 0, 0.1);
     }
-    .mg_card_bookmark {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      z-index: 2;
-      background: rgba(0, 0, 0, 0.3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 40px;
-      aspect-ratio: 1 / 1;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      transition: background-color 0.3s;
-      svg path {
-        transition: fill 0.3s;
-      }
-      &:hover {
-        background: rgba(0, 0, 0, 0.5);
-      }
 
-      &.mg_card_bookmark_active {
-        svg path {
-          fill: var(--main);
-        }
-      }
-    }
     .mg_card_type,
-    .mg_card_year {
+    .mg_card_year,
+    .mg_card_imdb {
       z-index: 2;
       position: absolute;
       bottom: 10px;
-      height: 24px;
+      height: 26px;
       letter-spacing: 0.4px;
       border-radius: 5px;
-      background-color: var(--main);
-      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      font-family: mmedium;
       font-size: 12px;
     }
     .mg_card_type {
@@ -120,15 +91,59 @@
       right: 10px;
       width: 65px;
     }
+    .mg_card_imdb {
+      background-color: rgba(0, 0, 0, 0.5);
+
+      top: 10px;
+      left: 10px;
+      width: 85px;
+      color: var(--imdb);
+      border-color: var(--imdb);
+      border: 1px solid var(--imdb);
+    }
   }
   .mg_card_info {
     gap: 2px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: start;
     padding: 0 5px;
     margin-top: 10px;
-    div {
+    .mg_card_info_f {
+      display: flex;
+      flex-direction: column;
+      width: 190px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .mg_card_bookmark {
+      flex-shrink: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 36px;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      svg path {
+        transition: fill 0.3s;
+      }
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      &.mg_card_bookmark_active {
+        svg path {
+          fill: var(--main);
+        }
+      }
+    }
+    .card_info_text {
       display: flex;
       align-items: center;
       font-size: 16px;
@@ -136,6 +151,11 @@
       font-weight: 400;
       font-family: mmedium;
       color: var(--texthead);
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
     }
     .mg_card_imdb {
       font-size: 13px;
@@ -144,6 +164,13 @@
       color: var(--main);
     }
   }
+}
+.mg_card_description_p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 9;
+  text-overflow: ellipsis;
 }
 .mg_info_grab {
   display: none;
@@ -154,7 +181,8 @@
   position: fixed;
   z-index: 6;
   width: 280px;
-  height: 270px;
+  height: auto;
+  max-height: 270px;
   background-color: #212121;
   left: 0;
   top: 0;
@@ -173,9 +201,12 @@
     letter-spacing: 0.5px;
     font-size: 14px;
     line-height: 20px;
-    -webkit-line-clamp: 10;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
+
+    span {
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+    }
   }
   p,
   .mg_card_description_p {
@@ -287,6 +318,8 @@
     color: var(--textdesc);
 
     .starter {
+      display: flex;
+      flex-direction: column;
       letter-spacing: 1px;
       color: var(--texthead);
       div:nth-child(2) {
@@ -300,6 +333,47 @@
 
         color: var(--main);
       }
+    }
+  }
+}
+@media (max-width: 600px) {
+  .mg_card {
+    .mg_img_side {
+      height: 280px;
+      width: 190px;
+      border-radius: 8px;
+      .mg_card_type,
+      .mg_card_year,
+      .mg_card_imdb {
+        font-size: 11px;
+      }
+    }
+    .mg_card_info {
+      .card_info_text {
+        font-size: 14px;
+      }
+      .mg_card_info_f {
+        width: 140px;
+      }
+    }
+  }
+  .mg_card_wide {
+    .mg_img_side {
+      height: 160px;
+      width: 280px;
+    }
+    .mg_card_info {
+      .starter {
+        font-size: 14px;
+        font-family: mmedium;
+      }
+      .laster .mg_card_imdb {
+        letter-spacing: 0.5px;
+      }
+    }
+    .mg_card_bookmark {
+      top: 5px;
+      right: 5px;
     }
   }
 }

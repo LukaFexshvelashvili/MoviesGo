@@ -9,6 +9,8 @@ const filter_container = document.querySelector(".filter_container");
 const filter_shadow = document.querySelector(".filter_shadow");
 const filter_types_row = document.querySelector(".filter_types_row");
 const filter_genres_row = document.querySelector(".filter_genres_row");
+const filter_block_c = document.querySelector(".filter_block_c");
+const mobile_addon = document.querySelector(".mobile_addon");
 const year_from = document.getElementById("year_from");
 const year_to = document.getElementById("year_to");
 const imdb_from = document.getElementById("imdb_from");
@@ -22,6 +24,45 @@ const close_filters = document.querySelector(".close_filters");
 
 filterit.addEventListener("click", filtermovies);
 
+let grabbing = false;
+let startY = null;
+
+mobile_addon.addEventListener("touchstart", function (e) {
+  grabbing = true;
+  startY = e.touches[0].clientY;
+  filter_block_c.style.transition = "none";
+});
+
+document.body.addEventListener(
+  "touchmove",
+  function (event) {
+    if (grabbing && startY) {
+      let currentY = event.touches[0].clientY;
+      let deltaY = (currentY - startY).toFixed(2);
+      filter_block_c.style.transform = `translateY(${
+        deltaY >= 0 ? deltaY : 0
+      }px)`;
+      event.preventDefault();
+    }
+  },
+  { passive: false }
+);
+
+mobile_addon.addEventListener("touchend", function () {
+  grabbing = false;
+  let numericValue = filter_block_c.style.transform.match(/\d+\.\d+/);
+  if (numericValue) {
+    let nm = parseFloat(numericValue[0]);
+
+    if (nm > 140) {
+      filter_block_c.style = ``;
+      close_filters_fun();
+    } else {
+      filter_block_c.style = ``;
+    }
+  }
+});
+
 function filtermovies() {
   const filteringdata = {
     type: selected_types.length !== 0 ? selected_types : -1,
@@ -32,18 +73,21 @@ function filtermovies() {
     imdb_to: selected_imdb[1],
   };
   console.log(filteringdata);
+  // request
 }
 
 clearfiltersbutton.addEventListener("click", clearFilters);
 filtershowbutton.addEventListener("click", () => {
+  document.body.classList.add("no-scroll");
   filter_container.classList.add("filter_container_show");
 });
-close_filters.addEventListener("click", () => {
+close_filters.addEventListener("click", close_filters_fun);
+filter_shadow.addEventListener("click", close_filters_fun);
+
+function close_filters_fun() {
+  document.body.classList.remove("no-scroll");
   filter_container.classList.remove("filter_container_show");
-});
-filter_shadow.addEventListener("click", () => {
-  filter_container.classList.remove("filter_container_show");
-});
+}
 year_from.addEventListener("input", () => {
   selected_year[0] = year_from.value;
 });

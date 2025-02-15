@@ -105,6 +105,22 @@ nav .nav_starter span {
      object-fit: cover;
 }
 
+.error_auth {
+  display: none;
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+  border: 2px solid var(--red);
+  border-radius: 8px;
+  background-color: var(--redclear);
+  color: var(--red);
+  letter-spacing: 0.5px;
+}
+
+.error_auth_show {
+  display: block;
+}
+
 @media (max-width: 1200px) {
   .auth_last {
     position: absolute;
