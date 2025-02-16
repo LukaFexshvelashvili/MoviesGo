@@ -54,42 +54,4 @@ mg_cardslider_wide.forEach((currentSlider) => {
       mg_cardslider_row.firstElementChild.clientWidth + gap;
     mg_cardslider_row.style.scrollBehavior = "unset";
   }
-  initializeSlider();
-
-  function initializeSlider() {
-    list.forEach((item) => {
-      mg_cardslider_row.innerHTML += `<div class="mg_card_wide">
-            <div class="mg_info_grab">
-              <h3 id="mg_card_display_description">
-                მოკლე აღწერა:
-                <span class="mg_card_description_p">
-                  სერიალი კოკაინის ეპიდემიის დაწყებაზე ლოს ანჯელესში 1980-იან
-                  წლებში. როდესაც ამერიკის ქუჩებში გაჩნდა იაფიანი კრეკი და
-                  კანონდარღვევები გაიზარდა. სამი განსხვავებული ადამიანის თვალით
-                  დანახული მოვლენები.
-                </span>
-              </h3>
-              <p id="mg_card_display_genres">
-                <span>ჟანრები:</span> დრამა, მძაფრსიუჟეტიანი, დეტექტივი
-              </p>
-            </div>
-            <div class="mg_img_side">
-              <img loading="lazy" src="../assets/images/snowfallwide.png" />
-              <div class="mg_card_shadow"></div>
-              <div class="mg_card_bookmark cnt">
-             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24"><path fill="none" stroke="var(--iconlow)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z"/></svg>
-              </div>
-              <div class="mg_card_info">
-                <div class="starter">
-                  <div>SNOWFALL</div>
-                  <div>თოვა</div>
-                </div>
-                <div class="laster">
-                  <div class="mg_card_imdb">IMDB: 8.4</div>
-                </div>
-              </div>
-            </div>
-          </div>`;
-    });
-  }
 });

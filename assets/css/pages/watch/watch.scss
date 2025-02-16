@@ -190,13 +190,14 @@
 .movie_actions {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 .movie_action_button {
+  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 36px;
+  height: 32px;
   aspect-ratio: 1 / 1;
   border-radius: 8px;
   cursor: pointer;
@@ -206,7 +207,7 @@
     aspect-ratio: 1 / 1;
   }
   &:hover {
-    background: var(--iconbghover);
+    background: var(--whitelowest);
   }
 }
 .movie_love {
@@ -216,7 +217,11 @@
   }
 }
 .movie_love_active {
-  fill: var(--main);
+  svg {
+    path {
+      fill: var(--main);
+    }
+  }
 }
 .movie_watchlater {
   svg path {
@@ -290,8 +295,6 @@
 
     padding: 8px 25px;
     border-radius: 10px;
-    background-color: var(--adminclear);
-    color: var(--admin);
   }
 }
 .c_form {
@@ -451,7 +454,22 @@
     background-color: var(--mainclearhover);
   }
 }
-
+.movie_bookmark {
+  svg path {
+    transition: 0.2s;
+  }
+}
+.iframe_players {
+  height: 100%;
+  width: 100%;
+}
+.hidden_player {
+  display: none;
+}
+.iframe_players {
+  height: 100%;
+  width: 100%;
+}
 @media (max-width: 1200px) {
   .watch_bg {
     height: 520px;
@@ -532,8 +550,6 @@
       font-size: 14px;
       padding: 6px 15px;
       border-radius: 6px;
-      background-color: var(--adminclear);
-      color: var(--admin);
     }
   }
   .c_profile_name {

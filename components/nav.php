@@ -1,3 +1,6 @@
+<?php
+ include_once "../server/connection.php";
+?>
 <div class="mg_web_loader">
     <div class="popcorn_container">
         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24">
@@ -17,14 +20,18 @@
 
                         <p class="no_results">ძიება</p>
                     </div>
-                    <input type="text" class="navinput" placeholder="ძებნა..." />
-                    <button class="cnt searchnavinput">
-                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M14.0775 14.1L16.6441 16.6667M15.9033 9.65084C15.9033 13.14 13.0841 15.9683 9.60663 15.9683C6.12996 15.9683 3.31079 13.14 3.31079 9.65167C3.31079 6.16083 6.12996 3.33333 9.60663 3.33333C13.0841 3.33333 15.9033 6.16167 15.9033 9.65084Z"
-                                stroke="var(--icon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
+                    <form class="navsearchform" action="search" method="get">
+                        <input name="title" type="text" class="navinput" placeholder="ძებნა..." />
+                        <button class="cnt searchnavinput">
+                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14.0775 14.1L16.6441 16.6667M15.9033 9.65084C15.9033 13.14 13.0841 15.9683 9.60663 15.9683C6.12996 15.9683 3.31079 13.14 3.31079 9.65167C3.31079 6.16083 6.12996 3.33333 9.60663 3.33333C13.0841 3.33333 15.9033 6.16167 15.9033 9.65084Z"
+                                    stroke="var(--icon)" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+
                     <button class="cnt nav_mb nav_mb_search_close">
                         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -35,10 +42,10 @@
                 </div>
             </div>
             <div class="navcats">
-                <p>ფილმები</p>
-                <p>სერიალები</p>
-                <p>ანიმაციები</p>
-                <p>ანიმეები</p>
+                <a href="./search?type=0">ფილმები</a>
+                <a href="./search?type=1">სერიალები</a>
+                <a href="./search?type=2">ანიმაციები</a>
+                <a href="./search?type=3">ანიმეები</a>
             </div>
             <div class="navactions">
                 <div class="nav_pc cnt navicons notifications">
@@ -48,20 +55,20 @@
                             fill="#8B8B8B" />
                     </svg>
                 </div>
-                <div class="nav_pc cnt navicons bookmarks">
+                <a href="./bookmarked" class="nav_pc cnt navicons bookmarks">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M7.527 20.841C6.861 21.274 6 20.772 6 19.952V3.942C6 3.422 6.336 3 6.75 3H17.25C17.664 3 18 3.422 18 3.942V19.952C18 20.772 17.139 21.274 16.473 20.842L12.527 18.28C12.3704 18.1774 12.1872 18.1228 12 18.1228C11.8128 18.1228 11.6296 18.1774 11.473 18.28L7.527 20.841Z"
                             stroke="#8B8B8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                </div>
-                <div class="nav_pc cnt navicons watchlater">
+                </a>
+                <a a href="./history" class="nav_pc cnt navicons watchlater">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M12 2C9.43639 2.00731 6.97349 2.99891 5.12 4.77V3C5.12 2.73478 5.01464 2.48043 4.82711 2.29289C4.63957 2.10536 4.38522 2 4.12 2C3.85478 2 3.60043 2.10536 3.41289 2.29289C3.22536 2.48043 3.12 2.73478 3.12 3V7.5C3.12 7.76522 3.22536 8.01957 3.41289 8.20711C3.60043 8.39464 3.85478 8.5 4.12 8.5H8.62C8.88522 8.5 9.13957 8.39464 9.32711 8.20711C9.51464 8.01957 9.62 7.76522 9.62 7.5C9.62 7.23478 9.51464 6.98043 9.32711 6.79289C9.13957 6.60536 8.88522 6.5 8.62 6.5H6.22C7.50578 5.15636 9.21951 4.30266 11.0665 4.08567C12.9136 3.86868 14.7785 4.30198 16.3407 5.31105C17.9028 6.32012 19.0646 7.84191 19.6263 9.61479C20.188 11.3877 20.1145 13.3009 19.4184 15.0254C18.7223 16.7499 17.4472 18.1781 15.8122 19.0643C14.1772 19.9505 12.2845 20.2394 10.4596 19.8813C8.63463 19.5232 6.99147 18.5405 5.81259 17.1022C4.63372 15.6638 3.99279 13.8597 4 12C4 11.7348 3.89464 11.4804 3.70711 11.2929C3.51957 11.1054 3.26522 11 3 11C2.73478 11 2.48043 11.1054 2.29289 11.2929C2.10536 11.4804 2 11.7348 2 12C2 13.9778 2.58649 15.9112 3.6853 17.5557C4.78412 19.2002 6.3459 20.4819 8.17317 21.2388C10.0004 21.9957 12.0111 22.1937 13.9509 21.8079C15.8907 21.422 17.6725 20.4696 19.0711 19.0711C20.4696 17.6725 21.422 15.8907 21.8079 13.9509C22.1937 12.0111 21.9957 10.0004 21.2388 8.17317C20.4819 6.3459 19.2002 4.78412 17.5557 3.6853C15.9112 2.58649 13.9778 2 12 2ZM12 8C11.7348 8 11.4804 8.10536 11.2929 8.29289C11.1054 8.48043 11 8.73478 11 9V12C11 12.2652 11.1054 12.5196 11.2929 12.7071C11.4804 12.8946 11.7348 13 12 13H14C14.2652 13 14.5196 12.8946 14.7071 12.7071C14.8946 12.5196 15 12.2652 15 12C15 11.7348 14.8946 11.4804 14.7071 11.2929C14.5196 11.1054 14.2652 11 14 11H13V9C13 8.73478 12.8946 8.48043 12.7071 8.29289C12.5196 8.10536 12.2652 8 12 8Z"
                             fill="#8B8B8B" />
                     </svg>
-                </div>
+                </a>
                 <div class="nav_pc navprofile">
                     <div class="navprofileblock">
                         <div class="c_profile">
@@ -74,11 +81,23 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <div class="c_profile_name">სტუმარი</div>
+                            <div class="c_profile_name">
+                                <?php echo is_logged() ? cut_text($_SESSION['nickname']) : "სტუმარი" ?>
+                            </div>
                         </div>
                         <div class="navline"></div>
                         <div class="navprofileblockactions"></div>
-                        <button class="navsign">შესვლა</button>
+                        <?php 
+                        if(is_logged()){
+                        ?>
+                        <a href="./logout"><button class="navsign navsignout">გასვლა</button></a>
+                        <?php
+                    }else{
+                        ?>
+                        <a href="./login"><button class="navsign">შესვლა</button></a>
+                        <?php
+                    }
+                    ?>
                     </div>
                     <div class="cnt navprofilebutton">
                         <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,13 +109,13 @@
                     </div>
                 </div>
                 <div class="nav_mb">
-                    <a href="./bookmarked." class="nav_mb_button cnt">
+                    <a href="./bookmarked" class="nav_mb_button cnt">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                             <path fill="none" stroke="var(--icon)" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z" />
                         </svg>
                     </a>
-                    <a href="./watchhistory." class="nav_mb_button cnt">
+                    <a href="./history" class="nav_mb_button cnt">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M9 1.5C7.07729 1.50548 5.23012 2.24919 3.84 3.5775V2.25C3.84 2.05109 3.76098 1.86032 3.62033 1.71967C3.47968 1.57902 3.28891 1.5 3.09 1.5C2.89109 1.5 2.70032 1.57902 2.55967 1.71967C2.41902 1.86032 2.34 2.05109 2.34 2.25V5.625C2.34 5.82391 2.41902 6.01468 2.55967 6.15533C2.70032 6.29598 2.89109 6.375 3.09 6.375H6.465C6.66391 6.375 6.85468 6.29598 6.99533 6.15533C7.13598 6.01468 7.215 5.82391 7.215 5.625C7.215 5.42609 7.13598 5.23532 6.99533 5.09467C6.85468 4.95402 6.66391 4.875 6.465 4.875H4.665C5.62933 3.86727 6.91463 3.22699 8.2999 3.06425C9.68517 2.90151 11.0839 3.22648 12.2555 3.98328C13.4271 4.74009 14.2985 5.88143 14.7197 7.21109C15.141 8.54075 15.0859 9.97564 14.5638 11.269C14.0417 12.5625 13.0854 13.6336 11.8591 14.2982C10.6329 14.9629 9.21337 15.1796 7.84467 14.911C6.47597 14.6424 5.2436 13.9054 4.35944 12.8266C3.47529 11.7479 2.99459 10.3948 3 9C3 8.80109 2.92098 8.61032 2.78033 8.46967C2.63968 8.32902 2.44891 8.25 2.25 8.25C2.05109 8.25 1.86032 8.32902 1.71967 8.46967C1.57902 8.61032 1.5 8.80109 1.5 9C1.5 10.4834 1.93987 11.9334 2.76398 13.1668C3.58809 14.4001 4.75943 15.3614 6.12987 15.9291C7.50032 16.4968 9.00832 16.6453 10.4632 16.3559C11.918 16.0665 13.2544 15.3522 14.3033 14.3033C15.3522 13.2544 16.0665 11.918 16.3559 10.4632C16.6453 9.00832 16.4968 7.50032 15.9291 6.12987C15.3614 4.75943 14.4001 3.58809 13.1668 2.76398C11.9334 1.93987 10.4834 1.5 9 1.5ZM9 6C8.80109 6 8.61032 6.07902 8.46967 6.21967C8.32902 6.36032 8.25 6.55109 8.25 6.75V9C8.25 9.19891 8.32902 9.38968 8.46967 9.53033C8.61032 9.67098 8.80109 9.75 9 9.75H10.5C10.6989 9.75 10.8897 9.67098 11.0303 9.53033C11.171 9.38968 11.25 9.19891 11.25 9C11.25 8.80109 11.171 8.61032 11.0303 8.46967C10.8897 8.32902 10.6989 8.25 10.5 8.25H9.75V6.75C9.75 6.55109 9.67098 6.36032 9.53033 6.21967C9.38968 6.07902 9.19891 6 9 6Z"
@@ -140,9 +159,10 @@
                                 stroke="var(--icon)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <div class="c_profile_name">სტუმარი</div>
+                    <div class="c_profile_name"><?php echo is_logged() ? cut_text($_SESSION['nickname']) : "სტუმარი" ?>
+                    </div>
                 </div>
-                <div class="cnt c_profile_badge">დეველოპერი</div>
+                <div class="cnt c_profile_badge dev_badge">დეველოპერი</div>
                 <div class="navline"></div>
                 <div class="mob_nav_actions_row"></div>
             </div>
@@ -154,3 +174,6 @@
         </div>
     </div>
 </nav>
+<script>
+const session_id = <?php echo is_logged() ? $_SESSION['user_id'] : null ?>
+</script>

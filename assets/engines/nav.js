@@ -55,7 +55,7 @@ navinput.addEventListener("input", () => {
   debounceTimeout = setTimeout(() => {
     if (navinput.value.length >= 1) {
       $.get(
-        "http://localhost/MoviesGoV2/server/actions/quick_search.php",
+        server_start_local + "/actions/quick_search.php",
         { title: navinput.value },
         function (data) {
           navsearch.innerHTML = data;
@@ -106,7 +106,7 @@ function removeProfileBlock(e) {
 
 const profileactions = [
   {
-    link: "profile.",
+    link: session_id ? "profile?id=" + session_id : "login",
     title: "პროფილი",
     icon: `
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@ const profileactions = [
 `,
   },
   {
-    link: "profile.",
+    link: session_id ? "profile?id=" + session_id : "login",
     title: "მოწონებულები",
     icon: `
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +124,7 @@ const profileactions = [
 `,
   },
   {
-    link: "bookmarked.",
+    link: "bookmarked",
     title: "ჩანიშნული ფილმები",
     icon: `
 <svg
@@ -143,7 +143,7 @@ const profileactions = [
 `,
   },
   {
-    link: "watchhistory.",
+    link: "history",
     title: "ბოლოს ნანახი",
     icon: `
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +152,7 @@ const profileactions = [
 `,
   },
   {
-    link: "settings.",
+    link: "settings",
     title: "პარამეტრები",
     icon: `
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -162,14 +162,14 @@ const profileactions = [
 `,
   },
   {
-    link: "settings.",
+    link: "settings",
     title: "ინტერფეისი",
     icon: `
     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path fill="none" stroke="var(--icon)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12m0-3h19M13 13h4m-4 4h2M7 6h.009M11 6h.009M9 9v12.5" color="currentColor"/></svg>
 `,
   },
   {
-    link: "help.",
+    link: "help",
     title: "დახმარება",
     icon: `
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

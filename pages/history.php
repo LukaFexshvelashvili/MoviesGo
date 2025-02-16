@@ -3,21 +3,22 @@
 include_once "../server/connection.php";
 include_once "../components/card.php";
 
-if (isset($_SESSION['bookmarks']) && !empty($_SESSION['bookmarks'])) {
-    $placeholders = implode(',', array_fill(0, count($_SESSION['bookmarks']), '?'));
+if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
+    $placeholders = implode(',', array_fill(0, count($_SESSION['watch_history']), '?'));
     $stmt_movies = $conn->prepare("SELECT * FROM movies WHERE id IN ($placeholders)");
-    $types = str_repeat('i', count($_SESSION['bookmarks'])); 
-    $stmt_movies->bind_param($types, ...$_SESSION['bookmarks']);
+    $types = str_repeat('i', count($_SESSION['watch_history'])); 
+    $stmt_movies->bind_param($types, ...$_SESSION['watch_history']);
     $stmt_movies->execute();
-    $bookmarked_movies = $stmt_movies->get_result();
+    $history_movies = $stmt_movies->get_result();
 } 
 ?>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>ჩანიშნული ფილმები - MoviesGo</title>
+    <title>ისტორია - MoviesGo</title>
 
     <link rel="stylesheet" href="../assets/css/components/colors.css" />
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -31,15 +32,15 @@ if (isset($_SESSION['bookmarks']) && !empty($_SESSION['bookmarks'])) {
     <?php include_once "../components/nav.php"?>
 
     <div class="container watchlater_content">
-        <h2>ჩანიშნული ფილმები:</h2>
+        <h2>ბოლოს ნანახი:</h2>
         <div class="card_row">
             <?php 
-            if(isset($bookmarked_movies)) {
-                while ($movie = $bookmarked_movies->fetch_assoc()) {
+            if(isset($history_movies)) {
+                while ($movie = $history_movies->fetch_assoc()) {
                     echo card($movie, $image_starter);
                 }
             }else{
-                echo '<p class="info_result_desc">ჩანიშნული ფილმები არ არის</p>';
+                echo '<p class="info_result_desc">ფილმების ისტორია არ არის</p>';
             }
             ?>
         </div>

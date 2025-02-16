@@ -1,3 +1,20 @@
+.dev_badge {
+  background-color: rgba(0, 235, 169, 0.1);
+  color: rgb(0, 235, 169);
+}
+
+.info_result_desc {
+  width: 100%;
+  color: var(--textdesc);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.admin_badge {
+  background-color: rgba(236, 0, 59, 0.1);
+  color: rgb(236, 0, 59);
+}
+
 .navinput {
   padding-left: 16px;
 }
@@ -52,14 +69,14 @@
   gap: 16px;
   color: var(--texthead);
 }
-.navcats p {
+.navcats a {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: pointer;
 }
-.navcats p::before {
+.navcats a::before {
   position: absolute;
   content: "";
   height: 2px;
@@ -70,7 +87,7 @@
   box-shadow: 0 -8px 18px var(--main);
   background-color: var(--main);
 }
-.navcats p:hover:before {
+.navcats a:hover:before {
   width: 100%;
 }
 
@@ -173,8 +190,6 @@
   font-size: 16px;
   padding: 8px 25px;
   border-radius: 8px;
-  background-color: var(--adminclear);
-  color: var(--admin);
 }
 
 .navsign {
@@ -182,14 +197,23 @@
   width: 100%;
   border-radius: 5px;
   background-color: var(--main);
-  margin-top: 25px;
+  margin-top: 20px;
   color: var(--texthead);
   letter-spacing: 0.5px;
   transition: background-color 0.3s;
+  transform: translateZ(0);
   cursor: pointer;
 }
 .navsign:hover {
   background-color: var(--mainhover);
+}
+
+.navsignout {
+  background-color: var(--mainclear);
+  color: var(--main);
+}
+.navsignout:hover {
+  background-color: var(--mainclearhover);
 }
 
 .navicons {
@@ -198,6 +222,13 @@
 }
 .navicons svg {
   height: 22px;
+}
+
+.navsearchform {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .navinput {

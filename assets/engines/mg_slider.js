@@ -146,3 +146,25 @@ function initializePlayer() {
     });
   });
 }
+
+function initializeBookmarks() {
+  if (!localStorage.getItem("mg_bookmarks")) {
+    localStorage.setItem("mg_bookmarks", JSON.stringify([]));
+  }
+}
+initializeBookmarks();
+
+// function add_history(id) {
+//   let saved_bookmarks = JSON.parse(localStorage.getItem("mg_bookmarks")) || [];
+//   const maxLength = 20;
+//   if (!saved_bookmarks.includes(id)) {
+//     saved_bookmarks.unshift(id);
+//   } else {
+//     saved_bookmarks = saved_bookmarks.filter((item) => item !== id);
+//     saved_bookmarks.unshift(id);
+//     if (saved_bookmarks.length > maxLength) {
+//       saved_bookmarks = saved_bookmarks.slice(0, maxLength);
+//     }
+//     localStorage.setItem("mg_bookmarks", JSON.stringify(saved_bookmarks));
+//   }
+// }

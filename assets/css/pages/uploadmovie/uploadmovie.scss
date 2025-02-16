@@ -177,6 +177,20 @@ textarea {
     color: var(--green);
   }
 }
+.poster_suggestion {
+  text-align: center;
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 15px 0;
+  color: var(--textdesc);
+  background-color: var(--input);
+  transition: background-color 0.2s;
+  display: none;
+  &:hover {
+    background-color: var(--inputHover);
+  }
+}
 .pictureshow {
   position: relative;
   max-height: 400px;

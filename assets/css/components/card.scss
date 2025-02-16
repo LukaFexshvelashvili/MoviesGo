@@ -1,17 +1,6 @@
 .mg_card {
   position: relative;
-  .mg_card_loader {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--inputnav);
-  }
+
   .mg_img_side {
     display: flex;
     justify-content: center;
@@ -28,7 +17,7 @@
     img {
       height: 100%;
       width: 100%;
-      border-radius: 10px;
+      border-radius: 12px;
       transition: filter 0.2s;
       position: absolute;
       z-index: 1;
@@ -110,13 +99,13 @@
     padding: 0 5px;
     margin-top: 10px;
     .mg_card_info_f {
+      gap: 2px;
       display: flex;
       flex-direction: column;
       width: 190px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: block;
     }
     .mg_card_bookmark {
       flex-shrink: 0;
@@ -131,16 +120,11 @@
       cursor: pointer;
       transition: background-color 0.3s;
       svg path {
-        transition: fill 0.3s;
-      }
-      &:hover {
-        background: rgba(0, 0, 0, 0.1);
+        transition: 0.2s;
       }
 
-      &.mg_card_bookmark_active {
-        svg path {
-          fill: var(--main);
-        }
+      &:hover {
+        background: var(--whitelowest);
       }
     }
     .card_info_text {
@@ -157,6 +141,9 @@
       text-overflow: ellipsis;
       display: block;
     }
+    .card_info_text:nth-child(2) {
+      color: var(--textdesc);
+    }
     .mg_card_imdb {
       font-size: 13px;
       font-family: mbold;
@@ -164,6 +151,18 @@
       color: var(--main);
     }
   }
+}
+.mg_card_loader {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--inputnav);
 }
 .mg_card_description_p {
   display: -webkit-box;
@@ -231,11 +230,18 @@
   visibility: visible;
   opacity: 1;
 }
-@media (max-width: 800px) {
-  .mg_card_description {
-    display: none !important;
+.bookmarked {
+  svg path {
+    fill: var(--main);
+    stroke: var(--main);
   }
 }
+.mg_card_wide {
+  .mg_img_side {
+    display: flex;
+  }
+}
+
 .mg_card_wide {
   cursor: pointer;
   position: relative;
@@ -254,7 +260,7 @@
       top: 0;
       left: 0;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 11px;
 
       height: 100%;
       width: 100%;
@@ -292,7 +298,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     svg path {
-      transition: fill 0.3s;
+      transition: 0.2s;
     }
     &:hover {
       background: rgba(0, 0, 0, 0.5);
@@ -312,28 +318,35 @@
     justify-content: space-between;
     position: absolute;
     left: 0;
-    bottom: 10px;
-    padding: 0px 10px;
+    bottom: 12px;
+    padding: 0px 15px;
     letter-spacing: 0.5px;
     color: var(--textdesc);
 
     .starter {
       display: flex;
       flex-direction: column;
+      gap: 2px;
       letter-spacing: 1px;
       color: var(--texthead);
+      font-family: mmedium;
       div:nth-child(2) {
         color: var(--textdesc);
       }
     }
     .laster {
       .mg_card_imdb {
-        font-size: 12px;
-        font-family: msemibold;
+        font-size: 13px;
+        font-family: mbold;
 
         color: var(--main);
       }
     }
+  }
+}
+@media (max-width: 800px) {
+  .mg_card_description {
+    display: none !important;
   }
 }
 @media (max-width: 600px) {

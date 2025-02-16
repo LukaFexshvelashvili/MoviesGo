@@ -1,8 +1,18 @@
 <?php
 include_once "../server/connection.php";
 include_once "../components/card.php";
+include_once "../components/card_wide.php";
 
-$movies = mysqli_query($conn,"SELECT * FROM movies")
+$movies = mysqli_query($conn,"SELECT * FROM movies");
+
+if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
+    $placeholders = implode(',', array_fill(0, count($_SESSION['watch_history']), '?'));
+    $stmt_movies = $conn->prepare("SELECT * FROM movies WHERE id IN ($placeholders)");
+    $types = str_repeat('i', count($_SESSION['watch_history'])); 
+    $stmt_movies->bind_param($types, ...$_SESSION['watch_history']);
+    $stmt_movies->execute();
+    $watch_history = $stmt_movies->get_result();
+} 
 
 ?>
 
@@ -12,7 +22,7 @@ $movies = mysqli_query($conn,"SELECT * FROM movies")
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Document</title>
+    <title>MoviesGo</title>
 
     <link rel="stylesheet" href="../assets/css/components/colors.css" />
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -24,7 +34,7 @@ $movies = mysqli_query($conn,"SELECT * FROM movies")
 </head>
 
 <body class="bg-bodybg">
-    
+
     <?php include_once "../components/nav.php"?>
 
     <!-- & MAIN SLIDER -->
@@ -33,6 +43,51 @@ $movies = mysqli_query($conn,"SELECT * FROM movies")
 
     <!-- & CARD SLIDERS -->
     <div class="container">
+        <?php
+if(isset($watch_history)){
+?>
+        <div class="mg_cardslider">
+            <div class="mg_cardslider_info">
+                <div class="mg_cardslider_start">
+                    <div class="cnt">
+                        <svg height="20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2C9.43639 2.00731 6.97349 2.99891 5.12 4.77V3C5.12 2.73478 5.01464 2.48043 4.82711 2.29289C4.63957 2.10536 4.38522 2 4.12 2C3.85478 2 3.60043 2.10536 3.41289 2.29289C3.22536 2.48043 3.12 2.73478 3.12 3V7.5C3.12 7.76522 3.22536 8.01957 3.41289 8.20711C3.60043 8.39464 3.85478 8.5 4.12 8.5H8.62C8.88522 8.5 9.13957 8.39464 9.32711 8.20711C9.51464 8.01957 9.62 7.76522 9.62 7.5C9.62 7.23478 9.51464 6.98043 9.32711 6.79289C9.13957 6.60536 8.88522 6.5 8.62 6.5H6.22C7.50578 5.15636 9.21951 4.30266 11.0665 4.08567C12.9136 3.86868 14.7785 4.30198 16.3407 5.31105C17.9028 6.32012 19.0646 7.84191 19.6263 9.61479C20.188 11.3877 20.1145 13.3009 19.4184 15.0254C18.7223 16.7499 17.4472 18.1781 15.8122 19.0643C14.1772 19.9505 12.2845 20.2394 10.4596 19.8813C8.63463 19.5232 6.99147 18.5405 5.81259 17.1022C4.63372 15.6638 3.99279 13.8597 4 12C4 11.7348 3.89464 11.4804 3.70711 11.2929C3.51957 11.1054 3.26522 11 3 11C2.73478 11 2.48043 11.1054 2.29289 11.2929C2.10536 11.4804 2 11.7348 2 12C2 13.9778 2.58649 15.9112 3.6853 17.5557C4.78412 19.2002 6.3459 20.4819 8.17317 21.2388C10.0004 21.9957 12.0111 22.1937 13.9509 21.8079C15.8907 21.422 17.6725 20.4696 19.0711 19.0711C20.4696 17.6725 21.422 15.8907 21.8079 13.9509C22.1937 12.0111 21.9957 10.0004 21.2388 8.17317C20.4819 6.3459 19.2002 4.78412 17.5557 3.6853C15.9112 2.58649 13.9778 2 12 2ZM12 8C11.7348 8 11.4804 8.10536 11.2929 8.29289C11.1054 8.48043 11 8.73478 11 9V12C11 12.2652 11.1054 12.5196 11.2929 12.7071C11.4804 12.8946 11.7348 13 12 13H14C14.2652 13 14.5196 12.8946 14.7071 12.7071C14.8946 12.5196 15 12.2652 15 12C15 11.7348 14.8946 11.4804 14.7071 11.2929C14.5196 11.1054 14.2652 11 14 11H13V9C13 8.73478 12.8946 8.48043 12.7071 8.29289C12.5196 8.10536 12.2652 8 12 8Z"
+                                fill="white"></path>
+                        </svg>
+                    </div>
+                    განაგრძე ყურება
+                </div>
+                <div class="mg_cardslider_end">
+                    <div class="mg_cardslider_button cnt mg_cardslider_left">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                    <div class="mg_cardslider_button cnt mg_cardslider_right">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="mg_cardslider_row">
+                <?php
+                    while ($data = mysqli_fetch_assoc($watch_history)) {
+                      echo card($data, $image_starter);
+                  }
+              ?>
+            </div>
+        </div>
+        <?php
+}
+?>
+
+
         <!-- სიახლე -->
         <div class="mg_cardslider_wide">
             <div class="mg_cardslider_info">
@@ -70,7 +125,13 @@ $movies = mysqli_query($conn,"SELECT * FROM movies")
                     </div>
                 </div>
             </div>
-            <div class="mg_cardslider_row mg_cardslider_wide_row"></div>
+            <div class="mg_cardslider_row mg_cardslider_wide_row">
+                <?php
+                    while ($data = mysqli_fetch_assoc($movies)) {
+                      echo card_wide($data, $image_starter);
+                  }
+              ?>
+            </div>
         </div>
 
         <!-- პოპულარული -->
@@ -106,7 +167,7 @@ $movies = mysqli_query($conn,"SELECT * FROM movies")
             <div class="mg_cardslider_row">
                 <?php
                     while ($data = mysqli_fetch_assoc($movies)) {
-                      card($data, $image_starter);
+                      echo card($data, $image_starter);
                   }
               ?>
             </div>

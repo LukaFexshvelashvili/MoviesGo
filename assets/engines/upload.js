@@ -12,12 +12,17 @@ const actors = document.getElementById("actors");
 const description = document.getElementById("description");
 const player = document.getElementById("player");
 
+const poster_suggestion = document.querySelector(".poster_suggestion");
+
 function changeValues(answer) {
-  let get_type = types.filter((item) => item.title == answer.type)[0];
+  let get_type = types.filter((item) => item.title == answer.Type)[0];
+  let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
   if (get_type) {
+    if (genre_answer.includes("ანიმაცია")) {
+      get_type = types.filter((item) => item.title == "ანიმაცია")[0];
+    }
     typeChangeHand(get_type.id);
   }
-  let genre_answer = answer.genres;
 
   if (genre_answer) {
     genre_answer.forEach((genre) => {
@@ -25,15 +30,19 @@ function changeValues(answer) {
     });
   }
 
-  name_eng.value = answer.name_eng;
-  nameInp.value = answer.name;
-  year.value = answer.year;
-  country.value = answer.country;
-  imdb.value = answer.imdb;
-  creator.value = answer.creator;
-  actors.value = answer.actors.join(", ");
-  description.value = answer.description;
-  ai_suggestion.innerText = `AI შემოთავაზება: ${answer.genres}`;
+  name_eng.value = answer.Title_eng;
+  nameInp.value = answer.Title;
+  year.value = answer.Year;
+  country.value = answer.Country;
+  imdb.value = answer.imdbRating;
+  creator.value = answer.Director;
+  actors.value = answer.Actors;
+  description.value = answer.Plot;
+  ai_suggestion.innerText = `AI შემოთავაზება: ${answer.Genre}`;
+  poster_suggestion.href = answer.Poster;
+  poster_suggestion.innerText = "AI შემოთავაზებული პოსტერი";
+  poster_suggestion.style.display = "block";
+
   checkall();
 }
 function clearValues() {
@@ -58,37 +67,29 @@ function clearValues() {
 }
 const ai_button = document.querySelector(".ai_button");
 const ai_input = document.querySelector("#ai_input");
+const ai_input_year = document.querySelector("#ai_input_year");
 
 ai_button.addEventListener("click", sendAIrequest);
 async function sendAIrequest() {
   mg_ai_web_loader.classList.remove("mg_ai_web_loader_hidden");
   if (ai_input.value.length > 1) {
-    const API_URL = "https://api.groq.com/openai/v1/chat/completions";
-    const API_TOKEN =
-      "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";
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-        "Content-Type": "application/json",
+    let params = {
+      t: ai_input.value,
+      y: ai_input_year.value,
+      plot: "full",
+      i: "tt3896198",
+      apikey: "ee640089",
+    };
+    $.get(
+      "http://www.omdbapi.com/",
+      params,
+      async function (data) {
+        mg_ai_web_loader.classList.add("mg_ai_web_loader_hidden");
+        let translatedAnswer = await sendAItranslate(JSON.stringify(data));
+        changeValues({ Title_eng: data.Title, ...translatedAnswer });
       },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          {
-            role: "user",
-            content: `give me just json answer only for movie: ${ai_input.value} as {type (return as, "ფილმი", "სერიალი", "ანიმაცია", "ანიმე"), name_eng, name, year, country, imdb, creator, actors, description, genres ( as array)} CAUTION answers should be in georgian language except name_eng`,
-          },
-        ],
-      }),
-    });
-    mg_ai_web_loader.classList.add("mg_ai_web_loader_hidden");
-
-    const data = await response.json();
-    const answer = JSON.parse(
-      data.choices[0].message.content.replace(/```/g, "").replace("json", "")
+      "json"
     );
-    changeValues(answer);
   } else {
     alert("AI - სთვის შეტყობინება ცარიელია");
   }
@@ -111,7 +112,10 @@ playereng1.addEventListener("input", function () {
 });
 
 Array.from(inputs).forEach((item) => {
-  if (item.getAttribute("id") !== "ai_input") {
+  if (
+    item.getAttribute("id") !== "ai_input" &&
+    item.getAttribute("id") !== "ai_input_year"
+  ) {
     item.addEventListener("input", () => {
       let delitem = item.closest(".labeled").querySelector(".clear_inp");
       if (item.value.length > 0 && delitem) {
@@ -248,6 +252,14 @@ function initializeGenres() {
   });
 }
 function selectGenreHand(title) {
+  if (title == "ანიმაცია") {
+    const element4 = document.querySelector(`[data-genre="ანიმაციური"]`);
+    element4.classList.add("genre_active");
+    if (!movie_genres.includes("ანიმაციური")) {
+      movie_genres.unshift("ანიმაციური");
+    }
+    genres_check.classList.add("checked");
+  }
   if (title == "რომანტიკული") {
     const element3 = document.querySelector(`[data-genre="რომანტიკა"]`);
     element3.classList.add("genre_active");
@@ -439,5 +451,41 @@ function checkall() {
     description_check.classList.add("checked");
   } else {
     description_check.classList.remove("checked");
+  }
+}
+
+async function sendAItranslate(data_send) {
+  mg_ai_web_loader.classList.remove("mg_ai_web_loader_hidden");
+  if (ai_input.value.length > 1) {
+    const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+    const API_TOKEN =
+      "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";
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          {
+            role: "user",
+            content: `translate json values (not keys) to georgian and just return JSON not any text as answer ${data_send}`,
+          },
+        ],
+      }),
+    });
+    mg_ai_web_loader.classList.add("mg_ai_web_loader_hidden");
+
+    const data = await response.json();
+    const answer = JSON.parse(
+      data.choices[0].message.content.replace(/```/g, "").replace("json", "")
+    );
+    console.log(answer);
+
+    return answer;
+  } else {
+    alert("AI - სთვის შეტყობინება ცარიელია");
   }
 }

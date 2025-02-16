@@ -1,3 +1,26 @@
+.mg_web_auth_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.mg_web_auth_loader_hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.mg_web_auth_loader svg path {
+  transition: 0.3s;
+}
+
 nav {
   display: flex;
   align-items: center;
