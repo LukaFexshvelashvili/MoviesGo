@@ -97,14 +97,15 @@
   margin-left: 10px;
   .navprofilebutton {
     user-select: none;
-    background-color: rgba(51, 51, 51, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
     transition: background-color 0.2s;
     height: 100%;
     width: 100%;
     cursor: pointer;
+    border-radius: 5px;
 
     &:hover {
-      background-color: #272727;
+      background-color: rgb(255, 255, 255, 0.15);
     }
   }
 }
@@ -205,6 +206,23 @@
   svg {
     height: 22px;
   }
+  svg path {
+    transition: 0.2s;
+    fill: var(--iconlow);
+  }
+  &:hover svg path {
+    fill: var(--icon);
+  }
+  &.navicons:nth-child(2) {
+    svg path {
+      fill: unset;
+      stroke: var(--iconlow);
+    }
+    &:hover svg path {
+      fill: unset;
+      stroke: var(--icon);
+    }
+  }
 }
 .navsearchform {
   display: flex;
@@ -228,6 +246,9 @@
   &:focus {
     background-color: var(--inputnavbgactive);
   }
+}
+.badge_margin {
+  margin-top: 10px;
 }
 .searchnavinput,
 .nav_mb_search_close {

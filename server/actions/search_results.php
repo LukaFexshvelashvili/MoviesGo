@@ -23,7 +23,7 @@ if (!empty($_GET["title"]) || !empty($_GET["type"])) {
     }
 
     // FOR LIMIT
-    $query .= " LIMIT 4";
+    $query .= "";
 
     $stmt = $conn->prepare($query);
 

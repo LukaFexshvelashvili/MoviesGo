@@ -124,6 +124,19 @@
                 <input class="inpc" type="text" id="actors" name="actors" />
             </div>
             <div class="labeled">
+                <div class="ps">
+                    <p>თრეილერი</p>
+                    <p class="nr">არასავალდებულო</p>
+                </div>
+                <div class="clear_inp">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
+                    </svg>
+                </div>
+                <input class="inpc" type="text" id="trailer" name="trailer" />
+            </div>
+            <div class="labeled">
                 <p>მოკლე სიუჟეტი</p>
                 <div class="clear_inp">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -189,6 +202,7 @@
                 <p id="imdb_check">imdb</p>
                 <p id="creator_check">რეჟისორი</p>
                 <p id="actors_check" class="optional">როლებში</p>
+                <p id="trailer_check" class="optional">თრეილერი</p>
                 <p id="description_check">მოკლე სიუჟეტი</p>
                 <p id="genres_check">ჟანრები</p>
                 <p id="image_check">ფოტო 1</p>

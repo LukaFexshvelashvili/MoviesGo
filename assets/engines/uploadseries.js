@@ -11,6 +11,8 @@ const creator = document.getElementById("creator");
 const actors = document.getElementById("actors");
 const description = document.getElementById("description");
 
+const poster_suggestion = document.querySelector(".poster_suggestion");
+
 function changeValues(answer) {
   let get_type = types.filter((item) => item.title == answer.Type)[0];
   let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
@@ -171,7 +173,6 @@ function addplayerblock() {
   const playerNew = newPlayerRow.querySelector(`#player${newPlayerID}`);
   playerNew.addEventListener("input", function () {
     players[newPlayerID] = playerNew.value;
-    console.log(players);
   });
 }
 function removePlayer(button, newPlayerID) {
@@ -291,6 +292,15 @@ const description_check = document.getElementById("description_check");
 const genres_check = document.getElementById("genres_check");
 const image_check = document.getElementById("image_check");
 const image2_check = document.getElementById("image2_check");
+const trailer_check = document.getElementById("trailer_check");
+
+trailer.oninput = () => {
+  if (trailer.value.length > 2) {
+    trailer_check.classList.add("checked");
+  } else {
+    trailer_check.classList.remove("checked");
+  }
+};
 name_eng.oninput = () => {
   if (name_eng.value.length > 2) {
     name_eng_check.classList.add("checked");

@@ -41,8 +41,8 @@
   opacity: 1;
 }
 .mg_slider .mg_slider_img {
-  -o-object-position: 0px -100px;
-     object-position: 0px -100px;
+  -o-object-position: 0px center;
+     object-position: 0px center;
   top: 0;
   left: 0;
   -o-object-fit: cover;

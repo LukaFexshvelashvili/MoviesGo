@@ -29,7 +29,7 @@ function is_logged(){
 
     }
 }
-$admin_status = 10;
+$admin_status = 1;
 
 // Input date
 function format_date($input_date){
@@ -59,5 +59,25 @@ $formatted_date = $date->format('Y ') . $georgian_month . $date->format(' d');
 // $formatted_date = $date->format('Y ') . substr($georgian_month, 0,length: 9) . $date->format(' d');
 
 return $formatted_date; 
+}
+function get_local_time($timestamp){
+// Define Georgian weekday names manually
+$georgian_weekdays = [
+    'Monday' => 'ორშ',
+    'Tuesday' => 'სამ',
+    'Wednesday' => 'ოთხ',
+    'Thursday' => 'ხუთ',
+    'Friday' => 'პარ',
+    'Saturday' => 'შაბ',
+    'Sunday' => 'კვი'
+];
+
+$date = new DateTime($timestamp);
+
+$day_name = $date->format('l');
+
+$formatted_date = $date->format('m/d') . ' ' . $georgian_weekdays[$day_name] . ' ' . $date->format('H:i');
+
+echo $formatted_date;
 }
 ?>

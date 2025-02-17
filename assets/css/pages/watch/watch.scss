@@ -459,10 +459,7 @@
     transition: 0.2s;
   }
 }
-.iframe_players {
-  height: 100%;
-  width: 100%;
-}
+
 .hidden_player {
   display: none;
 }
@@ -502,6 +499,14 @@
   }
 }
 @media (max-width: 768px) {
+  .video_players {
+    border-radius: 0px;
+  }
+  .watch_bg {
+    img {
+      filter: brightness(0.6);
+    }
+  }
   .watch_bg {
     width: 100%;
     height: auto;

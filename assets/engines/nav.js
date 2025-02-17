@@ -106,7 +106,7 @@ function removeProfileBlock(e) {
 
 const profileactions = [
   {
-    link: session_id ? "profile?id=" + session_id : "login",
+    link: session_id !== null ? "profile?id=" + session_id : "login",
     title: "პროფილი",
     icon: `
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@ const profileactions = [
 `,
   },
   {
-    link: session_id ? "profile?id=" + session_id : "login",
+    link: session_id !== null ? "profile?id=" + session_id : "login",
     title: "მოწონებულები",
     icon: `
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

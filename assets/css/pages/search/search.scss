@@ -63,7 +63,8 @@
 .cardrows {
   margin-top: 30px;
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .filter_container {
@@ -221,6 +222,9 @@
   display: none;
 }
 @media (max-width: 900px) {
+  .cardrows {
+    gap: 10px;
+  }
   .filter_container {
     .filter_block::-webkit-scrollbar {
       display: none;

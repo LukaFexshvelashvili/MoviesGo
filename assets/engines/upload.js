@@ -9,6 +9,7 @@ const country = document.getElementById("country");
 const imdb = document.getElementById("imdb");
 const creator = document.getElementById("creator");
 const actors = document.getElementById("actors");
+const trailer = document.getElementById("trailer");
 const description = document.getElementById("description");
 const player = document.getElementById("player");
 
@@ -104,11 +105,11 @@ const playereng1 = document.getElementById("playereng1");
 const inputs = document.querySelectorAll("input, textarea");
 
 playergeo1.addEventListener("input", function () {
-  players[1].GEO = playergeo1.value;
+  players[1].GEO.HD = playergeo1.value;
 });
 
 playereng1.addEventListener("input", function () {
-  players[1].ENG = playereng1.value;
+  players[1].ENG.HD = playereng1.value;
 });
 
 Array.from(inputs).forEach((item) => {
@@ -176,19 +177,19 @@ function addplayerblock() {
   });
 
   players[newPlayerID] = {
-    GEO: "",
-    ENG: "",
+    GEO: { HD: "" },
+    ENG: { HD: "" },
   };
 
   const geoInput = newPlayerRow.querySelector(`#playergeo${newPlayerID}`);
   const engInput = newPlayerRow.querySelector(`#playereng${newPlayerID}`);
 
   geoInput.addEventListener("input", function () {
-    players[newPlayerID].GEO = geoInput.value;
+    players[newPlayerID].GEO.HD = geoInput.value;
   });
 
   engInput.addEventListener("input", function () {
-    players[newPlayerID].ENG = engInput.value;
+    players[newPlayerID].ENG.HD = engInput.value;
   });
 }
 function removePlayer(button, newPlayerID) {
@@ -304,10 +305,19 @@ const country_check = document.getElementById("country_check");
 const imdb_check = document.getElementById("imdb_check");
 const creator_check = document.getElementById("creator_check");
 const actors_check = document.getElementById("actors_check");
+const trailer_check = document.getElementById("trailer_check");
 const description_check = document.getElementById("description_check");
 const genres_check = document.getElementById("genres_check");
 const image_check = document.getElementById("image_check");
 const image2_check = document.getElementById("image2_check");
+
+trailer.oninput = () => {
+  if (trailer.value.length > 2) {
+    trailer_check.classList.add("checked");
+  } else {
+    trailer_check.classList.remove("checked");
+  }
+};
 name_eng.oninput = () => {
   if (name_eng.value.length > 2) {
     name_eng_check.classList.add("checked");

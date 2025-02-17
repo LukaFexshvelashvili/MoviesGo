@@ -1,5 +1,3 @@
-import { mg_slider_items } from "../../ui/slideritems.js";
-
 const mg_slider = document.querySelector(".mg_slider");
 
 const mg_slider_row = document.createElement("div");
@@ -10,10 +8,24 @@ const mg_slider_indicators = document.createElement("div");
 mg_slider_indicators.classList.add("mg_slider_indicators");
 mg_slider.appendChild(mg_slider_indicators);
 
+let userSlided = false;
 let activeSlider = 0;
-function changeSlider(slide) {
-  let maxSlider = mg_slider_row.children.length;
+let autoslidetime = 4000;
+let intslide;
 
+intslide = setInterval(() => {
+  if (!userSlided) {
+    changeSlider("right", true);
+  } else {
+    userSlided = false;
+  }
+}, autoslidetime);
+
+function changeSlider(slide, notUser) {
+  if (!notUser) {
+    userSlided = true;
+  }
+  let maxSlider = mg_slider_row.children.length;
   if (slide === "right") {
     if (activeSlider < maxSlider - 1) {
       activeSlider++;
@@ -95,7 +107,7 @@ function changeIndicators() {
   );
   indicators[activeSlider].classList.add("mg_slider_indicator_active");
 }
-
+// ${item.genres.map((genre) => `<div>${genre}</div>`).join("")}
 function initializePlayer() {
   mg_slider_items.forEach((item, index) => {
     mg_slider_indicators.innerHTML += `<div class="mg_slider_indicator${
@@ -111,7 +123,7 @@ function initializePlayer() {
     }" class="mg_slider_img" />
             <div class="mg_slider_info">
               <div class="mg_slider_genres">
-                 ${item.genres.map((genre) => `<div>${genre}</div>`).join("")}
+                 
               </div>
               <div class="mg_slider_subtitle">${item.subtitle}</div>
               <div class="mg_slider_title">${item.title}</div>

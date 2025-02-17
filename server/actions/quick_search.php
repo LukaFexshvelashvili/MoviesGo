@@ -3,7 +3,7 @@ include_once "../connection.php";
 include_once "../../components/assets/types.php";
 if($_GET["title"]){
 
-    $stmt = $conn->prepare("SELECT * FROM movies WHERE name LIKE ? OR name_eng LIKE ? LIMIT 4");
+    $stmt = $conn->prepare("SELECT * FROM movies WHERE name LIKE ? OR name_eng LIKE ? ORDER BY year DESC LIMIT 4");
     $searchTerm = "%" . $_GET["title"] . "%";  
     $stmt->bind_param("ss", $searchTerm, $searchTerm);  
     $stmt->execute();

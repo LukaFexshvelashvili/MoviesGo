@@ -1,5 +1,5 @@
 <?php
- include_once "../server/connection.php";
+include_once "../server/connection.php";
 ?>
 <div class="mg_web_loader">
     <div class="popcorn_container">
@@ -81,23 +81,27 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </div>
+
                             <div class="c_profile_name">
                                 <?php echo is_logged() ? cut_text($_SESSION['nickname']) : "სტუმარი" ?>
+
                             </div>
                         </div>
+                        <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<div class="cnt c_profile_badge badge_margin dev_badge">დეველოპერი</div>' : "") : "" ?>
+
                         <div class="navline"></div>
                         <div class="navprofileblockactions"></div>
-                        <?php 
-                        if(is_logged()){
-                        ?>
-                        <a href="./logout"><button class="navsign navsignout">გასვლა</button></a>
                         <?php
-                    }else{
+                        if (is_logged()) {
                         ?>
-                        <a href="./login"><button class="navsign">შესვლა</button></a>
+                        <a href="./logout"><button class="navsign navsignout">ანგარიშიდან გასვლა</button></a>
                         <?php
-                    }
-                    ?>
+                        } else {
+                        ?>
+                        <a href="./login"><button class="navsign">ავტორიზაცია</button></a>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class="cnt navprofilebutton">
                         <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -162,18 +166,28 @@
                     <div class="c_profile_name"><?php echo is_logged() ? cut_text($_SESSION['nickname']) : "სტუმარი" ?>
                     </div>
                 </div>
-                <div class="cnt c_profile_badge dev_badge">დეველოპერი</div>
+                <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<div class="cnt c_profile_badge dev_badge">დეველოპერი</div>' : "") : "" ?>
+
                 <div class="navline"></div>
                 <div class="mob_nav_actions_row"></div>
             </div>
             <div class="mobile_nav_content_end">
-                <div class="mob_nav_sign cnt mob_nav_sign_out">
-                    ანგარიშიდან გასვლა
-                </div>
+                <?php
+                if (is_logged()) {
+                ?>
+                <a href="./logout"><button class="mob_nav_sign mob_nav_sign_out cnt">ანგარიშიდან გასვლა</button></a>
+                <?php
+                } else {
+                ?>
+                <a href="./login"><button class="mob_nav_sign cnt">ავტორიზაცია</button></a>
+                <?php
+                }
+                ?>
+
             </div>
         </div>
     </div>
 </nav>
 <script>
-const session_id = <?php echo is_logged() ? $_SESSION['user_id'] : null ?>
+const session_id = <?php echo is_logged() ? $_SESSION['user_id'] : 'null'; ?>
 </script>
