@@ -1,11 +1,14 @@
 const iframe_players = document.querySelectorAll(".iframe_player_box");
 
-let player_index = 1;
-
 iframe_players.forEach((iframe_player) => {
+  initializeIframePlayer(iframe_player);
+});
+
+function initializeIframePlayer(iframe_player) {
   let active_season = 1;
   let active_episode = 1;
-  player_index = player_index + 1;
+  const player_index = iframe_player.getAttribute("data-player");
+
   const iframe_player_seasons = iframe_player.querySelector(
     ".iframe_player_seasons"
   );
@@ -67,16 +70,6 @@ iframe_players.forEach((iframe_player) => {
       } else {
         active_season = 1;
         active_episode = 1;
-        localStorage.setItem(
-          "iframe_player",
-          JSON.stringify([
-            {
-              id: IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index,
-              episode: 1,
-              season: 1,
-            },
-          ])
-        );
       }
     } else {
       iframe_save.unshift({
@@ -85,8 +78,6 @@ iframe_players.forEach((iframe_player) => {
         season: 1,
       });
     }
-    cutIfTooLarge(iframe_save, 5);
-    localStorage.setItem("iframe_player", JSON.stringify(iframe_save));
   } else {
     localStorage.setItem(
       "iframe_player",
@@ -98,19 +89,6 @@ iframe_players.forEach((iframe_player) => {
         },
       ])
     );
-  }
-
-  function getCurStorage() {
-    if (localStorage.getItem("iframe_player")) {
-      let iframe_save_ = localStorage.getItem("iframe_player");
-      let iframe_save = JSON.parse(iframe_save_);
-      let get_cur = iframe_save.filter((item) => {
-        return item.id == IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index;
-      });
-      return get_cur[0];
-    } else {
-      return null;
-    }
   }
 
   iframe_player_ep_button.addEventListener("click", () => {
@@ -163,7 +141,7 @@ iframe_players.forEach((iframe_player) => {
     });
   }
   function printEpisodes() {
-    const curSE = getCurStorage().season;
+    const curSE = getCurStorage() == null ? 1 : getCurStorage().season;
     iframe_player_eps_scroll.innerHTML = "";
     IFRAME_PLAYERS.PLAYERS[player_index][active_season].forEach(
       (item, index) => {
@@ -198,14 +176,7 @@ iframe_players.forEach((iframe_player) => {
     iframe_loader.classList.remove("iframe_loader_hide");
     iframe.src = episode;
     close_episodes();
-    if (localStorage.getItem("iframe_player")) {
-      let iframe_save_ = localStorage.getItem("iframe_player");
-      let iframe_save = JSON.parse(iframe_save_);
-      iframe_save[0].episode = parseInt(active_episode);
-      iframe_save[0].season = active_season;
-      cutIfTooLarge(iframe_save, 5);
-      localStorage.setItem("iframe_player", JSON.stringify(iframe_save));
-    }
+    localsave();
   }
 
   function getEpisodeRequest() {
@@ -244,4 +215,53 @@ iframe_players.forEach((iframe_player) => {
       list.splice(number);
     }
   }
-});
+
+  function getCurStorage() {
+    if (localStorage.getItem("iframe_player")) {
+      let iframe_save_ = localStorage.getItem("iframe_player");
+      let iframe_save = JSON.parse(iframe_save_);
+      let get_cur = iframe_save.filter((item) => {
+        return item.id == IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index;
+      });
+      if (get_cur.length == 0) {
+        return null;
+      }
+      return get_cur[0];
+    } else {
+      return null;
+    }
+  }
+  function localsave() {
+    if (localStorage.getItem("iframe_player")) {
+      let iframe_save_ = localStorage.getItem("iframe_player");
+      let iframe_save = JSON.parse(iframe_save_);
+      let is_saved = getCurStorage() == null ? false : true;
+      if (is_saved) {
+        let ind = iframe_save.findIndex(
+          (item) => item.id == IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index
+        );
+        iframe_save[ind].episode = parseInt(active_episode);
+        iframe_save[ind].season = parseInt(active_season);
+      } else {
+        iframe_save.unshift({
+          id: IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index,
+          episode: parseInt(active_episode),
+          season: parseInt(active_season),
+        });
+      }
+      cutIfTooLarge(iframe_save, 5);
+      localStorage.setItem("iframe_player", JSON.stringify(iframe_save));
+    } else {
+      localStorage.setItem(
+        "iframe_player",
+        JSON.stringify([
+          {
+            id: IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index,
+            episode: parseInt(active_episode),
+            season: parseInt(active_season),
+          },
+        ])
+      );
+    }
+  }
+}

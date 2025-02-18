@@ -170,7 +170,7 @@ initializePlayer(),
   mg_player_ep_button.addEventListener("click", openEpisodes),
   mg_eps_closer.addEventListener("click", closeEpisodes),
   mg_player.addEventListener("mousemove", mouseMoving),
-  mg_player.addEventListener("touchmove", mouseMoving),
+  mg_player.addEventListener("touchmove", mouseMoving, { passive: !0 }),
   mg_fullscreen.addEventListener("click", fullscreenOnOff),
   mg_main_play.addEventListener("click", firstStart),
   mg_skip_left.addEventListener("touchend", skipLeftDbl),
@@ -179,7 +179,9 @@ initializePlayer(),
   mg_skip_right_button.addEventListener("click", skipRight),
   mg_play_pause_full.addEventListener("dblclick", fullscreenOnOff),
   mg_play_pause_full.addEventListener("click", playPause),
-  mg_play_pause_full_mobile.addEventListener("touchend", showhideControls),
+  mg_play_pause_full_mobile.addEventListener("touchend", showhideControls, {
+    passive: !0,
+  }),
   mg_play_pause.forEach((e) => {
     e.addEventListener("click", playPause);
   }),
@@ -189,11 +191,19 @@ initializePlayer(),
   mg_frame.addEventListener("click", togglePIP),
   mg_download.addEventListener("click", downloadMovie),
   mg_timeline_scaler.addEventListener("click", measureTimeMouse),
-  mg_timeline_scaler.addEventListener("touchstart", measureTimeTouch),
-  mg_timeline_scaler.addEventListener("touchmove", measureTimeTouch),
-  mg_timeline_scaler.addEventListener("touchend", removeSeeTime),
+  mg_timeline_scaler.addEventListener("touchstart", measureTimeTouch, {
+    passive: !0,
+  }),
+  mg_timeline_scaler.addEventListener("touchmove", measureTimeTouch, {
+    passive: !0,
+  }),
+  mg_timeline_scaler.addEventListener("touchend", removeSeeTime, {
+    passive: !0,
+  }),
   mg_timeline_scaler.addEventListener("mousemove", seeTime),
-  mg_timeline_scaler.addEventListener("touchmove", seeTimeTouch),
+  mg_timeline_scaler.addEventListener("touchmove", seeTimeTouch, {
+    passive: !0,
+  }),
   mg_timeline_scaler.addEventListener("mouseout", removeSeeTime),
   document.addEventListener("keydown", handleKeyPress),
   mg_video.addEventListener("waiting", function () {

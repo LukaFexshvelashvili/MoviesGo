@@ -84,7 +84,7 @@ a {
 }
 
 .mg_video_thumbnail {
-  filter: brightness(0.75);
+  filter: brightness(0.85);
 }
 
 #mg_sound_slider {

@@ -231,20 +231,8 @@
     const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");
 
     function verifyCheckings() {
-        if (
-            name_eng_check.classList.contains("checked") &&
-            name_check.classList.contains("checked") &&
-            year_check.classList.contains("checked") &&
-            country_check.classList.contains("checked") &&
-            imdb_check.classList.contains("checked") &&
-            creator_check.classList.contains("checked") &&
-            description_check.classList.contains("checked")
-        ) {
-            return true;
-        } else {
-            alert("შეავსე ყველა სავალდებულო ველი !");
-            return false;
-        }
+        return true;
+
     }
 
     const upload_form = document.querySelector(".upload_form");

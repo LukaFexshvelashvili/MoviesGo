@@ -491,17 +491,6 @@
   display: none;
 }
 
-.iframe_player_box {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-.iframe_player_box iframe {
-  height: 100%;
-  width: 100%;
-}
-
 .iframe_players {
   height: 100%;
   width: 100%;

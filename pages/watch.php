@@ -107,29 +107,31 @@ header("Location: ./");
                     if (!empty($players[$i]) && is_array($players)) {
                         if ($i == 1) {
                             if ($first_geo_src || $first_eng_src) {
-                                echo '<div data-player="' . $i . '" class="mg_player video_players"></div>';
+                                echo '<div data-player="' . $i . '" class="mg_player player_box video_players"></div>';
                             } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
 
                                 $i++;
-                                echo '<iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
+                                echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box"><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
                             }
                         } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
 
-                            echo '<iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class="hidden_player iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
+                            echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box">
+            </div><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class="hidden_player iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
                         }
                     }
                 }
             } else {
                 for ($i = 1; $i <= $players_length; $i++) {
+                
                     if ($i == 1) {
                         if ($first_geo_src || $first_eng_src) {
 
-                                echo '<div data-player="' . $i . '" class="mg_player video_players"></div>';
+                                echo '<div data-player="' . $i . '" class="mg_player player_box video_players"></div>';
                             }else {
                                 $i++;
                               
                                 ?>
-            <div data-player="<?php echo $i ?>" class="iframe_players iframe_player_box">
+            <div data-player="<?php echo $i ?>" class="iframe_players player_box iframe_player_box">
                 <?php include "../components/player/series_selector.php" ?>
                 <iframe sandbox="allow-scripts allow-same-origin" class=" video_players"
                     src="<?php echo htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') ?>"
@@ -140,7 +142,7 @@ header("Location: ./");
                             }
                         } elseif (!empty($players[$i][1][0]["languages"]["GEO"]["HD"]) || !empty($players[$i][1][0]["languages"]["ENG"]["HD"])) {
                             ?>
-            <div data-player="<?php echo $i ?>" class="hidden_player iframe_players iframe_player_box">
+            <div data-player="<?php echo $i ?>" class="hidden_player iframe_players player_box iframe_player_box">
                 <?php include "../components/player/series_selector.php" ?>
                 <iframe sandbox="allow-scripts allow-same-origin" class=" video_players"
                     src="<?php echo htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') ?>"
@@ -406,12 +408,12 @@ if($_SESSION['status'] == $admin_status){
 
             let player_id = $(this).attr("data-player-button");
 
-            $(".video_players").addClass("hidden_player");
+            $(".player_box").addClass("hidden_player");
             $("video").each(function() {
                 this.pause();
             });
 
-            $(' .video_players[data-player="' + player_id + '" ]').removeClass("hidden_player");
+            $(' .player_box[data-player="' + player_id + '" ]').removeClass("hidden_player");
             $(".players_change_button").removeClass("active_player");
             $(this).addClass("active_player");
         }
