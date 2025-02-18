@@ -799,7 +799,7 @@ a {
 }
 
 .mg_play_pause_mobile_locked {
-  display: none;
+  display: none !important;
 }
 
 .mg_play_pause_full_mobile {

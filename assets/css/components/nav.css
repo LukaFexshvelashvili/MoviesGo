@@ -121,6 +121,20 @@
   background-color: rgba(255, 255, 255, 0.15);
 }
 
+.login_error {
+  width: 100%;
+  padding: 20px 0;
+  font-family: mregular;
+  color: var(--texthead);
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.login_error a {
+  font-family: mbold;
+  font-weight: 600;
+  color: var(--main);
+}
+
 .navprofileblock {
   padding: 20px;
   background-color: var(--secondbgcolor);
@@ -203,6 +217,7 @@
   letter-spacing: 0.5px;
   transition: background-color 0.3s;
   transform: translateZ(0);
+  font-family: msemibold;
   cursor: pointer;
 }
 .navsign:hover {
@@ -256,7 +271,7 @@
   color: var(--texthead);
   background-color: var(--inputnav);
   letter-spacing: 0.5px;
-  font-family: msemibold;
+  font-family: mmedium;
 }
 .navinput:hover {
   background-color: var(--inputnavbghover);
@@ -275,7 +290,7 @@
   height: 40px;
   aspect-ratio: 1/1;
   right: 0;
-  background-color: var(--main);
+  background-color: var(--whiteclear);
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -287,7 +302,7 @@
 }
 .searchnavinput:hover,
 .nav_mb_search_close:hover {
-  background-color: var(--mainhover);
+  background-color: var(--whiteclearhover);
 }
 
 .navlogo {
@@ -564,7 +579,7 @@
     height: 60px;
   }
   .navinputblock {
-    transform: translateY(-100%);
+    transform: translateY(-120%);
     position: fixed;
     width: 100%;
     left: 0;
@@ -600,7 +615,12 @@
   .navinputblock .nav_mb_search_close {
     position: relative;
     border-radius: 0px;
+    background-color: var(--main);
     height: 100%;
+  }
+  .navinputblock .searchnavinput:hover,
+  .navinputblock .nav_mb_search_close:hover {
+    background-color: var(--mainhover);
   }
   .navinputblock .searchnavinput svg,
   .navinputblock .nav_mb_search_close svg {

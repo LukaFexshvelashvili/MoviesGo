@@ -3,35 +3,51 @@ include_once "../server/connection.php";
 include_once "../components/card.php";
 include_once "../components/card_wide.php";
 
-$movies = mysqli_query($conn, "SELECT * FROM movies ORDER BY id DESC LIMIT 10");
+$sql = "
+(SELECT * FROM movies WHERE type = 0 ORDER BY id DESC LIMIT 10)
+UNION ALL
+(SELECT * FROM movies WHERE type = 1 ORDER BY id DESC LIMIT 10)
+UNION ALL
+(SELECT * FROM movies WHERE type = 2 ORDER BY id DESC LIMIT 10)
+UNION ALL
+(SELECT * FROM movies WHERE type = 3 ORDER BY id DESC LIMIT 10);
+";
 
-$movies_list = []; 
+$movies_fetch = mysqli_query($conn, $sql);
+$movies_list = mysqli_fetch_all($movies_fetch, MYSQLI_ASSOC);
+$movies_by_type = [];
 
-while ($data = mysqli_fetch_assoc($movies)) {
-    $movies_list[] = $data; 
-}
-
-$mg_slider_items = [];
 foreach ($movies_list as $movie) {
-    $mg_slider_items[] =  [
-        "id" => $movie['id'],
-        "image" => $image_starter.$movie['thumbnail_url'],
-        "altimage" => $movie['name_eng']." thumbnail",
-        "link" => "./watch?id=".$movie['id'],
-        "title" => $movie['name_eng']." - ".$movie['name'],
-        "subtitle" => $movie['subtitle'],
-        "genres" => json_decode($movie['genres']),
-        "imdb" => $movie['imdb'],
-    ];
+    switch ($movie['type']) {
+        case 0:
+            $movies_by_type["movies"][] = $movie;
+            break;
+        case 1:
+            $movies_by_type["series"][] = $movie;
+            break;
+        case 2:
+            $movies_by_type["animations"][] = $movie;
+            break;
+        case 3:
+            $movies_by_type["animes"][] = $movie;
+            break;
+       
+    }
 }
+
+
 
 if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
-$placeholders = implode(',', array_fill(0, count($_SESSION['watch_history']), '?'));
-$stmt_movies = $conn->prepare("SELECT * FROM movies WHERE id IN ($placeholders)");
-$types = str_repeat('i', count($_SESSION['watch_history']));
-$stmt_movies->bind_param($types, ...$_SESSION['watch_history']);
-$stmt_movies->execute();
-$watch_history = $stmt_movies->get_result();
+    $watch_history = $_SESSION['watch_history'];
+    $placeholders = implode(',', array_fill(0, count($watch_history), '?'));
+    $sql = "SELECT * FROM movies WHERE id IN ($placeholders) 
+        ORDER BY FIELD(id, " . implode(',', array_fill(0, count($watch_history), '?')) . ")";
+    $stmt_movies = $conn->prepare($sql);
+    $types = str_repeat('i', count($watch_history) * 2);
+    $params = array_merge($watch_history, $watch_history);
+    $stmt_movies->bind_param($types, ...$params);
+    $stmt_movies->execute();
+    $watch_history = $stmt_movies->get_result();
 }
 
 ?>
@@ -55,17 +71,17 @@ $watch_history = $stmt_movies->get_result();
 
 <body class="bg-bodybg">
 
-    <?php include_once "../components/nav.php"?>
+    <?php include_once "../components/nav.php" ?>
 
     <!-- & MAIN SLIDER -->
-    <div class="mg_slider"></div>
+    <?php include_once "../components/mg_slider.php" ?>
     <script type="module" src="../assets/engines/mg_slider.js"></script>
 
     <!-- & CARD SLIDERS -->
     <div class="container">
         <?php
-if(isset($watch_history)){
-?>
+        if (isset($watch_history)) {
+        ?>
         <div class="mg_cardslider">
             <div class="mg_cardslider_info">
                 <div class="mg_cardslider_start">
@@ -98,14 +114,14 @@ if(isset($watch_history)){
             <div class="mg_cardslider_row">
                 <?php
                     while ($data = mysqli_fetch_assoc($watch_history)) {
-                      echo card($data, $image_starter);
-                  }
-              ?>
+                        echo card($data, $image_starter);
+                    }
+                    ?>
             </div>
         </div>
         <?php
-}
-?>
+        }
+        ?>
 
 
         <!-- სიახლე -->
@@ -147,8 +163,8 @@ if(isset($watch_history)){
             </div>
             <div class="mg_cardslider_row mg_cardslider_wide_row">
                 <?php foreach ($movies_list as $data) {
-        echo card_wide($data, $image_starter);
-    } ?>
+                    echo card_wide($data, $image_starter);
+                } ?>
             </div>
         </div>
 
@@ -184,8 +200,8 @@ if(isset($watch_history)){
             </div>
             <div class="mg_cardslider_row">
                 <?php foreach ($movies_list as $data) {
-        echo card($data, $image_starter);
-    } ?>
+                    echo card($data, $image_starter);
+                } ?>
             </div>
         </div>
     </div>
@@ -224,7 +240,15 @@ if(isset($watch_history)){
                         </div>
                     </div>
                 </div>
-                <div class="mg_cardslider_row"></div>
+                <div class="mg_cardslider_row">
+                    <?php
+                         if(isset($movies_by_type['animes']) && !empty($movies_by_type['animes'])) {
+                            foreach ($movies_by_type['animes'] as $data) {
+                                echo card($data, $image_starter);
+                            } 
+                        } 
+                ?>
+                </div>
             </div>
         </div>
     </div>
@@ -265,7 +289,15 @@ if(isset($watch_history)){
                     </div>
                 </div>
             </div>
-            <div class="mg_cardslider_row"></div>
+            <div class="mg_cardslider_row">
+                <?php
+                    if(isset($movies_by_type['movies']) && !empty($movies_by_type['movies'])) {
+                        foreach ($movies_by_type['movies'] as $data) {
+                            echo card($data, $image_starter);
+                        } 
+                    } 
+                ?>
+            </div>
         </div>
         <div class="mg_cardslider">
             <div class="mg_cardslider_info">
@@ -299,7 +331,15 @@ if(isset($watch_history)){
                     </div>
                 </div>
             </div>
-            <div class="mg_cardslider_row"></div>
+            <div class="mg_cardslider_row">
+                <?php
+                if(isset($movies_by_type['series']) && !empty($movies_by_type['series'])) {
+                foreach ($movies_by_type['series'] as $data) {
+                    echo card($data, $image_starter);
+                } 
+            } 
+                ?>
+            </div>
         </div>
         <div class="mg_cardslider">
             <div class="mg_cardslider_info">
@@ -329,7 +369,15 @@ if(isset($watch_history)){
                     </div>
                 </div>
             </div>
-            <div class="mg_cardslider_row"></div>
+            <div class="mg_cardslider_row">
+                <?php 
+                    if(isset($movies_by_type['animations']) && !empty($movies_by_type['animations'])) {
+                foreach ($movies_by_type['animations'] as $data) {
+                    echo card($data, $image_starter);
+                } 
+            } 
+             ?>
+            </div>
         </div>
     </div>
     <!-- ახალი -->
@@ -351,9 +399,7 @@ if(isset($watch_history)){
     <!-- </div> -->
     <?php include_once "../components/footer.php" ?>
     <?php include_once "../components/endpage.php" ?>
-    <script>
-    const mg_slider_items = <?php echo json_encode($mg_slider_items); ?>;
-    </script>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script type="module" src="../ui/mg_engine.js"></script>

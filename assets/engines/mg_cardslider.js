@@ -6,7 +6,6 @@ mg_cardslider.forEach((currentSlider) => {
     ".mg_cardslider_right"
   );
   const gap = 20;
-  const list = ["", "", "", "", "", "", "", "", "", "", "", ""];
 
   // EVENTS
   mg_cardslider_left.addEventListener("click", scrollSliderLeft);

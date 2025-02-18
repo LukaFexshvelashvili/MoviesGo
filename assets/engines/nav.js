@@ -20,6 +20,7 @@ const navprofileblockactions = document.querySelectorAll(
 
 nav_mb_search_opener.addEventListener("click", function () {
   navinputblock.classList.add("navinputblockshow");
+  navinput.focus();
 });
 nav_mb_search_close.addEventListener("click", closemobilesearch);
 navsearchshadow.addEventListener("click", closemobilesearch);
@@ -44,6 +45,9 @@ nav_mb_menu_opener.addEventListener("click", function () {
     nav_mb_menu_close_svg.classList.add("getshow");
   }
 });
+
+// ESSENTIAL FOR LINK GRABS REMOVE
+// document.addEventListener("dragstart", (e) => e.preventDefault());
 
 let debounceTimeout;
 

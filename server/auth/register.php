@@ -46,20 +46,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['nickname'] && $_POST['email'
     $stmt->bind_param("sssiissss", $nickname, $email, $hashedPassword, $status, $role, $ui_settings, $watch_history, $bookmarks, $createDate);
     
     if ($stmt->execute()) {
+
+               // GET USER DATA AND SAVE IN SESSION
+               $inserted_id = $conn->insert_id;
+               $result = $conn->query("SELECT * FROM users WHERE id = $inserted_id");
+               $data = $result->fetch_assoc();
+               set_user($data);
        
         echo json_encode(["status" => 100, "message" => "User registered successfully!"]);
 
-        // GET USER DATA AND SAVE IN SESSION
-        $inserted_id = $conn->insert_id;
-        $result = $conn->query("SELECT * FROM users WHERE id = $inserted_id");
-        $data = $result->fetch_assoc();
-        set_user($data);
+ 
     } else {
         echo json_encode(["status" => 2, "message" => "Error: " . $stmt->error]);
     }
     
-    $stmt->close();
-    $conn->close();
 }else{
     echo json_encode(["status" => 0, "message" => "Not enough information"]);
 

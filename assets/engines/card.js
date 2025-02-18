@@ -2,7 +2,7 @@ const mg_card_bookmark = document.querySelectorAll(
   ".mg_card_bookmark, .movie_bookmark"
 );
 
-mg_card_bookmark.forEach((item) =>
+mg_card_bookmark.forEach((item) => {
   item.addEventListener("click", function () {
     let movie_id = this.getAttribute("data-movie");
     if (movie_id) {
@@ -11,8 +11,8 @@ mg_card_bookmark.forEach((item) =>
       });
       this.classList.toggle("bookmarked");
     }
-  })
-);
+  });
+});
 
 const mg_card = document.querySelectorAll(".mg_card, .mg_card_wide");
 

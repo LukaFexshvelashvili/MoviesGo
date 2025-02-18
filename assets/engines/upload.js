@@ -211,6 +211,7 @@ function initializeTypes() {
   const type_button = document.querySelectorAll(".type_button");
   Array.from(type_button).forEach((button) => {
     button.addEventListener("click", () => {
+      type_button.forEach((item) => item.classList.remove("type_active"));
       if (button.classList.contains("type_active")) {
         button.classList.remove("type_active");
         movie_type = -1;
@@ -224,6 +225,10 @@ function initializeTypes() {
   });
 }
 function typeChangeHand(id) {
+  const elements = document.querySelectorAll(`.type_button`);
+  elements.forEach((element) => {
+    element.classList.remove("type_active");
+  });
   const element = document.querySelector(`[data-type="${id}"]`);
   element.classList.add("type_active");
   movie_type = id;

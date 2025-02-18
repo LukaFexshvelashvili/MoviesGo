@@ -8,6 +8,11 @@ if ($_GET["id"]) {
     $stmt->bind_param("i", $_GET["id"]);
     $stmt->execute();
     $result = $stmt->get_result();
+if($result->num_rows != 1) {
+
+header("Location: ./");
+    exit;
+}
 
     $movie = $result->fetch_assoc();
 
@@ -74,6 +79,7 @@ if ($_GET["id"]) {
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="../assets/css/pages/watch/watch.css" />
     <link rel="stylesheet" href="../assets/css/mg_player.css" />
+    <link rel="stylesheet" href="../assets/css/player/series_selector.css" />
     <link rel="stylesheet" href="../assets/css/components/nav.css" />
     <link rel="stylesheet" href="../assets/css/components/card.css" />
     <link rel="stylesheet" href="../assets/css/components/mg_cardslider.css" />
@@ -105,11 +111,11 @@ if ($_GET["id"]) {
                             } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
 
                                 $i++;
-                                echo '<iframe data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
+                                echo '<iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
                             }
                         } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
 
-                            echo '<iframe data-player="' . $i . '" class="hidden_player iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
+                            echo '<iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class="hidden_player iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
                         }
                     }
                 }
@@ -122,10 +128,25 @@ if ($_GET["id"]) {
                             }else {
                                 $i++;
                               
-                                echo '<iframe data-player="' . $i . '" class="iframe_players video_players" src="' . htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
+                                ?>
+            <div data-player="<?php echo $i ?>" class="iframe_players iframe_player_box">
+                <?php include "../components/player/series_selector.php" ?>
+                <iframe sandbox="allow-scripts allow-same-origin" class=" video_players"
+                    src="<?php echo htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                    frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <?php
                             }
                         } elseif (!empty($players[$i][1][0]["languages"]["GEO"]["HD"]) || !empty($players[$i][1][0]["languages"]["ENG"]["HD"])) {
-                            echo '<iframe data-player="' . $i . '" class="hidden_player iframe_players video_players" src="' . htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe>';
+                            ?>
+            <div data-player="<?php echo $i ?>" class="hidden_player iframe_players iframe_player_box">
+                <?php include "../components/player/series_selector.php" ?>
+                <iframe sandbox="allow-scripts allow-same-origin" class=" video_players"
+                    src="<?php echo htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                    frameborder="0" allowfullscreen></iframe>
+            </div>
+            <?php
                         }
                 }
             }
@@ -238,11 +259,7 @@ if ($_GET["id"]) {
                     <div class="movie_card_subtitle"><?php echo $movie['subtitle'] ?></div>
                     <div class="movie_card_title"><?php echo $movie['name_eng'] ?></div>
                     <div class="movie_card_imdb">IMDB: <?php echo $movie['imdb'] ?></div>
-                    <div class="movie_card_genres">
-                        <div>დრამა</div>
-                        <div>მძაფრსიუჟეტიანი</div>
-                        <div>დეტექტივი</div>
-                    </div>
+
                 </div>
                 <div class="movie_card_end">
                     <div class="movie_card_addons">
@@ -261,8 +278,11 @@ if ($_GET["id"]) {
                 </div>
             </div>
         </div>
+        <?php echo $_SESSION['status'] == $admin_status ? '<a style="display:inline-flex; margin-top:20px;" href="updatemovie?id='.$movie['id'].'"><button class="dbts">რედაქტირება</button></a>' : "" ?>
+        <?php echo $_SESSION['status'] == $admin_status ? '<button id="delete_movie" class="dbt">წაშლა</button>' : "" ?>
 
         <div class="movie_description">
+
             <h3>მოკლე სიუჟეტი:</h3>
             <p>
                 <?php echo $movie['description'] ?>
@@ -305,7 +325,17 @@ include_once "../components/comments.php";
     <?php include_once "../components/endpage.php" ?>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <?php
+if(!$is_movie){
+    ?>
+    <script>
+    let IFRAME_PLAYERS = {
+        PLAYER_ID: <?php echo $movie['id'] ?>,
+        PLAYERS: <?php echo json_encode($players, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>,
+    }
+    </script>
 
+    <?php
+}
     ?>
     <?php if ($first_geo_src || $first_eng_src): ?>
     <script>
@@ -332,8 +362,44 @@ include_once "../components/comments.php";
     <script type="module" src="../assets/engines/MGVIDEOPLAYERMINIFIED.js"></script>
     <?php endif; ?>
 
+    <?php
+
+include_once "../components/iframe_adblocks.php"
+
+?>
+    <?php
+if($_SESSION['status'] == $admin_status){
+
+?>
+
+    <script>
+    $("#delete_movie").click(() => {
+
+        $.ajax({
+            url: server_start + "movie_delete.php",
+            type: "POST",
+            data: {
+                movie_id: <?php echo $movie['id'] ?>
+            },
+            success: function(response) {
+                let data = JSON.parse(response);
+                if (data.status == 100) {
+                    alert("წაიშალა");
+                    window.location.reload()
+                } else {
+                    alert(JSON.stringify(data));
+
+                }
+            }
+        })
+    })
+    </script>
+    <?php
 
 
+}
+
+?>
     <script>
     $(".players_change_button").click(function() {
         if (!$(this).hasClass("active_player")) {
@@ -345,17 +411,11 @@ include_once "../components/comments.php";
                 this.pause();
             });
 
-            $('.video_players[data-player="' + player_id + '"]').removeClass("hidden_player");
-
+            $(' .video_players[data-player="' + player_id + '" ]').removeClass("hidden_player");
             $(".players_change_button").removeClass("active_player");
             $(this).addClass("active_player");
         }
     });
-
-
-
-
-
     $(".movie_love").click(() => {
         if ($(".movie_love").hasClass("movie_love_active")) {
             $(".movie_love").removeClass("movie_love_active");
@@ -373,6 +433,7 @@ include_once "../components/comments.php";
     </script>
     <script type="module" src="../ui/mg_engine.js"></script>
     <script src="../assets/engines/nav.js"></script>
+    <script src="../assets/engines/iframe_players.js"></script>
     <script src="../assets/engines/card.js"></script>
     <script src="../assets/engines/mg_cardslider.js"></script>
 </body>

@@ -2,8 +2,7 @@
 
 include_once "../connection.php";
 include_once "../../components/card.php";
-
-if (!empty($_GET["title"]) || !empty($_GET["type"])) {
+if (isset($_GET["title"]) || isset($_GET["type"])) {
     $query = "SELECT * FROM movies WHERE 1=1"; 
     $params = [];
     $types = "";
@@ -15,8 +14,7 @@ if (!empty($_GET["title"]) || !empty($_GET["type"])) {
         $params[] = $searchTerm;
         $types .= "ss";
     }
-
-    if (!empty($_GET["type"])) {
+    if (isset($_GET["type"])) {
         $query .= " AND type = ?";
         $params[] = $_GET["type"];
         $types .= "s";

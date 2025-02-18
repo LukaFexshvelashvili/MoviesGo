@@ -102,7 +102,14 @@ foreach ($topLevelComments as $comment) {
     </div>
     <div class="comment_content"><?php echo substr($comment['comment'], 0, 200) ?></div>
     <div class="comment_actions">
+        <?php
+if(is_logged() && $comment['author_id'] == $_SESSION['user_id']){
+        ?>
+        <button data-comment-id="<?php echo $comment['comment_id']; ?>" class="dbt delete_comment">წაშლა</button>
+        <?php
 
+                        }
+?>
         <button data-reply-id="<?php echo $comment['comment_id']; ?>"
             data-reply-name="<?php echo $comment['nickname']; ?>"
             data-reply-comment="<?php echo substr($comment['comment'], 0, 20)."..."; ?>"
@@ -144,7 +151,14 @@ foreach ($topLevelComments as $comment) {
     </div>
     <div class="comment_content"><?php echo substr($replied['comment'], 0, 200) ?></div>
     <div class="comment_actions">
+        <?php
+if(is_logged() && $replied['author_id'] == $_SESSION['user_id']){
+        ?>
+        <button data-comment-id="<?php echo $comment['comment_id']; ?>" class="dbt delete_comment">წაშლა</button>
+        <?php
 
+                        }
+?>
         <button data-reply-id="<?php echo $comment['comment_id']; ?>"
             data-reply-name="<?php echo $replied['nickname']; ?>"
             data-reply-comment="<?php echo substr($replied['comment'], 0, 20)."..."; ?>"

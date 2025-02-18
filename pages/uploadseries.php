@@ -275,7 +275,8 @@
                         alert("წარმატებით აიტვირთა");
                         window.location.reload();
                     } else {
-                        alert("წარმოიშვა შეცდომა მიმართეთ დეველოპერს");
+                        alert(JSON.stringify(data));
+
                     }
                 },
             });

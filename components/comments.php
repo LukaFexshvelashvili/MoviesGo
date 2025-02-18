@@ -12,8 +12,8 @@ if(is_logged()){
                     stroke-linejoin="round" />
             </svg>
         </div>
-        <div class="c_profile_name">ლუკა ფეხშველაშვილი</div>
-        <div class="cnt c_profile_badge">დეველოპერი</div>
+        <div class="c_profile_name"><?php echo $_SESSION['nickname'] ?></div>
+        <?php echo $_SESSION['status'] == $admin_status ? '<div class="cnt c_profile_badge dev_badge">დეველოპერი</div>' : "" ?>
     </div>
     <form class="c_form" id="comment_form">
         <div class="replying" style="display: none;">
@@ -33,7 +33,10 @@ if(is_logged()){
     <?php
 } else {
             ?>
+    <div class="login_error">
+        <p>კომენტარის დასაწერად გთხოვთ გაიაროთ <a href="./login">ავტორიზაცია</a></p>
 
+    </div>
     <?php
 }
             ?>
@@ -80,6 +83,25 @@ $(document).on("click", ".reply_to_comment", function() {
     }, 300);
 
 })
+$(document).on("click", ".delete_comment", function() {
+    $.ajax({
+        url: c_server_start_local + "actions/delete_comment.php",
+        type: "POST",
+        data: {
+            comment_id: $(this).data("comment-id")
+        },
+        success: function(response) {
+            let data = JSON.parse(response);
+            if (data.status == 100) {
+                initializeComments()
+            } else {
+                alert("შეცდომა");
+            }
+        }
+    })
+})
+
+
 $(".reply_close").click(() => {
     clear_comment_inputs()
 })

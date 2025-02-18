@@ -16,6 +16,9 @@ html,
 }
 img {
   user-select: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 input,
@@ -29,6 +32,9 @@ body {
 a {
   user-select: none;
   color: inherit;
+  user-select: none;
+  user-drag: none;
+  -webkit-user-drag: none;
 }
 button,
 input,
@@ -63,7 +69,7 @@ textarea,
 }
 body {
   color: white;
-  font-family: msemibold;
+  font-family: mregular;
 }
 .no-scroll {
   overflow: hidden;

@@ -112,6 +112,7 @@
 
 .movie_card_info {
   position: relative;
+  font-family: mmedium;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -191,8 +192,7 @@
 .movie_card_addon,
 .movie_card_addon_mob {
   letter-spacing: 0.5px;
-  font-family: msemibold;
-  max-width: 600px;
+  font-family: mregular;
   color: var(--textdesc);
 }
 .movie_card_addon span,
@@ -279,11 +279,14 @@
 .movie_description {
   margin-top: 30px;
   display: flex;
+  font-family: mregular;
   flex-direction: column;
   gap: 10px;
   letter-spacing: 0.5px;
 }
 .movie_description h3 {
+  font-family: mregular;
+  font-weight: 400;
   color: var(--texthead);
 }
 .movie_description p {
@@ -294,6 +297,8 @@
   margin: 50px 0;
 }
 .movie_comments h3 {
+  font-family: mregular;
+  font-weight: 400;
   margin-bottom: 25px;
   letter-spacing: 0.5px;
   color: var(--texthead);
@@ -486,6 +491,17 @@
   display: none;
 }
 
+.iframe_player_box {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.iframe_player_box iframe {
+  height: 100%;
+  width: 100%;
+}
+
 .iframe_players {
   height: 100%;
   width: 100%;
@@ -564,7 +580,7 @@
     height: 18px;
   }
   .c_profile .c_profile_badge {
-    font-family: msemibold;
+    font-family: mmedium;
     font-size: 14px;
     padding: 6px 15px;
     border-radius: 6px;
@@ -589,9 +605,12 @@
   .movie_card_addon,
   .movie_card_addon_mob {
     letter-spacing: 0.5px;
-    font-family: mmedium;
+    font-family: mregular;
     font-size: 14px;
     color: var(--textdesc);
+  }
+  .movie_card_info {
+    width: auto;
   }
   .movie_card_info .movie_card_genres {
     flex-wrap: wrap;
@@ -617,17 +636,17 @@
   }
   .movie_description h3 {
     font-size: 16px;
-    font-family: mmedium;
+    font-family: mregular;
     font-weight: 400;
   }
   .movie_description p {
     font-size: 14px;
-    font-family: mmedium;
+    font-family: mregular;
     line-height: 24px;
   }
   .movie_comments h3 {
     font-size: 16px;
-    font-family: mmedium;
+    font-family: mregular;
     font-weight: 400;
   }
   .movie_card_genres {
@@ -640,7 +659,7 @@
   }
   .movie_card_genres_mob span {
     letter-spacing: 0.5px;
-    font-family: mmedium;
+    font-family: mregular;
     font-size: 14px;
     color: var(--texthead);
   }

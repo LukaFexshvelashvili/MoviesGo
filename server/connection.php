@@ -29,7 +29,7 @@ function is_logged(){
 
     }
 }
-$admin_status = 1;
+$admin_status = 10;
 
 // Input date
 function format_date($input_date){

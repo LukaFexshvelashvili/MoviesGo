@@ -1,9 +1,24 @@
+<?php
+include_once "../server/connection.php";
+if ($_GET["id"]) {
+    $stmt = $conn->prepare("SELECT * FROM movies WHERE id = ?");
+    $stmt->bind_param("i", $_GET["id"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $movie = $result->fetch_assoc();
+} else {
+header("Location: /pages/");
+exit;
+}
+?>
+
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>upload</title>
+    <title>update</title>
 
     <link rel="stylesheet" href="../assets/css/components/colors.css" />
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -23,7 +38,7 @@
     </div>
     <?php include_once "../components/nav.php" ?>
     <div class="container upload_section">
-        <h1>ფილმის ატვირთვა</h1>
+        <h1>ფილმის განახლება | <?php echo $movie['name_eng']." - ".$movie['name'] ?></h1>
 
         <div class="ai_help">
             <input type="text" id="ai_input" placeholder="ფილმის სახელი ინგლისურად" />
@@ -32,6 +47,7 @@
             <a href="" target="_blank" class="poster_suggestion"></a>
         </div>
         <form class="upload_form" enctype="multipart/form-data">
+            <input class="inpc" type="hidden" id="movie_id" name="movie_id" value="<?php echo $movie['id'] ?>" />
             <div class="labeled">
                 <p>ტიპი</p>
                 <div class="types_listing"></div>
@@ -44,7 +60,8 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="name_eng" name="name_eng" />
+                <input class="inpc" type="text" id="name_eng" name="name_eng"
+                    value="<?php echo $movie['name_eng'] ?>" />
             </div>
             <div class="labeled">
                 <p>სახელი</p>
@@ -54,7 +71,7 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="name" name="name" />
+                <input class="inpc" type="text" id="name" name="name" value="<?php echo $movie['name'] ?>" />
             </div>
             <div class="labeled">
                 <div class="ps">
@@ -67,7 +84,8 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="subtitle" name="subtitle" />
+                <input class="inpc" type="text" id="subtitle" name="subtitle"
+                    value="<?php echo $movie['subtitle'] ?>" />
             </div>
             <div class="labeled">
                 <p>წელი</p>
@@ -77,7 +95,7 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="year" name="year" />
+                <input class="inpc" type="text" id="year" name="year" value="<?php echo $movie['year'] ?>" />
             </div>
             <div class="labeled">
                 <p>ქვეყანა</p>
@@ -87,7 +105,7 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="country" name="country" />
+                <input class="inpc" type="text" id="country" name="country" value="<?php echo $movie['country'] ?>" />
             </div>
             <div class="labeled">
                 <p>IMDb</p>
@@ -97,7 +115,7 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="imdb" name="imdb" />
+                <input class="inpc" type="text" id="imdb" name="imdb" value="<?php echo $movie['imdb'] ?>" />
             </div>
             <div class="labeled">
                 <p>რეჟისორი</p>
@@ -107,7 +125,7 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="creator" name="creator" />
+                <input class="inpc" type="text" id="creator" name="creator" value="<?php echo $movie['creator'] ?>" />
             </div>
             <div class="labeled">
                 <div class="ps">
@@ -120,7 +138,7 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="actors" name="actors" />
+                <input class="inpc" type="text" id="actors" name="actors" value="<?php echo $movie['actors'] ?>" />
             </div>
             <div class="labeled">
                 <div class="ps">
@@ -133,7 +151,7 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <input class="inpc" type="text" id="trailer" name="trailer" />
+                <input class="inpc" type="text" id="trailer" name="trailer" value="<?php echo $movie['trailer'] ?>" />
             </div>
             <div class="labeled">
                 <p>მოკლე სიუჟეტი</p>
@@ -143,7 +161,8 @@
                             d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z" />
                     </svg>
                 </div>
-                <textarea class="inpc" id="description" name="description"></textarea>
+                <textarea class="inpc" id="description"
+                    name="description"><?php echo $movie['description'] ?></textarea>
             </div>
             <div class="labeled">
                 <p>ჟანრები</p>
@@ -175,7 +194,8 @@
                     </svg>
                 </div>
                 <div class="pictureshow">
-                    <img id="image1UploadPreview" class="imagePreviewer" />
+                    <img id="image1UploadPreview" class="imagePreviewer"
+                        src="<?php echo $image_starter.$movie['poster_url'] ?>" />
                 </div>
             </div>
             <div class="labeled">
@@ -189,26 +209,27 @@
                     </svg>
                 </div>
                 <div class="pictureshow">
-                    <img id="image2UploadPreview" class="imagePreviewer" />
+                    <img id="image2UploadPreview" class="imagePreviewer"
+                        src="<?php echo $image_starter.$movie['thumbnail_url'] ?>" />
                 </div>
             </div>
             <div class="checkings">
-                <p id="type_check">ტიპი</p>
-                <p id="name_eng_check">სახელი ინგლისურად</p>
-                <p id="name_check">სახელი</p>
-                <p id="subtitle_check" class="optional">subtitle</p>
-                <p id="year_check">წელი</p>
-                <p id="country_check">ქვეყანა</p>
-                <p id="imdb_check">imdb</p>
-                <p id="creator_check">რეჟისორი</p>
-                <p id="actors_check" class="optional">როლებში</p>
-                <p id="trailer_check" class="optional">თრეილერი</p>
-                <p id="description_check">მოკლე სიუჟეტი</p>
-                <p id="genres_check">ჟანრები</p>
-                <p id="image_check">ფოტო 1</p>
-                <p id="image2_check">ფოტო 2</p>
+                <p class="optional" id="type_check">ტიპი</p>
+                <p class="optional" id="name_eng_check">სახელი ინგლისურად</p>
+                <p class="optional" id="name_check">სახელი</p>
+                <p class="optional" id="subtitle_check">subtitle</p>
+                <p class="optional" id="year_check">წელი</p>
+                <p class="optional" id="country_check">ქვეყანა</p>
+                <p class="optional" id="imdb_check">imdb</p>
+                <p class="optional" id="creator_check">რეჟისორი</p>
+                <p class="optional" id="actors_check">როლებში</p>
+                <p class="optional" id="trailer_check">თრეილერი</p>
+                <p class="optional" id="description_check">მოკლე სიუჟეტი</p>
+                <p class="optional" id="genres_check">ჟანრები</p>
+                <p class="optional" id="image_check">ფოტო 1</p>
+                <p class="optional" id="image2_check">ფოტო 2</p>
             </div>
-            <button class="dbt">ატვირთვა</button>
+            <button class="dbt">განახლება</button>
         </form>
     </div>
 
@@ -216,18 +237,11 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-    let players = {
-        1: {
-            GEO: {
-                HD: ""
-            },
-            ENG: {
-                HD: ""
-            }
-        }
-    };
-    let movie_type = -1;
-    let movie_genres = [];
+    let players = <?php echo $movie['players'] ?>;
+    let movie_type = <?php echo $movie['type'] ?>;
+    let movie_genres = <?php echo $movie['genres'] ?>;
+
+
     // changing in upload.js
     </script>
     <script type="module" src="../ui/mg_engine.js"></script>
@@ -235,23 +249,91 @@
     <script type="module" src="../assets/engines/upload.js"></script>
     <script src="../assets/engines/mg_cardslider.js"></script>
     <script>
+    setTimeout(() => {
+        const elementtype = document.querySelector(`[data-type="${movie_type}"]`);
+        elementtype.classList.add("type_active");
+        movie_genres.forEach((genre) => {
+            selectGenreHand(genre);
+        });
+
+        function selectGenreHand(title) {
+
+            const element = document.querySelector(`[data-genre="${title}"]`);
+
+            if (element) {
+                element.classList.add("genre_active");
+            }
+        }
+    }, 100);
+
+    Object.keys(players).forEach((id) => {
+        if (id != 1) {
+            addplayerblock(players[id], id);
+        } else {
+            const geoInput = document.querySelector(`#playergeo1`);
+            const engInput = document.querySelector(`#playereng1`);
+            geoInput.value = players[id].GEO.HD
+            engInput.value = players[id].ENG.HD
+        }
+    });
+
+    function addplayerblock(data, id) {
+        const playersRow = document.querySelector(".players_row"); // Find the player row container
+        const newPlayerRow = document.createElement("div"); // Create a new div for the player row
+        newPlayerRow.classList.add("labeled");
+        let newPlayerID = id;
+        newPlayerRow.innerHTML = `
+    <div class="ps">
+      <p>ფლეერი ${newPlayerID}</p>
+       <div class="dl" >წაშლა</div>
+      <div class="clear_inp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            fill="currentColor"
+            d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="inputs_upload">
+      <input class="inpc" placeholder="GEO" id="playergeo${newPlayerID}" type="text" value="${data.GEO.HD ? data.GEO.HD : ""}" />
+      <input class="inpc" placeholder="ENG" id="playereng${newPlayerID}" type="text" value="${data.ENG.HD ? data.ENG.HD : ""}" />
+    </div>
+  `;
+
+        playersRow.appendChild(newPlayerRow);
+
+        const deleteButton = newPlayerRow.querySelector(".dl");
+        deleteButton.addEventListener("click", function() {
+            removePlayer(deleteButton, newPlayerID);
+        });
+
+        players[newPlayerID] = {
+            GEO: {
+                HD: data.GEO.HD ? data.GEO.HD : ""
+            },
+            ENG: {
+                HD: data.ENG.HD ? data.ENG.HD : ""
+            },
+        };
+
+        const geoInput = newPlayerRow.querySelector(`#playergeo${newPlayerID}`);
+        const engInput = newPlayerRow.querySelector(`#playereng${newPlayerID}`);
+
+        geoInput.addEventListener("input", function() {
+            players[newPlayerID].GEO.HD = geoInput.value;
+        });
+
+        engInput.addEventListener("input", function() {
+            players[newPlayerID].ENG.HD = engInput.value;
+        });
+    }
+    </script>
+    <script>
     const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");
 
     function verifyCheckings() {
-        if (
-            name_eng_check.classList.contains("checked") &&
-            name_check.classList.contains("checked") &&
-            year_check.classList.contains("checked") &&
-            country_check.classList.contains("checked") &&
-            imdb_check.classList.contains("checked") &&
-            creator_check.classList.contains("checked") &&
-            description_check.classList.contains("checked")
-        ) {
-            return true;
-        } else {
-            alert("შეავსე ყველა სავალდებულო ველი !");
-            return false;
-        }
+        return true;
     }
 
     const upload_form = document.querySelector(".upload_form");
@@ -271,20 +353,19 @@
             mg_ai_web_loader.classList.remove("mg_ai_web_loader_hidden");
 
             $.ajax({
-                url: server_start + "movie_upload.php",
+                url: server_start + "movie_update.php",
                 type: "POST",
                 data: formData,
-                processData: false, // Don't process the data (important for file uploads)
-                contentType: false, // Don't set content type (important for file uploads)
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     mg_ai_web_loader.classList.add("mg_ai_web_loader_hidden");
                     let data = JSON.parse(response);
                     if (data.status == 100) {
-                        alert("წარმატებით აიტვირთა");
+                        alert("წარმატებით განახლდა");
                         window.location.reload();
                     } else {
                         alert(JSON.stringify(data));
-
 
                     }
                 },

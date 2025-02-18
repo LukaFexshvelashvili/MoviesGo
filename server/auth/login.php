@@ -25,8 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(["status" => 0, "message" => "User not found."]);
     }
 
-    $stmt->close();
-    $conn->close();
 } else {
     echo json_encode(["status" => 0, "message" => "Invalid request."]);
 }
