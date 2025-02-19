@@ -3,7 +3,7 @@
 include_once "../connection.php";
 include_once "../../components/card.php";
 if (isset($_GET["title"]) || isset($_GET["type"])) {
-    $query = "SELECT * FROM movies WHERE 1=1"; 
+    $query = "SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE 1=1"; 
     $params = [];
     $types = "";
 

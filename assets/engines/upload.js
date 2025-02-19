@@ -16,21 +16,23 @@ const player = document.getElementById("player");
 const poster_suggestion = document.querySelector(".poster_suggestion");
 
 function changeValues(answer) {
-  let get_type = types.filter((item) => item.title == answer.Type)[0];
-  let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
-  if (get_type) {
-    if (genre_answer.includes("ანიმაცია")) {
-      get_type = types.filter((item) => item.title == "ანიმაცია")[0];
+  if (answer.Type) {
+    let get_type = types.filter((item) => item.title == answer.Type)[0];
+    if (get_type) {
+      if (genre_answer.includes("ანიმაცია")) {
+        get_type = types.filter((item) => item.title == "ანიმაცია")[0];
+      }
+      typeChangeHand(get_type.id);
     }
-    typeChangeHand(get_type.id);
   }
-
-  if (genre_answer) {
-    genre_answer.forEach((genre) => {
-      selectGenreHand(genre);
-    });
+  if (answer.Genre) {
+    let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
+    if (genre_answer) {
+      genre_answer.forEach((genre) => {
+        selectGenreHand(genre);
+      });
+    }
   }
-
   name_eng.value = answer.Title_eng;
   nameInp.value = answer.Title;
   year.value = answer.Year;

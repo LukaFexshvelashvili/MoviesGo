@@ -4,13 +4,13 @@ include_once "../components/card.php";
 include_once "../components/card_wide.php";
 
 $sql = "
-(SELECT * FROM movies WHERE type = 0 ORDER BY id DESC LIMIT 10)
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 0 ORDER BY id DESC LIMIT 10)
 UNION ALL
-(SELECT * FROM movies WHERE type = 1 ORDER BY id DESC LIMIT 10)
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 1 ORDER BY id DESC LIMIT 10)
 UNION ALL
-(SELECT * FROM movies WHERE type = 2 ORDER BY id DESC LIMIT 10)
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 2 ORDER BY id DESC LIMIT 10)
 UNION ALL
-(SELECT * FROM movies WHERE type = 3 ORDER BY id DESC LIMIT 10);
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 3 ORDER BY id DESC LIMIT 10);
 ";
 
 $movies_fetch = mysqli_query($conn, $sql);
@@ -40,7 +40,7 @@ foreach ($movies_list as $movie) {
 if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
     $watch_history = $_SESSION['watch_history'];
     $placeholders = implode(',', array_fill(0, count($watch_history), '?'));
-    $sql = "SELECT * FROM movies WHERE id IN ($placeholders) 
+    $sql = "SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE id IN ($placeholders) 
         ORDER BY FIELD(id, " . implode(',', array_fill(0, count($watch_history), '?')) . ")";
     $stmt_movies = $conn->prepare($sql);
     $types = str_repeat('i', count($watch_history) * 2);

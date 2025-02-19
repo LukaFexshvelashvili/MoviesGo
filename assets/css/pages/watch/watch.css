@@ -496,6 +496,17 @@
   width: 100%;
 }
 
+.player_box {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.player_box iframe {
+  height: 100%;
+  width: 100%;
+}
+
 @media (max-width: 1200px) {
   .watch_bg {
     height: 520px;

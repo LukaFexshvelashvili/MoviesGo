@@ -14,19 +14,22 @@ const description = document.getElementById("description");
 const poster_suggestion = document.querySelector(".poster_suggestion");
 
 function changeValues(answer) {
-  let get_type = types.filter((item) => item.title == answer.Type)[0];
-  let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
-  if (get_type) {
-    if (genre_answer.includes("ანიმაცია")) {
-      get_type = types.filter((item) => item.title == "ანიმაცია")[0];
+  if (answer.Type) {
+    let get_type = types.filter((item) => item.title == answer.Type)[0];
+    if (get_type) {
+      if (genre_answer.includes("ანიმაცია")) {
+        get_type = types.filter((item) => item.title == "ანიმაცია")[0];
+      }
+      typeChangeHand(get_type.id);
     }
-    typeChangeHand(get_type.id);
   }
-
-  if (genre_answer) {
-    genre_answer.forEach((genre) => {
-      selectGenreHand(genre);
-    });
+  if (answer.Genre) {
+    let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
+    if (genre_answer) {
+      genre_answer.forEach((genre) => {
+        selectGenreHand(genre);
+      });
+    }
   }
 
   name_eng.value = answer.Title_eng;
@@ -96,13 +99,12 @@ async function sendAIrequest() {
 
 const genres_listing = document.querySelector(".genres_listing");
 const types_listing = document.querySelector(".types_listing");
-const addplayer = document.querySelector("#addplayer");
 const clear_inps = document.querySelectorAll(".clear_inp");
 const player1 = document.getElementById("player1");
 const inputs = document.querySelectorAll("input, textarea");
 
 player1.addEventListener("input", function () {
-  players[1] = player1.value;
+  players = player1.value;
 });
 
 Array.from(inputs).forEach((item) => {
@@ -130,58 +132,6 @@ function clearinp() {
   if (inputField) {
     this.style.display = "none";
     inputField.value = "";
-  }
-}
-
-addplayer.addEventListener("click", addplayerblock);
-
-function addplayerblock() {
-  let lastPlayer = parseInt(
-    Object.keys(players)[Object.keys(players).length - 1]
-  );
-  const playersRow = document.querySelector(".players_row"); // Find the player row container
-  const newPlayerRow = document.createElement("div"); // Create a new div for the player row
-  newPlayerRow.classList.add("labeled");
-  let newPlayerID = lastPlayer + 1;
-  newPlayerRow.innerHTML = `
-    <div class="ps">
-      <p>ფლეერი ${newPlayerID}</p>
-       <div class="dl" >წაშლა</div>
-      <div class="clear_inp">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path
-            fill="currentColor"
-            d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z"
-          />
-        </svg>
-      </div>
-    </div>
-    <div class="inputs_upload">
-      <input class="inpc" placeholder="SERIES" id="player${newPlayerID}" type="text" value="" />
-</div>
-  `;
-
-  playersRow.appendChild(newPlayerRow);
-
-  const deleteButton = newPlayerRow.querySelector(".dl");
-  deleteButton.addEventListener("click", function () {
-    removePlayer(deleteButton, newPlayerID);
-  });
-
-  players[newPlayerID] = ``;
-
-  const playerNew = newPlayerRow.querySelector(`#player${newPlayerID}`);
-  playerNew.addEventListener("input", function () {
-    players[newPlayerID] = playerNew.value;
-  });
-}
-function removePlayer(button, newPlayerID) {
-  const playerRow = button.closest(".labeled");
-
-  if (playerRow) {
-    playerRow.remove();
-
-    delete players[newPlayerID];
   }
 }
 

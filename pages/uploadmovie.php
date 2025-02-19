@@ -167,7 +167,8 @@
             <div class="labeled">
                 <p>ფოტო გრძელი (POSTER)</p>
                 <div class="custom_file cnt">
-                    <input name="poster" type="file" class="fileInput" id="image1Upload" accept="image/*" />
+                    <input name="poster" type="file" class="fileInput" id="image1Upload"
+                        accept="image/jpeg, image/jpg, image/png, image/webp" />
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 384 384">
                         <path fill="var(--triplecolor)"
@@ -181,7 +182,8 @@
             <div class="labeled">
                 <p>ფოტო მსხვილი (THUMBNAIL)</p>
                 <div class="custom_file cnt">
-                    <input name="thumbnail" type="file" class="fileInput" id="image2Upload" accept="image/*" />
+                    <input name="thumbnail" type="file" class="fileInput" id="image2Upload"
+                        accept="image/jpeg, image/jpg, image/png, image/webp" />
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 384 384">
                         <path fill="var(--triplecolor)"

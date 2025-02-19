@@ -108,15 +108,15 @@ header("Location: ./");
                         if ($i == 1) {
                             if ($first_geo_src || $first_eng_src) {
                                 echo '<div data-player="' . $i . '" class="mg_player player_box video_players"></div>';
-                            } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
+                            } elseif (!empty($players[$i]["GEO"]["HD"])) {
 
                                 $i++;
-                                echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box"><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
+                                echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box "><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
                             }
-                        } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
+                        } elseif (!empty($players[$i]["GEO"]["HD"])) {
 
-                            echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box">
-            </div><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class="hidden_player iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
+                            echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box hidden_player">
+            <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
                         }
                     }
                 }
@@ -140,7 +140,7 @@ header("Location: ./");
 
             <?php
                             }
-                        } elseif (!empty($players[$i][1][0]["languages"]["GEO"]["HD"]) || !empty($players[$i][1][0]["languages"]["ENG"]["HD"])) {
+                        } elseif (!empty($players[$i][1][0]["languages"]["GEO"]["HD"])) {
                             ?>
             <div data-player="<?php echo $i ?>" class="hidden_player iframe_players player_box iframe_player_box">
                 <?php include "../components/player/series_selector.php" ?>
@@ -280,8 +280,8 @@ header("Location: ./");
                 </div>
             </div>
         </div>
-        <?php echo $_SESSION['status'] == $admin_status ? '<a style="display:inline-flex; margin-top:20px;" href="updatemovie?id='.$movie['id'].'"><button class="dbts">რედაქტირება</button></a>' : "" ?>
-        <?php echo $_SESSION['status'] == $admin_status ? '<button id="delete_movie" class="dbt">წაშლა</button>' : "" ?>
+        <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<a style="display:inline-flex; margin-top:20px;" href="updatemovie?id='.$movie['id'].'"><button class="dbts">რედაქტირება</button></a>' : "") : "" ?>
+        <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<button id="delete_movie" class="dbt">წაშლა</button>' : "") : "" ?>
 
         <div class="movie_description">
 
@@ -327,15 +327,21 @@ include_once "../components/comments.php";
     <?php include_once "../components/endpage.php" ?>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <?php
-if(!$is_movie){
+if($is_movie){
     ?>
     <script>
-    let IFRAME_PLAYERS = {
+    let IFRAME_PLAYERS = null
+    </script>
+
+    <?php
+}else{
+?>
+    <script>
+    IFRAME_PLAYERS = {
         PLAYER_ID: <?php echo $movie['id'] ?>,
         PLAYERS: <?php echo json_encode($players, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>,
     }
     </script>
-
     <?php
 }
     ?>
@@ -370,30 +376,31 @@ include_once "../components/iframe_adblocks.php"
 
 ?>
     <?php
-if($_SESSION['status'] == $admin_status){
+if( is_logged() && $_SESSION['status'] == $admin_status){
 
 ?>
 
     <script>
     $("#delete_movie").click(() => {
+        if (confirm("ნამდვილად გსურს ფილმის წაშლა?")) {
+            $.ajax({
+                url: server_start + "movie_delete.php",
+                type: "POST",
+                data: {
+                    movie_id: <?php echo $movie['id'] ?>
+                },
+                success: function(response) {
+                    let data = JSON.parse(response);
+                    if (data.status == 100) {
+                        alert("წაიშალა");
+                        window.location.reload()
+                    } else {
+                        alert(JSON.stringify(data));
 
-        $.ajax({
-            url: server_start + "movie_delete.php",
-            type: "POST",
-            data: {
-                movie_id: <?php echo $movie['id'] ?>
-            },
-            success: function(response) {
-                let data = JSON.parse(response);
-                if (data.status == 100) {
-                    alert("წაიშალა");
-                    window.location.reload()
-                } else {
-                    alert(JSON.stringify(data));
-
+                    }
                 }
-            }
-        })
+            })
+        }
     })
     </script>
     <?php

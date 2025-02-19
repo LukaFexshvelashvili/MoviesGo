@@ -27,7 +27,7 @@ if($_GET["id"]){
     $stmt_likes->close();
     if (!empty($movie_ids)) {
         $placeholders = implode(',', array_fill(0, count($movie_ids), '?'));
-        $stmt_movies = $conn->prepare("SELECT * FROM movies WHERE id IN ($placeholders)");
+        $stmt_movies = $conn->prepare("SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE id IN ($placeholders)");
         $types = str_repeat('i', count($movie_ids)); 
         $stmt_movies->bind_param($types, ...$movie_ids);
         $stmt_movies->execute();

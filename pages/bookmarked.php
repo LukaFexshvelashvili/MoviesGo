@@ -5,7 +5,7 @@ include_once "../components/card.php";
 
 if (isset($_SESSION['bookmarks']) && !empty($_SESSION['bookmarks'])) {
     $placeholders = implode(',', array_fill(0, count($_SESSION['bookmarks']), '?'));
-    $stmt_movies = $conn->prepare("SELECT * FROM movies WHERE id IN ($placeholders)");
+    $stmt_movies = $conn->prepare("SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator  FROM movies WHERE id IN ($placeholders)");
     $types = str_repeat('i', count($_SESSION['bookmarks'])); 
     $stmt_movies->bind_param($types, ...$_SESSION['bookmarks']);
     $stmt_movies->execute();

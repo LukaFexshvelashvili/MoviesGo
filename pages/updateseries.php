@@ -10,8 +10,8 @@ if ($_GET["id"]) {
 
     $is_movie = !isset($players[1][1]) && !isset($players[2][1]) && !isset($players[3][1]);
 
-    if(!$is_movie){
-        header("Location: ./updateseries?id=". $movie["id"]);
+    if($is_movie){
+        header("Location: ./updatemovie?id=". $movie["id"]);
     }
 } else {
 header("Location: /pages/");
@@ -45,11 +45,11 @@ exit;
     </div>
     <?php include_once "../components/nav.php" ?>
     <div class="container upload_section">
-        <h1>ფილმის განახლება | <?php echo $movie['name_eng']." - ".$movie['name'] ?></h1>
+        <h1>სერიალის განახლება | <?php echo $movie['name_eng']." - ".$movie['name'] ?></h1>
 
         <div class="ai_help">
-            <input type="text" id="ai_input" placeholder="ფილმის სახელი ინგლისურად" />
-            <input type="text" id="ai_input_year" placeholder="ფილმის წელი" />
+            <input type="text" id="ai_input" placeholder="სერიალის სახელი ინგლისურად" />
+            <input type="text" id="ai_input_year" placeholder="სერიალის წელი" />
             <button class="ai_button">გენერირება</button>
             <a href="" target="_blank" class="poster_suggestion"></a>
         </div>
@@ -180,21 +180,20 @@ exit;
                 <div class="players_row">
                     <div class="labeled">
                         <div class="ps">
-                            <p>ფლეერი 1</p>
+                            <p>ფლეიერები/სერიები</p>
                         </div>
                         <div class="inputs_upload">
-                            <input class="inpc" placeholder="GEO" id="playergeo1" type="text" />
-                            <input class="inpc" placeholder="ENG" id="playereng1" type="text" />
+                            <textarea class="inpc" placeholder="ფლეიერების/სერიების ობიექტი { }" id="player1"
+                                type="text" /><?php echo $movie['players'] ?></textarea>
                         </div>
                     </div>
                 </div>
-                <button id="addplayer" type="button" class="dbt">დამატება</button>
             </div>
             <div class="labeled">
                 <p>ფოტო გრძელი (POSTER)</p>
                 <div class="custom_file cnt">
-                    <input name="poster" type="file" class="fileInput" id="image1Upload"
-                        accept="image/jpeg, image/jpg, image/png, image/webp" />
+                    <input name="poster" type="file" class="fileInput" id="image1Upload" accept="image/*" />
+
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 384 384">
                         <path fill="var(--triplecolor)"
                             d="M384 341q0 18-12.5 30.5T341 384H43q-18 0-30.5-12.5T0 341V43q0-18 12.5-30.5T43 0h298q18 0 30.5 12.5T384 43v298zM117 224l-74 96h298l-96-128l-74 96z" />
@@ -208,8 +207,8 @@ exit;
             <div class="labeled">
                 <p>ფოტო მსხვილი (THUMBNAIL)</p>
                 <div class="custom_file cnt">
-                    <input name="thumbnail" type="file" class="fileInput" id="image2Upload"
-                        accept="image/jpeg, image/jpg, image/png, image/webp" />
+                    <input name="thumbnail" type="file" class="fileInput" id="image2Upload" accept="image/*" />
+
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 384 384">
                         <path fill="var(--triplecolor)"
                             d="M384 341q0 18-12.5 30.5T341 384H43q-18 0-30.5-12.5T0 341V43q0-18 12.5-30.5T43 0h298q18 0 30.5 12.5T384 43v298zM117 224l-74 96h298l-96-128l-74 96z" />
@@ -253,7 +252,7 @@ exit;
     </script>
     <script type="module" src="../ui/mg_engine.js"></script>
     <script src="../assets/engines/nav.js"></script>
-    <script type="module" src="../assets/engines/upload.js"></script>
+    <script type="module" src="../assets/engines/uploadseries.js"></script>
     <script src="../assets/engines/mg_cardslider.js"></script>
     <script>
     setTimeout(() => {
@@ -272,69 +271,6 @@ exit;
             }
         }
     }, 100);
-
-    Object.keys(players).forEach((id) => {
-        if (id != 1) {
-            addplayerblock(players[id], id);
-        } else {
-            const geoInput = document.querySelector(`#playergeo1`);
-            const engInput = document.querySelector(`#playereng1`);
-            geoInput.value = players[id].GEO.HD
-            engInput.value = players[id].ENG.HD
-        }
-    });
-
-    function addplayerblock(data, id) {
-        const playersRow = document.querySelector(".players_row"); // Find the player row container
-        const newPlayerRow = document.createElement("div"); // Create a new div for the player row
-        newPlayerRow.classList.add("labeled");
-        let newPlayerID = id;
-        newPlayerRow.innerHTML = `
-    <div class="ps">
-      <p>ფლეერი ${newPlayerID}</p>
-       <div class="dl" >წაშლა</div>
-      <div class="clear_inp">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path
-            fill="currentColor"
-            d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z"
-          />
-        </svg>
-      </div>
-    </div>
-    <div class="inputs_upload">
-      <input class="inpc" placeholder="GEO" id="playergeo${newPlayerID}" type="text" value="${data.GEO.HD ? data.GEO.HD : ""}" />
-      <input class="inpc" placeholder="ENG" id="playereng${newPlayerID}" type="text" value="${data.ENG.HD ? data.ENG.HD : ""}" />
-    </div>
-  `;
-
-        playersRow.appendChild(newPlayerRow);
-
-        const deleteButton = newPlayerRow.querySelector(".dl");
-        deleteButton.addEventListener("click", function() {
-            removePlayer(deleteButton, newPlayerID);
-        });
-
-        players[newPlayerID] = {
-            GEO: {
-                HD: data.GEO.HD ? data.GEO.HD : ""
-            },
-            ENG: {
-                HD: data.ENG.HD ? data.ENG.HD : ""
-            },
-        };
-
-        const geoInput = newPlayerRow.querySelector(`#playergeo${newPlayerID}`);
-        const engInput = newPlayerRow.querySelector(`#playereng${newPlayerID}`);
-
-        geoInput.addEventListener("input", function() {
-            players[newPlayerID].GEO.HD = geoInput.value;
-        });
-
-        engInput.addEventListener("input", function() {
-            players[newPlayerID].ENG.HD = engInput.value;
-        });
-    }
     </script>
     <script>
     const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");
