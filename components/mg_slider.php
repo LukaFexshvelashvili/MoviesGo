@@ -16,7 +16,8 @@
     <div class="mg_slider_row">
         <?php
 $ind = 0;
-foreach ($movies_list as $movie) {
+$slider_array = array_slice($movies_list, 0, 5);
+foreach ($slider_array as $movie) {
     $ind++;
 
     ?>
@@ -53,7 +54,7 @@ foreach ($movies_list as $movie) {
     </div>
     <div class="mg_slider_indicators">
         <?php
-for ($i = 0; $i < count($movies_list); $i++) {
+for ($i = 0; $i < count($slider_array); $i++) {
         ?>
         <div class="mg_slider_indicator <?php echo $i==0 ? "mg_slider_indicator_active" : ""?>"></div>
         <?php

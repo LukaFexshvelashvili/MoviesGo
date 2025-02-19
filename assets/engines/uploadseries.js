@@ -14,21 +14,27 @@ const description = document.getElementById("description");
 const poster_suggestion = document.querySelector(".poster_suggestion");
 
 function changeValues(answer) {
-  if (answer.Type) {
-    let get_type = types.filter((item) => item.title == answer.Type)[0];
-    if (get_type) {
-      if (genre_answer.includes("ანიმაცია")) {
-        get_type = types.filter((item) => item.title == "ანიმაცია")[0];
-      }
-      typeChangeHand(get_type.id);
-    }
-  }
   if (answer.Genre) {
     let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
     if (genre_answer) {
       genre_answer.forEach((genre) => {
         selectGenreHand(genre);
       });
+    }
+  }
+
+  if (answer.Type) {
+    let get_type = types.filter((item) => item.title == answer.Type)[0];
+    if (get_type) {
+      let genre_answer = answer.Genre.split(",").map((genre) => genre.trim());
+      if (genre_answer) {
+        if (genre_answer.includes("ანიმაცია")) {
+          get_type = types.filter((item) => item.title == "ანიმაცია")[0];
+        }
+      } else {
+        get_type = types.filter((item) => item.title == "ანიმაცია")[0];
+      }
+      typeChangeHand(get_type.id);
     }
   }
 

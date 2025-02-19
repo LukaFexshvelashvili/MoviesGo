@@ -280,8 +280,22 @@ header("Location: ./");
                 </div>
             </div>
         </div>
-        <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<a style="display:inline-flex; margin-top:20px;" href="updatemovie?id='.$movie['id'].'"><button class="dbts">რედაქტირება</button></a>' : "") : "" ?>
-        <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<button id="delete_movie" class="dbt">წაშლა</button>' : "") : "" ?>
+        <?php
+if(is_logged() && $_SESSION['status'] == $admin_status){
+
+    ?>
+        <div class="adm_in">
+            <p class="">ადმინისტრატორის სივრცე</p>
+            <div class="row">
+                <a href="updatemovie?id='.$movie['id'].'"><button class="dbts">რედაქტირება</button></a>
+                <button id="delete_movie" class="dbt">წაშლა</button>
+            </div>
+        </div>
+        <?php
+}
+
+        ?>
+
 
         <div class="movie_description">
 

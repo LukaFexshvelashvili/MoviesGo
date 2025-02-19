@@ -35,11 +35,6 @@ function changeActiveThemeHand(themeID) {
     Array.from(Object.keys(theme)).forEach((item) => {
       document.documentElement.style.setProperty(`--${item}`, theme[item]);
     });
-    active_colors = {
-      main: theme.main,
-      mainshadow: theme.mainshadow,
-      mainhover: theme.mainhover,
-    };
   }
 }
 
