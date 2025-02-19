@@ -40,7 +40,7 @@ header("Location: ./");
         $user_liked = 0;
     }
     $same_movies = mysqli_query($conn, "SELECT * FROM movies");
-
+    
     $is_movie = !isset($players[1][1]) && !isset($players[2][1]) && !isset($players[3][1]);
     function getNestedValue($array, $keys, $default = null)
     {
@@ -100,6 +100,7 @@ header("Location: ./");
 
 
             <?php
+            $firstRend = false;
             $players_length = count($players);
             if ($is_movie) {
                 for ($i = 1; $i <= $players_length; $i++) {
@@ -108,11 +109,19 @@ header("Location: ./");
                         if ($i == 1) {
                             if ($first_geo_src || $first_eng_src) {
                                 echo '<div data-player="' . $i . '" class="mg_player player_box video_players"></div>';
+                                $firstRend = true;
+
                             } elseif (!empty($players[$i]["GEO"]["HD"])) {
 
-                                $i++;
+                                $firstRend = true;
+
                                 echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box "><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
+                                $i++;
                             }
+                        }elseif ($firstRend == false){
+                            echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box "><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
+                                $firstRend = true;
+
                         } elseif (!empty($players[$i]["GEO"]["HD"])) {
 
                             echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box hidden_player">
@@ -159,6 +168,7 @@ header("Location: ./");
             <div class="players">
                 <?php
 
+            $firstRend = false;
                 if ($is_movie) {
                     for ($i = 1; $i <= $players_length; $i++) {
                         if (!empty($players[$i]) && is_array($players)) {
@@ -166,11 +176,19 @@ header("Location: ./");
 
                                 if ($first_geo_src || $first_eng_src) {
                                     echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი 1</div>';
+                                $firstRend = true;
+
                                 } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
+
+                                $firstRend = true;
 
                                     $i++;
                                     echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player ">ფლეიერი ' . $i . '</div>';
                                 }
+                            }elseif ($firstRend == false){
+                                echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player ">ფლეიერი ' . $i . '</div>';
+                                $firstRend = true;
+                         
                             } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
 
                                 echo '<div data-player-button="' . $i . '" class="cnt players_change_button ">ფლეიერი ' . $i . '</div>';
@@ -287,7 +305,7 @@ if(is_logged() && $_SESSION['status'] == $admin_status){
         <div class="adm_in">
             <p class="">ადმინისტრატორის სივრცე</p>
             <div class="row">
-                <a href="updatemovie?id='.$movie['id'].'"><button class="dbts">რედაქტირება</button></a>
+                <a href="updatemovie?id=<?php echo $movie['id']; ?>"><button class="dbts">რედაქტირება</button></a>
                 <button id="delete_movie" class="dbt">წაშლა</button>
             </div>
         </div>

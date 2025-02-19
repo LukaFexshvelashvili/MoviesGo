@@ -713,14 +713,20 @@ function getSavedTime() {
 function getCheckOfControls() {
   let e = "ENG" == mg_main_controls.lang ? "ENG" : "GEO",
     n = "SD" == mg_main_controls.quality ? "SD" : "HD";
-  "GEO" == mg_main_controls.lang && MG_PLAYER.languages.GEO[n]
+  "GEO" == mg_main_controls.lang &&
+  MG_PLAYER.languages.GEO &&
+  MG_PLAYER.languages.GEO[n]
     ? InitializeVideo(MG_PLAYER.languages.GEO[n])
-    : "ENG" == mg_main_controls.lang && MG_PLAYER.languages.ENG[n]
+    : "ENG" == mg_main_controls.lang &&
+      MG_PLAYER.languages.ENG &&
+      MG_PLAYER.languages.ENG[n]
     ? ((e = "ENG"), InitializeVideo(MG_PLAYER.languages.ENG[n]))
     : InitializeVideo(MG_PLAYER.languages.GEO[n]),
     "HD" == mg_main_controls.quality && MG_PLAYER.languages[e].HD
       ? InitializeVideo(MG_PLAYER.languages[e].HD)
-      : "SD" == mg_main_controls.lang && MG_PLAYER.languages[e].SD
+      : "SD" == mg_main_controls.lang &&
+        MG_PLAYER.languages[e] &&
+        MG_PLAYER.languages[e].SD
       ? InitializeVideo(MG_PLAYER.languages[e].SD)
       : InitializeVideo(MG_PLAYER.languages[e].HD),
     mg_speed_button.forEach((e) => {
