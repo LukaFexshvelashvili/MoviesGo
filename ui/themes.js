@@ -280,6 +280,11 @@ export const genres = [
     bgcolor: "rgba(0, 165, 215, 0.1)",
   },
   {
+    title: "ფენტეზი",
+    color: "#a100eb",
+    bgcolor: "rgba(149, 0, 235, 0.1)",
+  },
+  {
     title: "ფანტასტიკა",
     color: "#C400EB",
     bgcolor: "rgba(196, 0, 235, 0.1)",
@@ -340,6 +345,11 @@ export const genres = [
     bgcolor: "rgba(221, 0, 81, 0.1)",
   },
   {
+    title: "მუსიკალური",
+    color: "#dd00ad",
+    bgcolor: "rgba(221, 0, 203, 0.1)",
+  },
+  {
     title: "ბიოგრაფიული",
     color: "#EBAC00",
     bgcolor: "rgba(235, 172, 0, 0.1)",
@@ -368,5 +378,10 @@ export const genres = [
     title: "დეტექტივი",
     color: "#00AAD9",
     bgcolor: "rgba(0, 170, 217, 0.1)",
+  },
+  {
+    title: "ქართული",
+    color: "#d99400",
+    bgcolor: "rgba(217, 148, 0, 0.1)",
   },
 ];

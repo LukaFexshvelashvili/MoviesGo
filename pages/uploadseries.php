@@ -229,7 +229,7 @@
     const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");
 
     function verifyCheckings() {
-        return true;
+        return true
 
     }
 
@@ -256,21 +256,44 @@
 
         if (verifyCheckings()) {
             mg_ai_web_loader.classList.remove("mg_ai_web_loader_hidden");
-
             $.ajax({
-                url: server_start + "movie_upload.php",
+                url: server_start_local + "movie/movie_exists.php",
                 type: "POST",
-                data: formData,
-                processData: false, // Don't process the data (important for file uploads)
-                contentType: false, // Don't set content type (important for file uploads)
+                data: {
+                    name_eng: $("#name_eng").val(),
+                    year: $("#year").val(),
+                },
                 success: function(response) {
-                    mg_ai_web_loader.classList.add("mg_ai_web_loader_hidden");
-                    let data = JSON.parse(response);
-                    if (data.status == 100) {
-                        alert("წარმატებით აიტვირთა");
-                        window.location.reload();
+                    let data = JSON.parse(response)
+                    if (data.status == 0) {
+                        alert("შემოწმებისას დაფიქსირდა ხარვეზი")
+                        return false;
+                    }
+                    if (data.exists == false) {
+                        $.ajax({
+                            url: server_start + "movie_upload.php",
+                            type: "POST",
+                            data: formData,
+                            processData: false, // Don't process the data (important for file uploads)
+                            contentType: false, // Don't set content type (important for file uploads)
+                            success: function(response2) {
+                                mg_ai_web_loader.classList.add(
+                                    "mg_ai_web_loader_hidden");
+                                let data2 = JSON.parse(response2);
+                                if (data2.status == 100) {
+                                    alert("წარმატებით აიტვირთა");
+                                    window.location = "./watch?id=" + data2.movie;
+                                } else {
+                                    alert(JSON.stringify(data2));
+
+
+                                }
+                            },
+                        });
+
                     } else {
-                        alert(JSON.stringify(data));
+                        alert("მსგავსი ფილმი უკვე არის მონაცემთა ბაზაში !")
+                        return false;
 
                     }
                 },

@@ -6,9 +6,12 @@ if (IFRAME_PLAYERS != null) {
   });
 
   function initializeIframePlayer(iframe_player) {
-    let active_season = 1;
-    let active_episode = 1;
     const player_index = iframe_player.getAttribute("data-player");
+    const PLAYER_ID = IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index;
+    let active_season = IFRAME_PLAYERS.PLAYERS
+      ? Object.keys(IFRAME_PLAYERS.PLAYERS[player_index])[0]
+      : 1;
+    let active_episode = 1;
 
     const iframe_player_seasons = iframe_player.querySelector(
       ".iframe_player_seasons"
@@ -26,72 +29,86 @@ if (IFRAME_PLAYERS != null) {
     const iframe_eps_closer = iframe_player.querySelector(".iframe_eps_closer");
     const iframe = iframe_player.querySelector("iframe");
 
-    if (localStorage.getItem("iframe_player")) {
-      let iframe_save_ = localStorage.getItem("iframe_player");
-      let iframe_save = JSON.parse(iframe_save_);
-      let get_cur = iframe_save.filter((item) => {
-        return item.id == IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index;
-      });
-      if (get_cur.length !== 0) {
-        movetoFirstItem(
-          iframe_save,
-          iframe_save.findIndex((item) => item.id == get_cur[0].id)
-        );
+    handleLocalStorage();
+    function handleLocalStorage() {
+      if (localStorage.getItem("iframe_player")) {
+        let iframe_save_ = localStorage.getItem("iframe_player");
+        let iframe_save = JSON.parse(iframe_save_);
+        let get_cur = iframe_save.filter((item) => item.id == PLAYER_ID);
 
-        if (
-          get_cur[0].season <=
-            Object.keys(IFRAME_PLAYERS.PLAYERS[player_index]).length &&
-          get_cur[0].episode <=
-            IFRAME_PLAYERS.PLAYERS[player_index][get_cur[0].season].length
-        ) {
-          active_season = get_cur[0].season;
-          active_episode = get_cur[0].episode;
-          setTimeout(() => {
-            const seasonElement = iframe_player_seasons.querySelector(
-              `[data-season="${get_cur[0]?.season}"]`
-            );
-            const episodeElement = iframe_player_eps_scroll.querySelector(
-              `[data-ep="${get_cur[0]?.episode}"]`
-            );
+        if (get_cur.length !== 0) {
+          movetoFirstItem(
+            iframe_save,
+            iframe_save.findIndex((item) => item.id == get_cur[0].id)
+          );
 
-            if (seasonElement && iframe_player_seasons) {
-              iframe_player_seasons.scrollTop =
-                seasonElement.offsetTop - iframe_player_seasons.offsetTop - 100;
-            }
+          if (
+            Object.keys(IFRAME_PLAYERS.PLAYERS[player_index]).includes(
+              get_cur[0].season.toString()
+            ) &&
+            get_cur[0].episode >= 0 &&
+            get_cur[0].episode <=
+              IFRAME_PLAYERS.PLAYERS[player_index][get_cur[0].season].length
+          ) {
+            active_season = get_cur[0].season;
+            active_episode = get_cur[0].episode;
+            setTimeout(() => {
+              const seasonElement = iframe_player_seasons.querySelector(
+                `[data-season="${get_cur[0]?.season}"]`
+              );
+              const episodeElement = iframe_player_eps_scroll.querySelector(
+                `[data-ep="${get_cur[0]?.episode}"]`
+              );
 
-            if (episodeElement && iframe_player_eps_scroll) {
-              iframe_player_eps_scroll.scrollTop =
-                episodeElement.offsetTop -
-                iframe_player_eps_scroll.offsetTop -
-                100;
-            }
-          }, 0);
+              if (seasonElement && iframe_player_seasons) {
+                iframe_player_seasons.scrollTop =
+                  seasonElement.offsetTop -
+                  iframe_player_seasons.offsetTop -
+                  100;
+              }
 
-          changeEpisode(getEpisodeRequest());
+              if (episodeElement && iframe_player_eps_scroll) {
+                iframe_player_eps_scroll.scrollTop =
+                  episodeElement.offsetTop -
+                  iframe_player_eps_scroll.offsetTop -
+                  100;
+              }
+            }, 0);
+
+            changeEpisode(getEpisodeRequest());
+          } else {
+            iframe_save[0].id = PLAYER_ID;
+            iframe_save[0].time = 0;
+            iframe_save[0].episode = 1;
+            iframe_save[0].season = active_season;
+            localStorage.setItem("iframe_player", JSON.stringify(iframe_save));
+          }
+          cutIfTooLarge(iframe_save, 5);
+          localStorage.setItem("iframe_player", JSON.stringify(iframe_save));
         } else {
-          active_season = 1;
-          active_episode = 1;
+          iframe_save.unshift({
+            id: PLAYER_ID,
+            time: 0,
+            episode: 1,
+            season: active_season,
+          });
+          cutIfTooLarge(iframe_save, 5);
+          localStorage.setItem("iframe_player", JSON.stringify(iframe_save));
         }
       } else {
-        iframe_save.unshift({
-          id: IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index,
-          episode: 1,
-          season: 1,
-        });
+        localStorage.setItem(
+          "iframe_player",
+          JSON.stringify([
+            {
+              id: PLAYER_ID,
+              time: 0,
+              episode: 1,
+              season: active_season,
+            },
+          ])
+        );
       }
-    } else {
-      localStorage.setItem(
-        "iframe_player",
-        JSON.stringify([
-          {
-            id: IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index,
-            episode: 1,
-            season: 1,
-          },
-        ])
-      );
     }
-
     iframe_player_ep_button.addEventListener("click", () => {
       iframe_player_eps_container.classList.add(
         "iframe_player_eps_container_show"
@@ -236,7 +253,7 @@ if (IFRAME_PLAYERS != null) {
         let iframe_save_ = localStorage.getItem("iframe_player");
         let iframe_save = JSON.parse(iframe_save_);
         let get_cur = iframe_save.filter((item) => {
-          return item.id == IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index;
+          return item.id == PLAYER_ID;
         });
         if (get_cur.length == 0) {
           return null;
@@ -252,14 +269,12 @@ if (IFRAME_PLAYERS != null) {
         let iframe_save = JSON.parse(iframe_save_);
         let is_saved = getCurStorage() == null ? false : true;
         if (is_saved) {
-          let ind = iframe_save.findIndex(
-            (item) => item.id == IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index
-          );
+          let ind = iframe_save.findIndex((item) => item.id == PLAYER_ID);
           iframe_save[ind].episode = parseInt(active_episode);
           iframe_save[ind].season = parseInt(active_season);
         } else {
           iframe_save.unshift({
-            id: IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index,
+            id: PLAYER_ID,
             episode: parseInt(active_episode),
             season: parseInt(active_season),
           });
@@ -271,7 +286,7 @@ if (IFRAME_PLAYERS != null) {
           "iframe_player",
           JSON.stringify([
             {
-              id: IFRAME_PLAYERS.PLAYER_ID + "p=" + player_index,
+              id: PLAYER_ID,
               episode: parseInt(active_episode),
               season: parseInt(active_season),
             },

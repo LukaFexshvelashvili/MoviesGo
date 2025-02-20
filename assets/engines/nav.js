@@ -21,6 +21,9 @@ const navprofileblockactions = document.querySelectorAll(
 nav_mb_search_opener.addEventListener("click", function () {
   navinputblock.classList.add("navinputblockshow");
   navinput.focus();
+  setTimeout(() => {
+    navsearch.classList.add("navsearchshow");
+  }, 50);
 });
 nav_mb_search_close.addEventListener("click", closemobilesearch);
 navsearchshadow.addEventListener("click", closemobilesearch);

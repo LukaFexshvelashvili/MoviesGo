@@ -306,7 +306,8 @@ exit;
                     let data = JSON.parse(response);
                     if (data.status == 100) {
                         alert("წარმატებით განახლდა");
-                        window.location.reload();
+                        window.location = "./watch?id=" + data.movie;
+
                     } else {
                         alert(JSON.stringify(data));
 

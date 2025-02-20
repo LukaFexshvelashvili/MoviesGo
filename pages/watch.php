@@ -8,16 +8,15 @@ if ($_GET["id"]) {
     $stmt->bind_param("i", $_GET["id"]);
     $stmt->execute();
     $result = $stmt->get_result();
-if($result->num_rows != 1) {
+    if ($result->num_rows != 1) {
 
-header("Location: ./");
-    exit;
-}
+        header("Location: ./");
+        exit;
+    }
 
     $movie = $result->fetch_assoc();
 
     $players = json_decode($movie["players"], true);
-
     $genresget = json_decode($movie["genres"], true);
 
     $genres = is_array($genresget) ? implode(", ", $genresget) : "No genres available";
@@ -40,8 +39,23 @@ header("Location: ./");
         $user_liked = 0;
     }
     $same_movies = mysqli_query($conn, "SELECT * FROM movies");
-    
-    $is_movie = !isset($players[1][1]) && !isset($players[2][1]) && !isset($players[3][1]);
+
+    $is_movie = true;
+
+    foreach ($players as $player) {
+        if (is_array($player)) {
+            foreach ($player as $seasons) {
+                if (is_array($seasons)) {
+                    foreach ($seasons as $episodes) {
+                        if (is_array($episodes)) {
+                            $is_movie = false;
+                            break 3;
+                        }
+                    }
+                }
+            }
+        }
+    }
     function getNestedValue($array, $keys, $default = null)
     {
         $current = $array;
@@ -87,9 +101,8 @@ header("Location: ./");
 
 <body>
     <?php
-
+    include_once "../components/nav.php";
     ?>
-    <?php include_once "../components/nav.php" ?>
     <div class="watch_bg cnt">
         <img src="<?php echo $image_starter . $movie['thumbnail_url'] ?>"
             alt="<?php echo $movie['name_eng'] ?> thumbnail" />
@@ -100,65 +113,75 @@ header("Location: ./");
 
 
             <?php
-            $firstRend = false;
+            $firstRend = true;
             $players_length = count($players);
+
             if ($is_movie) {
                 for ($i = 1; $i <= $players_length; $i++) {
-
-                    if (!empty($players[$i]) && is_array($players)) {
+                    if (!empty($players[$i]) && is_array($players[$i])) {
                         if ($i == 1) {
                             if ($first_geo_src || $first_eng_src) {
                                 echo '<div data-player="' . $i . '" class="mg_player player_box video_players"></div>';
                                 $firstRend = true;
-
                             } elseif (!empty($players[$i]["GEO"]["HD"])) {
-
+                                echo '<div data-player="' . $i . '" class="iframe_players player_box iframe_player_box">
+                                  <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
+                                      class="iframe_players video_players" 
+                                      src="' . htmlspecialchars($players[$i]["GEO"]["HD"], ENT_QUOTES, 'UTF-8') . '" 
+                                      frameborder="0" allowfullscreen>
+                                  </iframe>
+                              </div>';
                                 $firstRend = true;
-
-                                echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box "><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
-                                $i++;
                             }
-                        }elseif ($firstRend == false){
-                            echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box "><iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
-                                $firstRend = true;
+                        } elseif (!$firstRend) {
 
+                            echo '<div data-player="' . $i . '" class="iframe_players player_box iframe_player_box">
+                              <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
+                                  class="iframe_players video_players" 
+                                  src="' . htmlspecialchars($players[$i]["GEO"]["HD"], ENT_QUOTES, 'UTF-8') . '" 
+                                  frameborder="0" allowfullscreen>
+                              </iframe>
+                          </div>';
+                            $firstRend = true;
                         } elseif (!empty($players[$i]["GEO"]["HD"])) {
-
-                            echo '<div data-player="'.  $i .'" class="iframe_players player_box iframe_player_box hidden_player">
-            <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" class=" iframe_players video_players" src="' . htmlspecialchars($players[$i]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '" frameborder="0" allowfullscreen></iframe></div>';
+                            echo '<div data-player="' . $i . '" class="iframe_players player_box iframe_player_box hidden_player">
+                              <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
+                                  class="iframe_players video_players" 
+                                  src="' . htmlspecialchars($players[$i]["GEO"]["HD"], ENT_QUOTES, 'UTF-8') . '" 
+                                  frameborder="0" allowfullscreen>
+                              </iframe>
+                          </div>';
                         }
                     }
                 }
             } else {
+
                 for ($i = 1; $i <= $players_length; $i++) {
-                
-                    if ($i == 1) {
-                        if ($first_geo_src || $first_eng_src) {
-
+                    if (!empty($players[$i]) && is_array($players[$i])) {
+                        $startSeason = $players[$i][array_keys($players[$i])[0]];
+                        if ($i == 1) {
+                            if ($first_geo_src || $first_eng_src) {
                                 echo '<div data-player="' . $i . '" class="mg_player player_box video_players"></div>';
-                            }else {
-                                $i++;
-                              
-                                ?>
-            <div data-player="<?php echo $i ?>" class="iframe_players player_box iframe_player_box">
-                <?php include "../components/player/series_selector.php" ?>
-                <iframe sandbox="allow-scripts allow-same-origin" class=" video_players"
-                    src="<?php echo htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                    frameborder="0" allowfullscreen></iframe>
-            </div>
+                            } else {
 
-            <?php
+                                echo '<div data-player="' . $i . '" class="iframe_players player_box iframe_player_box">';
+                                include "../components/player/series_selector.php";
+                                echo '<iframe sandbox="allow-scripts allow-same-origin" class="video_players"
+                                  src="' . htmlspecialchars($startSeason[0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '"
+                                  frameborder="0" allowfullscreen></iframe>
+                              </div>';
                             }
-                        } elseif (!empty($players[$i][1][0]["languages"]["GEO"]["HD"])) {
-                            ?>
-            <div data-player="<?php echo $i ?>" class="hidden_player iframe_players player_box iframe_player_box">
-                <?php include "../components/player/series_selector.php" ?>
-                <iframe sandbox="allow-scripts allow-same-origin" class=" video_players"
-                    src="<?php echo htmlspecialchars($players[$i][1][0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                    frameborder="0" allowfullscreen></iframe>
-            </div>
-            <?php
+                            $firstRend = false;
+                        } elseif (!empty($startSeason[0]["languages"]["GEO"]["HD"])) {
+                            echo '<div data-player="' . $i . '" class="' . ($firstRend ? "" : "hidden_player") . ' iframe_players player_box iframe_player_box">';
+                            include "../components/player/series_selector.php";
+                            echo '<iframe sandbox="allow-scripts allow-same-origin" class="video_players"
+                              src="' . htmlspecialchars($startSeason[0]["languages"]["GEO"]["HD"] ?? '', ENT_QUOTES, 'UTF-8') . '"
+                              frameborder="0" allowfullscreen></iframe>
+                          </div>';
+                            $firstRend = false;
                         }
+                    }
                 }
             }
 
@@ -168,48 +191,49 @@ header("Location: ./");
             <div class="players">
                 <?php
 
-            $firstRend = false;
+                $firstRend = true;
+
                 if ($is_movie) {
                     for ($i = 1; $i <= $players_length; $i++) {
-                        if (!empty($players[$i]) && is_array($players)) {
+                        if (!empty($players[$i]) && is_array($players[$i])) {
                             if ($i == 1) {
-
                                 if ($first_geo_src || $first_eng_src) {
                                     echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი 1</div>';
-                                $firstRend = true;
-
+                                    $firstRend = true;
                                 } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
-
-                                $firstRend = true;
-
-                                    $i++;
-                                    echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player ">ფლეიერი ' . $i . '</div>';
+                                    echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი ' . $i . '</div>';
+                                    $firstRend = true;
                                 }
-                            }elseif ($firstRend == false){
-                                echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player ">ფლეიერი ' . $i . '</div>';
+                            } elseif (!$firstRend) {
+                                echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი ' . $i . '</div>';
                                 $firstRend = true;
-                         
                             } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
-
-                                echo '<div data-player-button="' . $i . '" class="cnt players_change_button ">ფლეიერი ' . $i . '</div>';
+                                echo '<div data-player-button="' . $i . '" class="cnt players_change_button">ფლეიერი ' . $i . '</div>';
                             }
                         }
                     }
                 } else {
+
                     for ($i = 1; $i <= $players_length; $i++) {
+                        if (!empty($players[$i]) && is_array($players[$i])) {
+                            $startSeason = $players[$i][array_keys($players[$i])[0]];
                             if ($i == 1) {
                                 if ($first_geo_src || $first_eng_src) {
                                     echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი 1</div>';
                                 } else {
-                                    $i++;
+
                                     echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი ' . $i . '</div>';
                                 }
-                            } elseif (!empty($players[$i][1][0]['languages']['GEO']['HD']) || !empty($players[$i][1][0]['languages']['ENG']['HD'])) {
-                                echo '<div data-player-button="' . $i . '" class="cnt players_change_button ">ფლეიერი ' . $i . '</div>';
+                                $firstRend = false;
+                            } elseif (!empty($startSeason[0]['languages']['GEO']['HD'])) {
+
+                                echo '<div data-player-button="' . $i . '" class="cnt players_change_button ' . ($firstRend ? "active_player" : "") . '">ფლეიერი ' . $i . '</div>';
+                                $firstRend = false;
                             }
-                        
+                        }
                     }
                 }
+
                 ?>
             </div>
             <div class="movie_actions">
@@ -299,9 +323,9 @@ header("Location: ./");
             </div>
         </div>
         <?php
-if(is_logged() && $_SESSION['status'] == $admin_status){
+        if (is_logged() && $_SESSION['status'] == $admin_status) {
 
-    ?>
+        ?>
         <div class="adm_in">
             <p class="">ადმინისტრატორის სივრცე</p>
             <div class="row">
@@ -310,7 +334,7 @@ if(is_logged() && $_SESSION['status'] == $admin_status){
             </div>
         </div>
         <?php
-}
+        }
 
         ?>
 
@@ -324,8 +348,8 @@ if(is_logged() && $_SESSION['status'] == $admin_status){
         </div>
 
         <?php
-include_once "../components/comments.php";
-    ?>
+        include_once "../components/comments.php";
+        ?>
         <div class="mg_cardslider">
             <div class="mg_cardslider_info">
                 <div class="mg_cardslider_start">მსგავსი ფილმები:</div>
@@ -359,15 +383,15 @@ include_once "../components/comments.php";
     <?php include_once "../components/endpage.php" ?>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <?php
-if($is_movie){
+    if ($is_movie) {
     ?>
     <script>
     let IFRAME_PLAYERS = null
     </script>
 
     <?php
-}else{
-?>
+    } else {
+    ?>
     <script>
     IFRAME_PLAYERS = {
         PLAYER_ID: <?php echo $movie['id'] ?>,
@@ -375,7 +399,7 @@ if($is_movie){
     }
     </script>
     <?php
-}
+    }
     ?>
     <?php if ($first_geo_src || $first_eng_src): ?>
     <script>
@@ -404,13 +428,13 @@ if($is_movie){
 
     <?php
 
-include_once "../components/iframe_adblocks.php"
+    include_once "../components/iframe_adblocks.php"
 
-?>
+    ?>
     <?php
-if( is_logged() && $_SESSION['status'] == $admin_status){
+    if (is_logged() && $_SESSION['status'] == $admin_status) {
 
-?>
+    ?>
 
     <script>
     $("#delete_movie").click(() => {
@@ -438,9 +462,9 @@ if( is_logged() && $_SESSION['status'] == $admin_status){
     <?php
 
 
-}
+    }
 
-?>
+    ?>
     <script>
     $(".players_change_button").click(function() {
         if (!$(this).hasClass("active_player")) {

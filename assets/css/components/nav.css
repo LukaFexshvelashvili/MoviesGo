@@ -368,6 +368,7 @@
   height: 100%;
   justify-content: space-between;
   padding: 5px 0;
+  font-family: mmedium;
   color: var(--texthead);
   letter-spacing: 0.5px;
 }
@@ -375,8 +376,9 @@
   color: var(--textdesc);
 }
 .mg_nav_card .mg_nav_info h3 {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 20px;
+  font-weight: 400;
 }
 .mg_nav_card .mg_nav_info h3,
 .mg_nav_card .mg_nav_info p {
@@ -384,6 +386,7 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   display: -webkit-box;
+  font-family: mmedium;
 }
 .mg_nav_card .mg_nav_info .nav_card_imdb {
   font-family: mbold;

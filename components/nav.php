@@ -90,7 +90,11 @@ include_once "../server/connection.php";
                         <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<div class="cnt c_profile_badge badge_margin dev_badge">დეველოპერი</div>' : "") : "" ?>
 
                         <div class="navline"></div>
-                        <div class="navprofileblockactions"></div>
+                        <div class="navprofileblockactions">
+                            <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<a href="./uploadmovie" class="navblockaction"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="var(--icon)" fill-rule="evenodd" d="M12 2a6.001 6.001 0 0 0-5.476 3.545a23.012 23.012 0 0 1-.207.452l-.02.001C6.233 6 6.146 6 6 6a4 4 0 1 0 0 8h.172l2-2H6a2 2 0 1 1 0-4h.064c.208 0 .45.001.65-.04a1.94 1.94 0 0 0 .7-.27c.241-.156.407-.35.533-.527a2.39 2.39 0 0 0 .201-.36c.053-.11.118-.255.196-.428l.004-.01a4.001 4.001 0 0 1 7.304 0l.005.01c.077.173.142.317.195.428c.046.097.114.238.201.36c.126.176.291.371.533.528c.242.156.487.227.7.27c.2.04.442.04.65.04L18 8a2 2 0 1 1 0 4h-2.172l2 2H18a4 4 0 0 0 0-8c-.146 0-.233 0-.297-.002h-.02A6.001 6.001 0 0 0 12 2m5.702 4.034" clip-rule="evenodd"/><path fill="var(--icon)" d="m12 12l-.707-.707l.707-.707l.707.707zm1 9a1 1 0 1 1-2 0zm-5.707-5.707l4-4l1.414 1.414l-4 4zm5.414-4l4 4l-1.414 1.414l-4-4zM13 12v9h-2v-9z"/></svg> ფილმის ატვირთვა</a>' : "") : "" ?>
+
+                        </div>
+
                         <?php
                         if (is_logged()) {
                         ?>
@@ -169,7 +173,10 @@ include_once "../server/connection.php";
                 <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<div class="cnt c_profile_badge dev_badge">დეველოპერი</div>' : "") : "" ?>
 
                 <div class="navline"></div>
-                <div class="mob_nav_actions_row"></div>
+                <div class="mob_nav_actions_row">
+                    <?php echo is_logged() ? ($_SESSION['status'] == $admin_status ? '<a href="./uploadmovie" class="navblockaction"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="var(--icon)" fill-rule="evenodd" d="M12 2a6.001 6.001 0 0 0-5.476 3.545a23.012 23.012 0 0 1-.207.452l-.02.001C6.233 6 6.146 6 6 6a4 4 0 1 0 0 8h.172l2-2H6a2 2 0 1 1 0-4h.064c.208 0 .45.001.65-.04a1.94 1.94 0 0 0 .7-.27c.241-.156.407-.35.533-.527a2.39 2.39 0 0 0 .201-.36c.053-.11.118-.255.196-.428l.004-.01a4.001 4.001 0 0 1 7.304 0l.005.01c.077.173.142.317.195.428c.046.097.114.238.201.36c.126.176.291.371.533.528c.242.156.487.227.7.27c.2.04.442.04.65.04L18 8a2 2 0 1 1 0 4h-2.172l2 2H18a4 4 0 0 0 0-8c-.146 0-.233 0-.297-.002h-.02A6.001 6.001 0 0 0 12 2m5.702 4.034" clip-rule="evenodd"/><path fill="var(--icon)" d="m12 12l-.707-.707l.707-.707l.707.707zm1 9a1 1 0 1 1-2 0zm-5.707-5.707l4-4l1.414 1.414l-4 4zm5.414-4l4 4l-1.414 1.414l-4-4zM13 12v9h-2v-9z"/></svg> ფილმის ატვირთვა</a>' : "") : "" ?>
+
+                </div>
             </div>
             <div class="mobile_nav_content_end">
                 <?php
