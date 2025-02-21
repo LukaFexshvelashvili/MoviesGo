@@ -922,6 +922,11 @@ a {
     display: block;
   }
 }
+@media (max-width: 7680px) {
+  .mg_player {
+    border-radius: 0px;
+  }
+}
 @media (max-width: 500px) {
   .mg_mob_off {
     display: none !important;

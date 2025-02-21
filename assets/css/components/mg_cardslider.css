@@ -1,5 +1,6 @@
 .mg_cardslider,
 .mg_cardslider_wide {
+  font-feature-settings: "case";
   display: flex;
   flex-direction: column;
   gap: 15px;

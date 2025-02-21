@@ -23,27 +23,22 @@ mg_cardslider.forEach((currentSlider) => {
     scrollLeft = mg_cardslider_row.scrollLeft;
   });
 
-  mg_cardslider_row.addEventListener("mouseleave", () => {
-    isMouseDown = false;
-    isDragging = false;
-  });
   mg_cardslider_row.addEventListener("click", (e) => {
     if (isDragging) {
       e.preventDefault();
     }
   });
 
-  mg_cardslider_row.addEventListener("mouseup", (e) => {
+  document.addEventListener("mouseup", (e) => {
     isMouseDown = false;
     setTimeout(() => {
       isDragging = false;
     }, 50);
   });
 
-  mg_cardslider_row.addEventListener("mousemove", (e) => {
+  document.addEventListener("mousemove", (e) => {
     if (!isMouseDown) return;
     isDragging = true;
-
     const x = e.pageX - mg_cardslider_row.offsetLeft;
     const walk = (x - startX) * 1;
     mg_cardslider_row.scrollLeft = scrollLeft - walk;

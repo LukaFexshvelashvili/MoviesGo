@@ -46,8 +46,8 @@ function card($data, $image_starter){
             </a>
             <div class="mg_card_info">
                 <div class="mg_card_info_f">
-                <div class="card_info_text">'.$data["name_eng"].'</div>
                 <div class="card_info_text">'.$data["name"].'</div>
+                <div class="card_info_text">'.$data["name_eng"].'</div>
                   </div>
                   <div class="mg_card_info_e">
                   <div data-movie="'.$data["id"].'" class="mg_card_bookmark '.(is_bookmark_exists($data['id']) ? "bookmarked" : "").' cnt">

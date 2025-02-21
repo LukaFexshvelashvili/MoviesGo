@@ -64,6 +64,7 @@
 }
 
 .navcats {
+  font-family: msemibold;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -428,11 +429,11 @@
   height: 36px;
   aspect-ratio: 1/1;
   border-radius: 8px;
-  background-color: var(--iconbg);
+  background-color: var(--white5);
   transition: background-color 0.2s;
 }
 .nav_mb .nav_mb_button:active {
-  background-color: var(--iconbghover);
+  background-color: var(--white10);
 }
 .nav_mb .nav_mb_menu_opener {
   position: relative;
@@ -631,10 +632,10 @@
     height: 20px;
   }
   .navinputblock .nav_mb_search_close {
-    background-color: var(--iconbg);
+    background-color: var(--white5);
   }
   .navinputblock .nav_mb_search_close:active {
-    background-color: var(--iconbghover);
+    background-color: var(--white10);
   }
   .navsearch {
     box-shadow: unset;

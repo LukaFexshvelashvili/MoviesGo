@@ -1,5 +1,6 @@
 .mg_card {
   position: relative;
+  font-feature-settings: "case";
 }
 .mg_card .mg_img_side {
   display: flex;

@@ -242,12 +242,42 @@ export const types = [
     bgcolor: "rgba(219, 0, 235, 0.1)",
   },
 ];
+
 export const genres = [
-  { title: "დრამა", color: "#D10345", bgcolor: "rgba(209, 3, 68, 0.1)" },
   {
-    title: "კომედია",
-    color: "#ebb400",
-    bgcolor: "rgba(235, 180, 0, 0.1)",
+    title: "ანიმაციური",
+    color: "#67c800",
+    bgcolor: "rgba(103, 200, 0, 0.7718)",
+  },
+  {
+    title: "ბიოგრაფიული",
+    color: "#EBAC00",
+    bgcolor: "rgba(235, 172, 0, 0.1)",
+  },
+  {
+    title: "დრამა",
+    color: "#D10345",
+    bgcolor: "rgba(209, 3, 68, 0.1)",
+  },
+  {
+    title: "დოკუმენტური",
+    color: "#EB005E",
+    bgcolor: "rgba(235, 0, 94, 0.1)",
+  },
+  {
+    title: "დეტექტივი",
+    color: "#00AAD9",
+    bgcolor: "rgba(0, 170, 217, 0.1)",
+  },
+  {
+    title: "ეროტიული",
+    color: "#c80000",
+    bgcolor: "rgba(200, 0, 0, 0.1)",
+  },
+  {
+    title: "ვესტერნი",
+    color: "#eb8100",
+    bgcolor: "rgba(235, 129, 0, 0.1)",
   },
   {
     title: "თრილერი",
@@ -255,9 +285,29 @@ export const genres = [
     bgcolor: "rgba(235, 47, 0, 0.1)",
   },
   {
+    title: "ისტორიული",
+    color: "#F4C60B",
+    bgcolor: "rgba(244, 197, 11, 0.1)",
+  },
+  {
+    title: "კომედია",
+    color: "#ebb400",
+    bgcolor: "rgba(235, 180, 0, 0.1)",
+  },
+  {
+    title: "კრიმინალური",
+    color: "#b5b5b5",
+    bgcolor: "rgba(181, 181, 181, 0.1)",
+  },
+  {
     title: "მისტიკა",
     color: "#DF00EB",
     bgcolor: "rgba(223, 0, 235, 0.1)",
+  },
+  {
+    title: "მისტიური",
+    color: "#7900eb",
+    bgcolor: "rgba(121, 0, 235, 0.1)",
   },
   {
     title: "მძაფრ-სიუჟეტიანი",
@@ -270,6 +320,26 @@ export const genres = [
     bgcolor: "rgba(235, 0, 114, 0.1)",
   },
   {
+    title: "მიუზიკლი",
+    color: "#DD0051",
+    bgcolor: "rgba(221, 0, 81, 0.1)",
+  },
+  {
+    title: "მუსიკალური",
+    color: "#dd00ad",
+    bgcolor: "rgba(221, 0, 203, 0.1)",
+  },
+  {
+    title: "მოკლემეტრაჟიანი",
+    color: "#EB6E00",
+    bgcolor: "rgba(235, 110, 0, 0.1)",
+  },
+  {
+    title: "რომანტიკა",
+    color: "#eb00b4",
+    bgcolor: "rgba(235, 0, 180, 0.1)",
+  },
+  {
     title: "საახალწლო",
     color: "#00d71d",
     bgcolor: "rgba(0, 215, 29, 0.1)",
@@ -280,44 +350,9 @@ export const genres = [
     bgcolor: "rgba(0, 165, 215, 0.1)",
   },
   {
-    title: "ფენტეზი",
-    color: "#a100eb",
-    bgcolor: "rgba(149, 0, 235, 0.1)",
-  },
-  {
-    title: "ფანტასტიკა",
-    color: "#C400EB",
-    bgcolor: "rgba(196, 0, 235, 0.1)",
-  },
-  {
-    title: "რომანტიკა",
-    color: "#eb00b4",
-    bgcolor: "rgba(235, 0, 180, 0.1)",
-  },
-  {
-    title: "ანიმაციური",
-    color: "#67c800",
-    bgcolor: "rgba(103, 200, 0, 0.7718)",
-  },
-  {
-    title: "კრიმინალური",
-    color: "#b5b5b5",
-    bgcolor: "rgba(181, 181, 181, 0.1)",
-  },
-  {
-    title: "ვესტერნი",
-    color: "#eb8100",
-    bgcolor: "rgba(235, 129, 0, 0.1)",
-  },
-  {
     title: "საბავშვო",
     color: "#67c800",
     bgcolor: "rgba(103, 200, 0, 0.7718)",
-  },
-  {
-    title: "ეროტიული",
-    color: "#c80000",
-    bgcolor: "rgba(200, 0, 0, 0.1)",
   },
   {
     title: "სათავგადასავლო",
@@ -335,26 +370,6 @@ export const genres = [
     bgcolor: "rgba(0, 137, 62, 0.1)",
   },
   {
-    title: "ისტორიული",
-    color: "#F4C60B",
-    bgcolor: "rgba(244, 197, 11, 0.1)",
-  },
-  {
-    title: "მიუზიკლი",
-    color: "#DD0051",
-    bgcolor: "rgba(221, 0, 81, 0.1)",
-  },
-  {
-    title: "მუსიკალური",
-    color: "#dd00ad",
-    bgcolor: "rgba(221, 0, 203, 0.1)",
-  },
-  {
-    title: "ბიოგრაფიული",
-    color: "#EBAC00",
-    bgcolor: "rgba(235, 172, 0, 0.1)",
-  },
-  {
     title: "საოჯახო",
     color: "#0091EB",
     bgcolor: "rgba(0, 145, 235, 0.1)",
@@ -365,19 +380,14 @@ export const genres = [
     bgcolor: "rgba(255, 146, 21, 0.1)",
   },
   {
-    title: "დოკუმენტური",
-    color: "#EB005E",
-    bgcolor: "rgba(235, 0, 94, 0.1)",
+    title: "ფენტეზი",
+    color: "#a100eb",
+    bgcolor: "rgba(149, 0, 235, 0.1)",
   },
   {
-    title: "მოკლემეტრაჟიანი",
-    color: "#EB6E00",
-    bgcolor: "rgba(235, 110, 0, 0.1)",
-  },
-  {
-    title: "დეტექტივი",
-    color: "#00AAD9",
-    bgcolor: "rgba(0, 170, 217, 0.1)",
+    title: "ფანტასტიკა",
+    color: "#C400EB",
+    bgcolor: "rgba(196, 0, 235, 0.1)",
   },
   {
     title: "ქართული",

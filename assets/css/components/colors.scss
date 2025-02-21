@@ -4,6 +4,7 @@
   --mainhover: rgb(253, 50, 114);
   --mainclear: rgba(245, 0, 78, 0.1);
   --mainclearhover: rgba(245, 0, 78, 0.15);
+  --purewhite: rgba(255, 255, 255, 0.9);
   --white: rgba(255, 255, 255, 0.9);
   --whiteclear: rgba(255, 255, 255, 0.05);
   --whiteclearhover: rgba(255, 255, 255, 0.1);
@@ -12,6 +13,7 @@
   --whitelowest: rgba(255, 255, 255, 0.1);
   --texthead: rgba(255, 255, 255, 0.9);
   --textdesc: rgba(255, 255, 255, 0.6);
+  --textdesc2: rgba(255, 255, 255, 0.45);
   --sidebar: #252525;
   --sbutton: #262626;
   --sbuttonhover: #292929;
@@ -37,6 +39,9 @@
   --secondcolorhover: rgba(49, 49, 49, 0.3);
   --triplecolor: rgba(65, 65, 65, 0.3);
   --bodybgclear: rgba(28, 28, 28, 0.1);
+  --bodybgclear10: rgba(28, 28, 28, 0.1);
+  --bodybgclear20: rgba(28, 28, 28, 0.2);
+  --bodybgclear30: rgba(28, 28, 28, 0.3);
   --inputnavbghover: #1f1f1f;
   --inputnavbgactive: #242424;
   --navheight: 70px;
@@ -45,6 +50,25 @@
   --redclear: rgba(253, 48, 58, 0.1);
   --green: rgb(50, 253, 53);
   --optional: rgb(253, 155, 50);
+
+  --black5: rgba(0, 0, 0, 0.05);
+  --black10: rgba(0, 0, 0, 0.1);
+  --black15: rgba(0, 0, 0, 0.15);
+  --black20: rgba(0, 0, 0, 0.2);
+  --black25: rgba(0, 0, 0, 0.25);
+  --black30: rgba(0, 0, 0, 0.3);
+  --black35: rgba(0, 0, 0, 0.35);
+  --black40: rgba(0, 0, 0, 0.4);
+  --black45: rgba(0, 0, 0, 0.45);
+  --black50: rgba(0, 0, 0, 0.5);
+
+  --white5: rgba(255, 255, 255, 0.05);
+  --white10: rgba(255, 255, 255, 0.1);
+  --white15: rgba(255, 255, 255, 0.15);
+  --white20: rgba(255, 255, 255, 0.2);
+  --white25: rgba(255, 255, 255, 0.25);
+  --white30: rgba(255, 255, 255, 0.3);
+  --white35: rgba(255, 255, 255, 0.35);
 }
 
 *::selection {

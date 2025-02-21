@@ -1,4 +1,5 @@
 <?php
+include_once "../components/assets/types.php";
 include_once "../server/connection.php";
 include_once "../components/card.php";
 ini_set('memory_limit', '512M');
@@ -19,7 +20,7 @@ if ($_GET["id"]) {
     $players = json_decode($movie["players"], true);
     $genresget = json_decode($movie["genres"], true);
 
-    $genres = is_array($genresget) ? implode(", ", $genresget) : "No genres available";
+    $genres = is_array($genresget) ? $genresget : [];
 
     $stmt_hearts = $conn->prepare("SELECT COUNT(*) as total_likes FROM movie_likes WHERE movie_id = ?");
     $stmt_hearts->bind_param("i", $_GET["id"]);
@@ -104,13 +105,15 @@ if ($_GET["id"]) {
     include_once "../components/nav.php";
     ?>
     <div class="watch_bg cnt">
-        <img src="<?php echo $image_starter . $movie['thumbnail_url'] ?>"
-            alt="<?php echo $movie['name_eng'] ?> thumbnail" />
-        <div class="watch_bg_shadow"></div>
+        <div class="watch_bg_img_container">
+
+            <img src="<?php echo $image_starter . $movie['thumbnail_url'] ?>"
+                alt="<?php echo $movie['name_eng'] ?> thumbnail" />
+            <div class="watch_bg_shadow"></div>
+        </div>
     </div>
     <div class="container cnt watch_block">
         <div class="watch_place">
-
 
             <?php
             $firstRend = true;
@@ -292,90 +295,161 @@ if ($_GET["id"]) {
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="movie_info">
-            <div class="movie_poster">
-                <img src="<?php echo $image_starter . $movie['poster_url'] ?>"
-                    alt="<?php echo $movie['name_eng'] ?> poster" />
-            </div>
-            <div class="movie_card_info">
-                <div class="movie_card_start">
-                    <div class="movie_card_subtitle"><?php echo $movie['subtitle'] ?></div>
-                    <div class="movie_card_title"><?php echo $movie['name_eng'] ?></div>
-                    <div class="movie_card_imdb">IMDB: <?php echo $movie['imdb'] ?></div>
+    <div class="movie_stats">
 
+        <div class="container movie_stats_container">
+            <div class="movie_info">
+                <div class="movie_poster">
+                    <img src="<?php echo $image_starter . $movie['poster_url'] ?>"
+                        alt="<?php echo $movie['name_eng'] ?> poster" />
                 </div>
-                <div class="movie_card_end">
-                    <div class="movie_card_addons">
-                        <div class="movie_card_addon"><span>წელი:</span> <?php echo $movie['year'] ?></div>
+                <div class="movie_card_info">
+                    <div class="movie_card_start">
+                        <div class="movie_card_title"><?php echo $movie['name'] ?></div>
+                        <div class="movie_card_title title_eng"><?php echo $movie['name_eng'] ?></div>
 
-                        <div class="movie_card_addon">
-                            <span>ჟანრები:</span> <?php echo $genres ?>
+                    </div>
+                    <div class="movie_card_information">
+                        <div class="info_card_respo">
+                            <div class="movie_poster_respo">
+                                <img src="<?php echo $image_starter . $movie['poster_url'] ?>"
+                                    alt="<?php echo $movie['name_eng'] ?> poster" />
+                            </div>
+                            <div class="info_card_row">
+                                <div class="info_card_inline">
+                                    <div class="info_texter">
+                                        <span>ტიპი</span>
+                                        <p><?php echo get_movie_type($movie['type']) ?></p>
+                                    </div>
+                                </div>
+                                <div class="info_card_inline">
+                                    <div class="info_texter">
+                                        <span>წელი</span>
+                                        <p><?php echo $movie['year'] ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="info_card_inline info_card_inline_imdb">
+                                    <div class="info_texter">
+                                        <span class="imdb">IMDB</span>
+                                        <p><?php echo number_format($movie['imdb'], 1) ?></p>
+                                    </div>
+                                </div>
+                                <div class="info_card_inline info_card_inline_description_pc ">
+                                    <div class="info_texter">
+                                        <span>რეჟისორი</span>
+                                        <p><?php echo $movie['creator'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="info_card_inline info_card_inline_description_pc">
+                                    <div class="info_texter">
+                                        <span>ქვეყანა</span>
+                                        <p><?php echo $movie['country'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="movie_card_addon">
-                            <span>რეჟისორი:</span> <?php echo $movie['creator'] ?>
+                        <div class="info_card_inline info_card_inline_description_mob">
+                            <div class="info_texter">
+                                <span>ქვეყანა</span>
+                                <p><?php echo $movie['country'] ?></p>
+                            </div>
                         </div>
-                        <div class="movie_card_addon for_pc">
-                            <span>როლებში:</span> <?php echo $movie['actors'] ?>
+                        <div class="info_card info_card_inline_description_mob">
+                            <div class="info_texter">
+                                <span>რეჟისორი</span>
+                                <p><?php echo $movie['creator'] ?></p>
+                            </div>
+                        </div>
+                        <div class="info_card">
+                            <span>ჟანრები</span>
+                            <div class="row">
+                                <?php
+foreach ($genres as $genre) {
+                            ?>
+                                <a href="search?genre=<?php echo $genre?>">
+                                    <button class="genre_block"><?php echo $genre ?></button>
+                                </a>
+                                <?php
+}
+                            ?>
+                            </div>
+                        </div>
+                        <?php
+if(!empty($movie['actors'])){
+    ?>
+                        <div class="info_card info_card_description">
+                            <span>მსახიობები</span>
+                            <div class="row_text">
+
+                                <p><?php echo $movie['actors'] ?></p>
+                            </div>
+                        </div>
+                        <?php
+}
+                    ?>
+                        <div class="info_card info_card_description">
+                            <span>სიუჟეტი</span>
+                            <div class="row_text">
+
+                                <p><?php echo $movie['description'] ?></p>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-        </div>
-        <?php
+
+            <?php
         if (is_logged() && $_SESSION['status'] == $admin_status) {
 
         ?>
-        <div class="adm_in">
-            <p class="">ადმინისტრატორის სივრცე</p>
-            <div class="row">
-                <a href="updatemovie?id=<?php echo $movie['id']; ?>"><button class="dbts">რედაქტირება</button></a>
-                <button id="delete_movie" class="dbt">წაშლა</button>
+            <div class="adm_in">
+                <div class="row">
+                    <a href="updatemovie?id=<?php echo $movie['id']; ?>"><button class="dbts">რედაქტირება</button></a>
+                    <button id="delete_movie" class="dbt">წაშლა</button>
+                </div>
             </div>
-        </div>
-        <?php
+            <?php
         }
 
         ?>
 
 
-        <div class="movie_description">
 
-            <h3>მოკლე სიუჟეტი:</h3>
-            <p>
-                <?php echo $movie['description'] ?>
-            </p>
-        </div>
 
-        <?php
+            <?php
         include_once "../components/comments.php";
         ?>
-        <div class="mg_cardslider">
-            <div class="mg_cardslider_info">
-                <div class="mg_cardslider_start">მსგავსი ფილმები:</div>
-                <div class="mg_cardslider_end">
-                    <div class="mg_cardslider_button cnt mg_cardslider_left">
-                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
-                                fill="var(--main)" />
-                        </svg>
-                    </div>
-                    <div class="mg_cardslider_button cnt mg_cardslider_right">
-                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
-                                fill="var(--main)" />
-                        </svg>
+            <div class="mg_cardslider">
+                <div class="mg_cardslider_info">
+                    <div class="mg_cardslider_start">მსგავსი ფილმები:</div>
+                    <div class="mg_cardslider_end">
+                        <div class="mg_cardslider_button cnt mg_cardslider_left">
+                            <svg width="9" height="16" viewBox="0 0 9 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
+                                    fill="var(--main)" />
+                            </svg>
+                        </div>
+                        <div class="mg_cardslider_button cnt mg_cardslider_right">
+                            <svg width="9" height="16" viewBox="0 0 9 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
+                                    fill="var(--main)" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="mg_cardslider_row">
-                <?php
+                <div class="mg_cardslider_row">
+                    <?php
                 while ($data = mysqli_fetch_assoc($same_movies)) {
                     echo card($data, $image_starter);
                 }
                 ?>
+                </div>
             </div>
         </div>
     </div>

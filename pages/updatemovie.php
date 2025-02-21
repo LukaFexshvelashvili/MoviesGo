@@ -335,6 +335,16 @@ exit;
             players[newPlayerID].ENG.HD = engInput.value;
         });
     }
+
+    function removePlayer(button, newPlayerID) {
+        const playerRow = button.closest(".labeled");
+
+        if (playerRow) {
+            playerRow.remove();
+
+            delete players[newPlayerID];
+        }
+    }
     </script>
     <script>
     const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");
