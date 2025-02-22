@@ -1,5 +1,24 @@
 import { types, genres } from "../../ui/themes.js";
 
+function get_results() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const paramsObject = Object.fromEntries(urlParams.entries());
+
+  $.get(
+    server_start_local + "actions/search_results.php",
+    paramsObject,
+    function (data) {
+      let parsedData = JSON.parse(data);
+
+      $(".cardrows").html(parsedData.data);
+      $("#search_nums_rows").text(parsedData.length);
+      loadCards();
+    }
+  );
+}
+get_results();
+
 let selected_types = [];
 let selected_genres = [];
 let selected_year = [1900, 2025];
@@ -65,15 +84,15 @@ mobile_addon.addEventListener("touchend", function () {
 
 function filtermovies() {
   const filteringdata = {
-    type: selected_types.length !== 0 ? selected_types : -1,
-    genres: selected_genres.length !== 0 ? selected_genres : -1,
-    year_from: selected_year[0],
-    year_to: selected_year[1],
-    imdb_from: selected_imdb[0],
-    imdb_to: selected_imdb[1],
+    type: selected_types.length !== 0 ? selected_types : null,
+    genres: selected_genres.length !== 0 ? selected_genres : null,
+    year_from: selected_year[0] !== 1900 ? selected_year[0] : null,
+    year_to: selected_year[1] !== 2025 ? selected_year[1] : null,
+    imdb_from: selected_imdb[0] !== 0 ? selected_imdb[0] : null,
+    imdb_to: selected_imdb[1] !== 10 ? selected_imdb[1] : null,
   };
-  console.log(filteringdata);
-  // request
+  addSearchParam(filteringdata);
+  get_results();
 }
 
 clearfiltersbutton.addEventListener("click", clearFilters);
@@ -194,4 +213,18 @@ function arrayRemove(array, item) {
   if (index !== -1) {
     array.splice(index, 1);
   }
+}
+
+function addSearchParam(object) {
+  const url = new URL(window.location);
+
+  Object.entries(object).forEach(([key, value]) => {
+    if (value !== null) {
+      url.searchParams.set(key, value);
+    } else {
+      url.searchParams.delete(key);
+    }
+  });
+
+  window.history.pushState({}, "", url);
 }

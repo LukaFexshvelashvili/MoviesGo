@@ -69,7 +69,7 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
     <link rel="stylesheet" href="../assets/css/components/mg_slider.css" />
 </head>
 
-<body class="bg-bodybg">
+<body class="bg-bodybg no-scroll">
 
     <?php include_once "../components/nav.php" ?>
 

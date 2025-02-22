@@ -15,6 +15,7 @@ mg_cardslider.forEach((currentSlider) => {
   let isMouseDown = false;
   let startX = 0;
   let scrollLeft = 0;
+  let delta = 0;
 
   // Mouse drag events
   mg_cardslider_row.addEventListener("mousedown", (e) => {
@@ -24,7 +25,7 @@ mg_cardslider.forEach((currentSlider) => {
   });
 
   mg_cardslider_row.addEventListener("click", (e) => {
-    if (isDragging) {
+    if (isDragging && (delta > 10 || delta < -10)) {
       e.preventDefault();
     }
   });
@@ -40,8 +41,8 @@ mg_cardslider.forEach((currentSlider) => {
     if (!isMouseDown) return;
     isDragging = true;
     const x = e.pageX - mg_cardslider_row.offsetLeft;
-    const walk = (x - startX) * 1;
-    mg_cardslider_row.scrollLeft = scrollLeft - walk;
+    delta = (x - startX) * 1;
+    mg_cardslider_row.scrollLeft = scrollLeft - delta;
   });
 
   function scrollSliderLeft() {

@@ -94,22 +94,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../assets/engines/card.js"></script>
-    <script>
-    function get_results() {
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const paramsObject = Object.fromEntries(urlParams.entries());
-
-        $.get(server_start_local + "actions/search_results.php", paramsObject, function(data) {
-            let parsedData = JSON.parse(data)
-
-            $(".cardrows").html(parsedData.data)
-            $("#search_nums_rows").text(parsedData.length)
-            loadCards()
-        })
-    }
-    get_results()
-    </script>
     <script type="module" src="../assets/engines/search.js"></script>
     <script type="module" src="../ui/mg_engine.js"></script>
     <script src="../assets/engines/nav.js"></script>

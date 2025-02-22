@@ -445,6 +445,7 @@
   z-index: 3;
   right: 0;
   top: 0;
+  bottom: 0;
   height: 100%;
   width: 300px;
   padding-bottom: 20px;
@@ -593,19 +594,22 @@
     .nav_mb_search_close {
       position: relative;
       border-radius: 0px;
-      background-color: var(--main);
       height: 100%;
-      &:hover {
-        background-color: var(--mainhover);
-      }
+
       svg {
         height: 20px;
       }
     }
+    .searchnavinput {
+      background-color: var(--main);
+      &:hover {
+        background-color: var(--mainhover);
+      }
+    }
     .nav_mb_search_close {
-      background-color: var(--white5);
+      background-color: var(--bodybg);
       &:active {
-        background-color: var(--white10);
+        filter: brightness(1.1);
       }
     }
   }

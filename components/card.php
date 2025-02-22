@@ -34,7 +34,7 @@ function card($data, $image_starter){
                 />
               </svg>
             </div>
-              <img class="mg_card_image" loading="lazy" src="'.$image_starter.$data['poster_url'].'" />
+              <img class="mg_card_image" loading="lazy" src="'.$image_starter.$data['poster_url'].'" alt="'.$data['name_eng'].' poster" />
               <div class="mg_card_shadow "></div>
 
               <div class="mg_card_type cnt">'.get_movie_type($data["type"]).'</div>

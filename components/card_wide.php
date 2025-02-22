@@ -31,7 +31,7 @@ function card_wide($data, $image_starter){
                 />
               </svg>
             </div>
-        <img class="mg_card_image" loading="lazy" src="'.$image_starter.$data['thumbnail_url'].'" alt="'.$data['name_eng'].' thumbnail" />
+        <img class="mg_card_image" loading="lazy" src="'.$image_starter.$data['thumbnail_url'].'" alt="'.$data['name_eng'].' banner" />
         <a href="./watch?id='.$data['id'].'" class="mg_card_shadow"></a>
         <div data-movie="'.$data['id'].'" class="mg_card_bookmark cnt">
             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24">

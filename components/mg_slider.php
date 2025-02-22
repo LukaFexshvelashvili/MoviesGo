@@ -26,15 +26,13 @@ foreach ($slider_array as $movie) {
 
             <img loading="lazy" src="<?php echo $image_starter.$movie['thumbnail_url'] ?>"
                 alt="<?php echo $image_starter.$movie['name_eng'] ?> thumbnail" class="mg_slider_img">
-            <div class="mg_slider_info">
-
+            <div class="mg_slider_info container">
                 <div class="slider_card_start">
                     <div class="slider_card_title"><?php echo $movie['name'] ?></div>
                     <div class="slider_card_title title_eng"><?php echo $movie['name_eng'] ?></div>
 
                 </div>
                 <div class="slider_main_row">
-
                     <div class="slider_card_row">
                         <div class="info_card_inline">
                             <div class="info_texter">
@@ -73,7 +71,7 @@ foreach ($slider_array as $movie) {
                     </div>
                 </div>
             </div>
-            <div class="mg_slider_actions">
+            <div class="mg_slider_actions ">
                 <div data-movie="<?php echo $movie['id'] ?>"
                     class="mg_slider_icon mg_slider_bookmark <?php echo (is_bookmark_exists($movie['id']) ? "bookmarked" : "") ?> ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

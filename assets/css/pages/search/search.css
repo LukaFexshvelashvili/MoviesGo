@@ -56,17 +56,20 @@
 
 .founded {
   margin-top: 20px;
-  padding: 0 10px;
   letter-spacing: 1px;
+  font-size: 15px;
   font-family: mmedium;
   color: var(--whitelow);
 }
 
 .cardrows {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px 12px;
+}
+.cardrows .mg_search_card .mg_img_side {
+  width: 100%;
 }
 
 .filter_container {
@@ -233,8 +236,11 @@
 }
 
 @media (max-width: 900px) {
+  .founded {
+    font-size: 13px;
+  }
   .cardrows {
-    gap: 10px;
+    gap: 20px 12px;
   }
   .filter_container .filter_block::-webkit-scrollbar {
     display: none;

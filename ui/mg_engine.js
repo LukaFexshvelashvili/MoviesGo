@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const mg_web_loader = document.querySelector(".mg_web_loader");
   if (mg_web_loader) {
     mg_web_loader.classList.add("mg_web_loader_hidden");
-    mg_web_loader.addEventListener("transitioned", () => {
+    document.body.classList.remove("no-scroll");
+    mg_web_loader.addEventListener("transitionend", () => {
       mg_web_loader.remove();
     });
   }

@@ -474,6 +474,7 @@
   z-index: 3;
   right: 0;
   top: 0;
+  bottom: 0;
   height: 100%;
   width: 300px;
   padding-bottom: 20px;
@@ -620,22 +621,23 @@
   .navinputblock .nav_mb_search_close {
     position: relative;
     border-radius: 0px;
-    background-color: var(--main);
     height: 100%;
-  }
-  .navinputblock .searchnavinput:hover,
-  .navinputblock .nav_mb_search_close:hover {
-    background-color: var(--mainhover);
   }
   .navinputblock .searchnavinput svg,
   .navinputblock .nav_mb_search_close svg {
     height: 20px;
   }
+  .navinputblock .searchnavinput {
+    background-color: var(--main);
+  }
+  .navinputblock .searchnavinput:hover {
+    background-color: var(--mainhover);
+  }
   .navinputblock .nav_mb_search_close {
-    background-color: var(--white5);
+    background-color: var(--bodybg);
   }
   .navinputblock .nav_mb_search_close:active {
-    background-color: var(--white10);
+    filter: brightness(1.1);
   }
   .navsearch {
     box-shadow: unset;

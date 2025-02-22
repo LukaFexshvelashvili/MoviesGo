@@ -100,7 +100,7 @@ if ($_GET["id"]) {
     <link rel="stylesheet" href="../assets/css/components/mg_cardslider.css" />
 </head>
 
-<body>
+<body class="no-scroll">
     <?php
     include_once "../components/nav.php";
     ?>
@@ -361,6 +361,7 @@ if ($_GET["id"]) {
                                 <p><?php echo $movie['creator'] ?></p>
                             </div>
                         </div>
+
                         <div class="info_card">
                             <span>ჟანრები</span>
                             <div class="row">
@@ -390,9 +391,10 @@ if(!empty($movie['actors'])){
                     ?>
                         <div class="info_card info_card_description">
                             <span>სიუჟეტი</span>
-                            <div class="row_text">
+                            <div class="row_text row_text_desc">
 
                                 <p><?php echo $movie['description'] ?></p>
+                                <button id="seeMoreBtn">მეტის ჩვენება</button>
                             </div>
                         </div>
                     </div>
@@ -540,6 +542,26 @@ if(!empty($movie['actors'])){
 
     ?>
     <script>
+    $("#seeMoreBtn").click(function() {
+        if ($(".row_text_desc").hasClass("expanded")) {
+            $(".row_text_desc").removeClass("expanded")
+            $("#seeMoreBtn").text("მეტის ჩვენება")
+        } else {
+            $(".row_text_desc").addClass("expanded")
+            $("#seeMoreBtn").text("ნაკლების ჩვენება")
+
+        }
+    })
+
+    function checkDescriptionHeight() {
+        if ($('.row_text_desc p').height() < 80 && $(".row_text_desc").hasClass("expanded") == false) {
+            $('#seeMoreBtn').addClass('hidden');
+        } else {
+            $('#seeMoreBtn').removeClass('hidden');
+        }
+    }
+    checkDescriptionHeight()
+    window.onresize = checkDescriptionHeight;
     $(".players_change_button").click(function() {
         if (!$(this).hasClass("active_player")) {
 

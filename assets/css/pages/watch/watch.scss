@@ -9,7 +9,8 @@
     display: flex;
     justify-content: center;
     img {
-      height: 100%;
+      height: auto;
+      width: 200%;
       top: 0;
       left: 0;
       object-position: center;
@@ -24,7 +25,7 @@
       position: absolute;
       height: 100%;
       width: 100%;
-      background: linear-gradient(to top, var(--bodybg), var(--bodybgclear30));
+      background: linear-gradient(to top, var(--bodybg), var(--bodybgclear40));
     }
   }
 }
@@ -169,6 +170,14 @@
         margin-top: 5px;
         display: flex;
         flex-wrap: wrap;
+        p {
+          max-height: 80px;
+          transition: max-height 0.3s ease-in-out;
+          overflow: hidden;
+        }
+      }
+      .row_text.expanded p {
+        max-height: none;
       }
       .genre_block {
         letter-spacing: 1px;
@@ -180,7 +189,7 @@
         align-items: center;
         cursor: pointer;
         transition: background-color 0.2s;
-        border-bottom: 2px solid var(--main);
+        border-bottom: 3px solid var(--main);
         &:hover {
           background-color: var(--white5);
         }
@@ -225,6 +234,8 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
+    width: 100%;
+
     p {
       font-size: 16px;
       display: -webkit-box;
@@ -406,6 +417,7 @@
 }
 .movie_comments {
   margin: 50px 0;
+  margin-top: 20px;
   h3 {
     font-family: mregular;
     font-weight: 400;
@@ -519,7 +531,6 @@
   background-color: var(--comment);
   border-radius: 10px;
   padding: 15px;
-  padding-bottom: 40px;
   position: relative;
   .comment_start {
     display: flex;
@@ -554,12 +565,11 @@
   letter-spacing: 0.5px;
 }
 .comment_actions {
-  position: absolute;
+  justify-content: end;
+  margin-top: 5px;
   display: flex;
   align-items: center;
   gap: 10px;
-  bottom: 15px;
-  right: 15px;
   .comment_love {
     height: 20px;
     aspect-ratio: 1/1;
@@ -647,6 +657,14 @@
   }
 }
 .movie_poster_respo {
+  display: none;
+}
+#seeMoreBtn {
+  color: var(--textdesc);
+  margin-left: auto;
+  cursor: pointer;
+}
+#seeMoreBtn.hidden {
   display: none;
 }
 @media (max-width: 1200px) {
@@ -878,10 +896,12 @@
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px;
     div {
       font-size: 12px;
-      width: 110px;
+      flex: 1;
+      width: auto;
+      min-width: 110px;
     }
   }
   .movie_actions {

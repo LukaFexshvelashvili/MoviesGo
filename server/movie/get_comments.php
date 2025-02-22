@@ -154,7 +154,7 @@ if(is_logged() && $comment['author_id'] == $_SESSION['user_id']){
         <?php
 if(is_logged() && $replied['author_id'] == $_SESSION['user_id']){
         ?>
-        <button data-comment-id="<?php echo $comment['comment_id']; ?>" class="dbt delete_comment">წაშლა</button>
+        <button data-comment-id="<?php echo $replied['comment_id']; ?>" class="dbt delete_comment">წაშლა</button>
         <?php
 
                         }
