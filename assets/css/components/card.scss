@@ -324,6 +324,14 @@
       letter-spacing: 1px;
       color: var(--texthead);
       font-family: mmedium;
+      div {
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        display: block;
+        max-width: calc(100% - 20px);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
       div:nth-child(2) {
         color: var(--textdesc);
       }
@@ -385,7 +393,7 @@
     .mg_card_imdb {
       z-index: 2;
       position: absolute;
-      bottom: 10px;
+      bottom: 5px;
       height: 24px;
       letter-spacing: 0.4px;
       background-color: rgba(0, 0, 0, 0.6);
@@ -395,18 +403,18 @@
       font-size: 11px;
     }
     .mg_card_type {
-      left: 10px;
+      left: 5px;
       width: 80px;
     }
     .mg_card_year {
-      right: 10px;
+      right: 5px;
       width: 65px;
     }
     .mg_card_imdb {
       background-color: rgba(0, 0, 0, 0.5);
 
-      top: 10px;
-      left: 10px;
+      top: 5px;
+      left: 5px;
       width: 85px;
       color: var(--imdb);
       border-color: var(--imdb);
@@ -422,10 +430,15 @@
     display: flex;
     flex-direction: column;
     align-items: start;
+    overflow: hidden;
+    max-width: calc(100% - 40px);
+
     a {
       display: inline-block;
       overflow: hidden;
       white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 100%;
       text-align: start;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
@@ -433,7 +446,7 @@
   }
   .card_info_text {
     letter-spacing: 0.4px;
-    font-size: 15px;
+    font-size: 14px;
     font-family: mmedium;
     color: var(--texthead);
   }
@@ -476,7 +489,7 @@
       .mg_card_type,
       .mg_card_year,
       .mg_card_imdb {
-        font-size: 10px;
+        font-size: 11px;
       }
 
       .mg_card_type {

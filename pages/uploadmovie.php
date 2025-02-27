@@ -150,6 +150,10 @@
                 <p id="ai_suggestion"></p>
                 <div class="genres_listing"></div>
             </div>
+            <div class="labeled">
+                <p>დამატებები</p>
+                <div class="addons_listing"></div>
+            </div>
             <div class="players">
                 <div class="players_row">
                     <div class="labeled">
@@ -205,6 +209,7 @@
                 <p id="creator_check">რეჟისორი</p>
                 <p id="actors_check" class="optional">როლებში</p>
                 <p id="trailer_check" class="optional">თრეილერი</p>
+                <p id="addons_check" class="optional">დამატებები</p>
                 <p id="description_check">მოკლე სიუჟეტი</p>
                 <p id="genres_check">ჟანრები</p>
                 <p id="image_check">ფოტო 1</p>
@@ -230,6 +235,7 @@
     };
     let movie_type = -1;
     let movie_genres = [];
+    let movie_addons = [];
     // changing in upload.js
     </script>
     <script type="module" src="../ui/mg_engine.js"></script>
@@ -256,6 +262,7 @@
         });
         formData.append("type", movie_type);
         formData.append("players", JSON.stringify(players));
+        formData.append("addons", JSON.stringify(movie_addons));
 
         if (verifyCheckings()) {
             mg_ai_web_loader.classList.remove("mg_ai_web_loader_hidden");

@@ -28,7 +28,7 @@ if(is_logged()){
         <input name="reply_id" type="hidden" id="reply_id"></input>
         <input name="movie_id" type="hidden" id="movie_id" value="<?php echo $movie['id'] ?>"></input>
         <textarea placeholder="შეტყობინება..." class="c_textarea" id="comment_input" name="comment_input"></textarea>
-        <button class="dbt c_button">დაკომენტარება</button>
+        <button class="dbtw c_button">დაკომენტარება</button>
     </form>
     <?php
 } else {
@@ -51,7 +51,7 @@ if(is_logged()){
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 <script>
-const c_server_start_local = "http://localhost/MoviesGoV2/server/";
+const c_server_start_local = '<?php echo $server_start_local ?>';
 
 function initializeComments() {
     $.ajax({

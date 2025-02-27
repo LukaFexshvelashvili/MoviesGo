@@ -1,4 +1,4 @@
-import { types, genres } from "../../ui/themes.js";
+import { types, genres, addons } from "../../ui/themes.js";
 
 const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");
 const name_eng = document.getElementById("name_eng");
@@ -43,8 +43,8 @@ function changeValues(answer) {
   year.value = answer.Year;
   country.value = answer.Country;
   imdb.value = answer.imdbRating;
-  creator.value = answer.Director;
-  actors.value = answer.Actors;
+  creator.value = answer.Director_eng;
+  actors.value = answer.Actors_eng;
   description.value = answer.Plot;
   ai_suggestion.innerText = `AI შემოთავაზება: ${answer.Genre}`;
   poster_suggestion.href = answer.Poster;
@@ -94,7 +94,12 @@ async function sendAIrequest() {
       async function (data) {
         mg_ai_web_loader.classList.add("mg_ai_web_loader_hidden");
         let translatedAnswer = await sendAItranslate(JSON.stringify(data));
-        changeValues({ Title_eng: data.Title, ...translatedAnswer });
+        changeValues({
+          Title_eng: data.Title,
+          ...translatedAnswer,
+          Actors_eng: data.Actors,
+          Director_eng: data.Director,
+        });
       },
       "json"
     );
@@ -103,6 +108,7 @@ async function sendAIrequest() {
   }
 }
 
+const addons_listing = document.querySelector(".addons_listing");
 const genres_listing = document.querySelector(".genres_listing");
 const types_listing = document.querySelector(".types_listing");
 const clear_inps = document.querySelectorAll(".clear_inp");
@@ -196,6 +202,29 @@ function initializeGenres() {
     });
   });
 }
+
+function initializeAddons() {
+  addons.forEach((addon) => {
+    addons_listing.innerHTML += `
+<div data-addon="${addon.title}" style="--buttoncolor:var(--main)" class="addon_button" >${addon.title}</div>
+`;
+  });
+  const addon_button = document.querySelectorAll(".addon_button");
+  Array.from(addon_button).forEach((button) => {
+    button.addEventListener("click", () => {
+      let get_addon = button.getAttribute("data-addon");
+      if (button.classList.contains("addon_active")) {
+        button.classList.remove("addon_active");
+        arrayRemove(movie_addons, get_addon);
+        addons_check.classList.remove("checked");
+      } else {
+        button.classList.add("addon_active");
+        movie_addons.unshift(get_addon);
+        addons_check.classList.add("checked");
+      }
+    });
+  });
+}
 function selectGenreHand(title) {
   if (title == "ანიმაცია") {
     const element4 = document.querySelector(`[data-genre="ანიმაციური"]`);
@@ -239,7 +268,7 @@ function selectGenreHand(title) {
 
 initializeTypes();
 initializeGenres();
-
+initializeAddons();
 const type_check = document.getElementById("type_check");
 const name_eng_check = document.getElementById("name_eng_check");
 const name_check = document.getElementById("name_check");
@@ -251,6 +280,7 @@ const creator_check = document.getElementById("creator_check");
 const actors_check = document.getElementById("actors_check");
 const description_check = document.getElementById("description_check");
 const genres_check = document.getElementById("genres_check");
+const addons_check = document.getElementById("addons_check");
 const image_check = document.getElementById("image_check");
 const image2_check = document.getElementById("image2_check");
 const trailer_check = document.getElementById("trailer_check");
@@ -413,7 +443,7 @@ async function sendAItranslate(data_send) {
   if (ai_input.value.length > 1) {
     const API_URL = "https://api.groq.com/openai/v1/chat/completions";
     const API_TOKEN =
-      "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";
+      "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";
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {

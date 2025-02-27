@@ -2,6 +2,6 @@
 ?>
 
 <script>
-const server_start = "http://localhost/moviesgo/v1/";
-const server_start_local = "http://localhost/MoviesGoV2/server/";
+const server_start = '<?php echo $server_start ?>';
+const server_start_local = '<?php echo $server_start_local ?>';
 </script>

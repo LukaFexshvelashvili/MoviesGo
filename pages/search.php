@@ -15,7 +15,14 @@
 <body>
 
     <?php include_once "../components/nav.php"?>
-
+    <div class="mg_ai_web_loader mg_ai_web_loader_hidden">
+        <div class="popcorn_container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24">
+                <path fill="var(--main)"
+                    d="M7 22H4.75s-.75 0-.94-1.35L2.04 3.81L2 3.5C2 2.67 2.9 2 4 2s2 .67 2 1.5C6 2.67 6.9 2 8 2s2 .67 2 1.5c0-.83.9-1.5 2-1.5c1.09 0 2 .66 2 1.5c0-.83.9-1.5 2-1.5s2 .67 2 1.5c0-.83.9-1.5 2-1.5s2 .67 2 1.5l-.04.31l-1.77 16.84C20 22 19.25 22 19.25 22H7M17.85 4.93C17.55 4.39 16.84 4 16 4c-.81 0-1.64.36-2 .87L13.78 20h2.88l1.19-15.07M10 4.87C9.64 4.36 8.81 4 8 4c-.84 0-1.55.39-1.85.93L7.34 20h2.88L10 4.87Z" />
+            </svg>
+        </div>
+    </div>
     <div class="container">
         <form class="searchform" onsubmit="return false">
             <input class="searchinput" type="text" value="<?php echo isset($_GET['title']) ? $_GET['title'] : "" ?>"
@@ -57,15 +64,15 @@
                     <div class="filter_cont">
                         <h2>აირჩიეთ წელი</h2>
                         <div class="filter_inp">
-                            <input type="text" id="year_from" value="1900" />-დან
-                            <input type="text" id="year_to" value="2025" />-მდე
+                            <input type="number" id="year_from" value="1900" />-დან
+                            <input type="number" id="year_to" value="2025" />-მდე
                         </div>
                     </div>
                     <div class="filter_cont">
                         <h2>აირჩიეთ IMDb</h2>
                         <div class="filter_inp">
-                            <input type="text" id="imdb_from" value="0.0" />-დან
-                            <input type="text" id="imdb_to" value="10" />-მდე
+                            <input type="number" id="imdb_from" value="0.0" />-დან
+                            <input type="number" id="imdb_to" value="10" />-მდე
                         </div>
                     </div>
                     <div class="filter_cont">
@@ -82,8 +89,12 @@
                 </div>
             </div>
         </div>
-
-        <p class="founded">ნაპოვნია: <span id="search_nums_rows"></span> შედეგი</p>
+        <div class="search_ascdesc">
+            <p class="founded">ნაპოვნია: <span id="search_nums_rows"></span> შედეგი</p>
+            <div class="ascdesc_row">
+                <div data-years-sort="to_down" class="ascdesc_year ascdesc_button">წელი ↓</div>
+            </div>
+        </div>
 
         <div class="cardrows">
 

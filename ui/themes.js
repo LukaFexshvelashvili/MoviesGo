@@ -215,7 +215,32 @@ export const themes_list = [
     inputnavbgactive: "#301300",
   },
 ];
-
+export const addons = [
+  {
+    id: 0,
+    title: "ჩვენ სერვერზე",
+  },
+  {
+    id: 1,
+    title: "ქართულად",
+  },
+  {
+    id: 2,
+    title: "ინგლისურად",
+  },
+  {
+    id: 3,
+    title: "HD",
+  },
+  {
+    id: 4,
+    title: "2K",
+  },
+  {
+    id: 5,
+    title: "4K",
+  },
+];
 export const types = [
   {
     id: 0,

@@ -107,7 +107,8 @@ textarea {
 }
 
 .genres_listing,
-.types_listing {
+.types_listing,
+.addons_listing {
   margin-top: 10px;
   display: flex;
   gap: 15px;
@@ -115,7 +116,8 @@ textarea {
 }
 
 .type_button,
-.genre_button {
+.genre_button,
+.addon_button {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
@@ -131,12 +133,17 @@ textarea {
   cursor: pointer;
 }
 .type_button:hover,
-.genre_button:hover {
+.genre_button:hover,
+.addon_button:hover {
   background-color: var(--secondcolorhover);
 }
-.type_button.genre_active, .type_button.type_active,
+.type_button.genre_active, .type_button.type_active, .type_button.addon_active,
 .genre_button.genre_active,
-.genre_button.type_active {
+.genre_button.type_active,
+.genre_button.addon_active,
+.addon_button.genre_active,
+.addon_button.type_active,
+.addon_button.addon_active {
   color: var(--texthead);
   background-color: var(--buttoncolor);
 }
@@ -220,53 +227,6 @@ textarea {
 }
 .pictureshow img {
   max-height: 400px;
-}
-
-.mg_ai_web_loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.mg_ai_web_loader_hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.mg_ai_web_loader svg path {
-  transition: 0.3s;
-}
-
-.popcorn_container {
-  position: relative;
-  width: 60px;
-  height: 60px;
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px) rotate(-5deg);
-  }
-  50% {
-    transform: translateX(5px) rotate(5deg);
-  }
-  75% {
-    transform: translateX(-5px) rotate(-5deg);
-  }
-}
-.popcorn_container svg {
-  animation: shake 1.5s infinite ease-in-out;
 }
 
 #ai_suggestion {

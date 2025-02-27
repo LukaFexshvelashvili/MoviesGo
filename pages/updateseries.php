@@ -176,6 +176,10 @@ exit;
                 <p id="ai_suggestion"></p>
                 <div class="genres_listing"></div>
             </div>
+            <div class="labeled">
+                <p>დამატებები</p>
+                <div class="addons_listing"></div>
+            </div>
             <div class="players">
                 <div class="players_row">
                     <div class="labeled">
@@ -232,6 +236,7 @@ exit;
                 <p class="optional" id="trailer_check">თრეილერი</p>
                 <p class="optional" id="description_check">მოკლე სიუჟეტი</p>
                 <p class="optional" id="genres_check">ჟანრები</p>
+                <p class="optional" id="addons_check">დამატებები</p>
                 <p class="optional" id="image_check">ფოტო 1</p>
                 <p class="optional" id="image2_check">ფოტო 2</p>
             </div>
@@ -246,7 +251,7 @@ exit;
     let players = <?php echo $movie['players'] ?>;
     let movie_type = <?php echo $movie['type'] ?>;
     let movie_genres = <?php echo $movie['genres'] ?>;
-
+    let movie_addons = <?php echo $movie['addons'] ?>;
 
     // changing in upload.js
     </script>
@@ -261,6 +266,18 @@ exit;
         movie_genres.forEach((genre) => {
             selectGenreHand(genre);
         });
+        movie_addons.forEach((addon) => {
+            selectAddonHand(addon);
+        });
+
+        function selectAddonHand(title) {
+
+            const element = document.querySelector(`[data-addon="${title}"]`);
+
+            if (element) {
+                element.classList.add("addon_active");
+            }
+        }
 
         function selectGenreHand(title) {
 
@@ -291,6 +308,7 @@ exit;
         });
         formData.append("type", movie_type);
         formData.append("players", JSON.stringify(players));
+        formData.append("addons", JSON.stringify(movie_addons));
 
         if (verifyCheckings()) {
             mg_ai_web_loader.classList.remove("mg_ai_web_loader_hidden");

@@ -54,7 +54,6 @@
   }
 }
 .founded {
-  margin-top: 20px;
   letter-spacing: 1px;
   font-size: 15px;
   font-family: mmedium;
@@ -63,8 +62,9 @@
 .cardrows {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 25px 12px;
+  padding-bottom: 20px;
   .mg_search_card {
     .mg_img_side {
       width: 100%;
@@ -73,6 +73,7 @@
 }
 
 .filter_container {
+  font-feature-settings: "case";
   z-index: 101;
   top: 0;
   left: 0;
@@ -115,6 +116,9 @@
       padding: 20px;
 
       h2 {
+        font-family: mmedium;
+        font-weight: 300;
+
         color: var(--texthead);
         letter-spacing: 0.5px;
         font-size: 16px;
@@ -138,24 +142,25 @@
 }
 .type_button,
 .genre_button {
-  user-select: none;
-  display: flex;
-  align-items: center;
+  letter-spacing: 1px;
+  height: 38px;
+  padding: 0px 30px;
+  display: inline-flex;
   justify-content: center;
-  height: 36px;
-  padding: 0 20px;
-  border-radius: 10px;
-  background-color: var(--secondcolor);
-  transition: 0.2s;
-  color: var(--buttoncolor);
+  background-color: var(--black10);
+  align-items: center;
+  color: var(--texthead);
   cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 3px solid var(--main);
   &:hover {
-    background-color: var(--secondcolorhover);
+    background-color: var(--white5);
   }
   &.genre_active,
   &.type_active {
     color: var(--texthead);
-    background-color: var(--buttoncolor);
+    background-color: var(--main);
+    border-bottom: 4px solid var(--black40);
   }
 }
 
@@ -172,6 +177,7 @@
   justify-content: center;
   gap: 10px;
   font-family: mmedium;
+  font-weight: 400;
   color: var(--textdesc);
   margin-top: 15px;
   input {
@@ -226,6 +232,55 @@
 .mobile_addon {
   display: none;
 }
+.search_ascdesc {
+  margin-top: 20px;
+
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+.ascdesc_row {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  font-feature-settings: "case";
+}
+.ascdesc_button {
+  letter-spacing: 1px;
+  height: 32px;
+  padding: 0px 20px;
+  display: inline-flex;
+  justify-content: center;
+  font-size: 14px;
+  background-color: var(--black10);
+  align-items: center;
+  color: var(--texthead);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 3px solid var(--main);
+  &:hover {
+    background-color: var(--white5);
+  }
+}
+@media (max-width: 1600px) {
+  .cardrows {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+@media (max-width: 1400px) {
+  .cardrows {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+  .mg_search_card .card_info_text {
+    font-size: 12px;
+  }
+}
+@media (max-width: 1000px) {
+  .cardrows {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .founded {
     font-size: 13px;
@@ -267,7 +322,7 @@
           width: 200px;
           margin: 0 auto;
           border-radius: 5px;
-          background-color: var(--bodybghover);
+          background-color: var(--white20);
         }
       }
     }

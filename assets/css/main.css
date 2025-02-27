@@ -68,6 +68,16 @@ textarea,
   font-family: msemibold;
   src: url("../fonts/OnService-SemiBold.ttf");
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
 body {
   color: white;
   font-family: mregular;
@@ -78,13 +88,15 @@ body {
   height: 100vh;
 }
 *::-webkit-scrollbar {
-  width: 6px;
+  width: 3px;
   background-color: var(--secondcolor);
 }
 *::-webkit-scrollbar-thumb {
   background-color: var(--main);
 }
-.mg_web_loader {
+
+.mg_web_loader,
+.mg_ai_web_loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -97,8 +109,11 @@ body {
   background-color: var(--bodybg);
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
-
-.mg_web_loader_hidden {
+.mg_ai_web_loader {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.mg_web_loader_hidden,
+.mg_ai_web_loader_hidden {
   opacity: 0;
   visibility: hidden;
 }
@@ -166,5 +181,10 @@ body {
 @media (min-width: 1600px) {
   .container {
     width: 1520px;
+  }
+}
+@media (min-width: 1700px) {
+  .container {
+    width: 1620px;
   }
 }

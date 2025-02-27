@@ -100,14 +100,16 @@ textarea {
   }
 }
 .genres_listing,
-.types_listing {
+.types_listing,
+.addons_listing {
   margin-top: 10px;
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
 }
 .type_button,
-.genre_button {
+.genre_button,
+.addon_button {
   user-select: none;
   display: flex;
   align-items: center;
@@ -123,7 +125,8 @@ textarea {
     background-color: var(--secondcolorhover);
   }
   &.genre_active,
-  &.type_active {
+  &.type_active,
+  &.addon_active {
     color: var(--texthead);
     background-color: var(--buttoncolor);
   }
@@ -203,52 +206,7 @@ textarea {
     max-height: 400px;
   }
 }
-.mg_ai_web_loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
 
-.mg_ai_web_loader_hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-.mg_ai_web_loader svg path {
-  transition: 0.3s;
-}
-
-.popcorn_container {
-  position: relative;
-  width: 60px;
-  height: 60px;
-}
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px) rotate(-5deg);
-  }
-  50% {
-    transform: translateX(5px) rotate(5deg);
-  }
-  75% {
-    transform: translateX(-5px) rotate(-5deg);
-  }
-}
-
-.popcorn_container svg {
-  animation: shake 1.5s infinite ease-in-out;
-}
 #ai_suggestion {
   font-family: mmedium;
   color: var(--textdesc);

@@ -61,17 +61,20 @@ a {
   justify-content: center;
   align-items: center;
   transform: translateZ(0);
-  color: var(--main);
-  height: 120px;
+  color: var(--texthead);
   padding: 15px;
   width: 320px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
-  font-family: msemibold;
-  line-height: 26px;
-  font-size: 16px;
+  font-feature-settings: "case";
+  font-family: mmedium;
+  line-height: 20px;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  font-weight: 200;
+  font-size: 14px;
   letter-spacing: 1px;
-  background-color: rgb(18, 0, 6);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .mg_error_hidden {
@@ -699,7 +702,7 @@ a {
   position: absolute;
   top: 0px;
   right: 0px;
-  z-index: 5;
+  z-index: 7;
   transition: visibility 0.1s, opacity 0.3s;
   height: 100%;
 }
@@ -888,6 +891,12 @@ a {
 }
 
 @media (max-width: 950px) {
+  .mg_controls .mg_controls_bar {
+    padding: 0 15px;
+  }
+  .mg_controls .mg_controls_bar .mg_timeline_scaler:hover .mg_timeline {
+    height: 4px;
+  }
   .mg_player_eps .mg_player_eps_container {
     height: 100%;
   }

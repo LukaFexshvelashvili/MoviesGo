@@ -4,7 +4,7 @@
   --mainhover: rgb(253, 50, 114);
   --mainclear: rgba(245, 0, 78, 0.1);
   --mainclearhover: rgba(245, 0, 78, 0.15);
-  --purewhite: rgba(255, 255, 255, 0.9);
+  --purewhite: rgb(255, 255, 255);
   --white: rgba(255, 255, 255, 0.9);
   --whiteclear: rgba(255, 255, 255, 0.05);
   --whiteclearhover: rgba(255, 255, 255, 0.1);
@@ -12,12 +12,15 @@
   --whitelow: rgba(255, 255, 255, 0.6);
   --whitelowest: rgba(255, 255, 255, 0.1);
   --texthead: rgba(255, 255, 255, 0.9);
+  --textdeschigh: rgba(255, 255, 255, 0.5);
   --textdesc: rgba(255, 255, 255, 0.6);
   --textdesc2: rgba(255, 255, 255, 0.45);
   --sidebar: #252525;
   --sbutton: #262626;
   --sbuttonhover: #292929;
   --navbg: #181818;
+  --secondblack: #212121;
+  --secondblackhover: #292929;
   --pbutton: #1f1f1f;
   --pbuttonhover: #252525;
   --secondbg: #202020;
@@ -43,6 +46,7 @@
   --bodybgclear20: rgba(28, 28, 28, 0.2);
   --bodybgclear30: rgba(28, 28, 28, 0.3);
   --bodybgclear40: rgba(28, 28, 28, 0.4);
+  --bodybgclear50: rgba(28, 28, 28, 0.4);
   --inputnavbghover: #1f1f1f;
   --inputnavbgactive: #242424;
   --navheight: 70px;
@@ -61,7 +65,14 @@
   --black40: rgba(0, 0, 0, 0.4);
   --black45: rgba(0, 0, 0, 0.45);
   --black50: rgba(0, 0, 0, 0.5);
+  --black60: rgba(0, 0, 0, 0.6);
+  --black65: rgba(0, 0, 0, 0.65);
+  --black70: rgba(0, 0, 0, 0.7);
+  --black80: rgba(0, 0, 0, 0.8);
+  --white1: rgba(255, 255, 255, 0.01);
+  --white2: rgba(255, 255, 255, 0.02);
   --white5: rgba(255, 255, 255, 0.05);
+  --white8: rgba(255, 255, 255, 0.08);
   --white10: rgba(255, 255, 255, 0.1);
   --white15: rgba(255, 255, 255, 0.15);
   --white20: rgba(255, 255, 255, 0.2);
@@ -115,14 +126,14 @@ a {
   cursor: pointer;
   padding: 8px 25px;
   letter-spacing: 0.5px;
-  background-color: var(--sbutton);
+  background-color: var(--white5);
   color: var(--texthead);
   font-size: 14px;
   border-radius: 8px;
   transition: background-color 0.2s;
 }
 .dbts:hover {
-  background-color: var(--sbuttonhover);
+  background-color: var(--white10);
 }
 
 .dfi {
@@ -144,4 +155,21 @@ a {
 }
 .dfi:focus {
   background-color: var(--inputactive);
+}
+
+.dbtw {
+  display: block;
+  cursor: pointer;
+  padding: 8px 25px;
+  letter-spacing: 0.5px;
+  background-color: var(--mainclear);
+  color: var(--main);
+  font-size: 14px;
+  font-family: msemibold;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.dbtw:hover {
+  background-color: var(--mainclearhover);
 }/*# sourceMappingURL=colors.css.map */

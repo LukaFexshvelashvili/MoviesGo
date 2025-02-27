@@ -25,11 +25,10 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  height: 70px;
+  height: 65px;
   display: flex;
   align-items: center;
   background-color: var(--navbg);
-  border-bottom: 2px solid var(--main);
   backface-visibility: hidden;
   transform: translateZ(0);
 }
@@ -100,10 +99,9 @@
 
 .navprofile {
   position: relative;
-  height: 40px;
+  height: 45px;
   aspect-ratio: 1/1;
   border-radius: 8px;
-  border: 2px solid var(--main);
   padding: 2px;
   margin-left: 10px;
 }
@@ -116,7 +114,7 @@
   height: 100%;
   width: 100%;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 50px;
 }
 .navprofile .navprofilebutton:hover {
   background-color: rgba(255, 255, 255, 0.15);
@@ -307,12 +305,14 @@
 }
 
 .navlogo {
-  height: 40px;
-  aspect-ratio: 1/1;
-  border-radius: 6px;
-  background-color: var(--main);
   color: var(--texthead);
-  font-size: 24px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  gap: 1px;
+  font-family: msemibold;
+}
+.navlogo span {
+  color: var(--main);
 }
 
 .navsearch {
@@ -422,11 +422,11 @@
 
 .nav_mb {
   display: none;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 .nav_mb .nav_mb_button {
-  height: 36px;
+  height: 34px;
   aspect-ratio: 1/1;
   border-radius: 8px;
   background-color: var(--white5);
@@ -456,7 +456,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   z-index: 20;
 }
@@ -473,7 +473,6 @@
   position: absolute;
   z-index: 3;
   right: 0;
-  top: 0;
   bottom: 0;
   height: 100%;
   width: 300px;
@@ -523,6 +522,11 @@
   letter-spacing: 0.5px;
   font-size: 16px;
   transition: background-color 0.3s;
+  color: var(--texthead);
+  background-color: var(--main);
+}
+.mob_nav_sign:hover {
+  background-color: var(--mainhover);
 }
 .mob_nav_sign.mob_nav_sign_out {
   color: var(--main);
@@ -530,13 +534,6 @@
 }
 .mob_nav_sign.mob_nav_sign_out:hover {
   background-color: var(--mainclearhover);
-}
-.mob_nav_sign.mob_nav_sign_in {
-  color: var(--texthead);
-  background-color: var(--main);
-}
-.mob_nav_sign.mob_nav_sign_in:hover {
-  background-color: var(--mainhover);
 }
 
 @media (max-width: 1200px) {
@@ -571,10 +568,6 @@
   .mobile_nav.mobile_nav_show .mobile_nav_content {
     transform: translateX(0);
   }
-  .navlogo {
-    font-size: 20px;
-    height: 36px;
-  }
   .nav_pc {
     display: none;
   }
@@ -583,6 +576,7 @@
   }
   .navbar {
     height: 60px;
+    padding: 0 5px;
   }
   .navinputblock {
     transform: translateY(-120%);

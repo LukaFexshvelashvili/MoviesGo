@@ -13,7 +13,7 @@ include_once "../server/connection.php";
     <div class="container navc">
         <div class="navcont">
             <div class="navwrap">
-                <a href="./" class="navlogo cnt"> M </a>
+                <a href="./" class="navlogo cnt">MOVIES<span>GO</span> </a>
                 <div class="navinputblock">
                     <div class="navsearchshadow nav_mb"></div>
                     <div class="navsearch">

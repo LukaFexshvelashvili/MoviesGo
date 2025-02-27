@@ -80,4 +80,7 @@ $formatted_date = $date->format('m/d') . ' ' . $georgian_weekdays[$day_name] . '
 
 echo $formatted_date;
 }
+
+$server_start = "http://localhost/moviesgo/v1/";
+$server_start_local = "http://localhost/MoviesGoV2/server/";
 ?>

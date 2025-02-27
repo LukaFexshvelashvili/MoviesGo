@@ -39,7 +39,7 @@ if ($_GET["id"]) {
     } else {
         $user_liked = 0;
     }
-    $same_movies = mysqli_query($conn, "SELECT * FROM movies");
+    $same_movies = mysqli_query($conn, "SELECT * FROM movies LIMIT 10");
 
     $is_movie = true;
 
@@ -319,7 +319,8 @@ if ($_GET["id"]) {
                                 <div class="info_card_inline">
                                     <div class="info_texter">
                                         <span>ტიპი</span>
-                                        <p><?php echo get_movie_type($movie['type']) ?></p>
+                                        <a
+                                            href="./search?type=<?php echo $movie['type']; ?>"><?php echo get_movie_type($movie['type']) ?></a>
                                     </div>
                                 </div>
                                 <div class="info_card_inline">

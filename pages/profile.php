@@ -1,10 +1,10 @@
 <?php
 include_once "../server/connection.php";
-include_once "../components/card.php";
-if($_GET["id"]){
+include_once "../components/search_card.php";
+if(isset($_GET["id"])){
     $user_id = $_GET["id"];
 }else if(is_logged()){
-    $user_id = $_GET["id"];
+    $user_id = $_SESSION["user_id"];
 }else{
     header("Location: ./ ");
     exit();
@@ -96,7 +96,7 @@ if($_GET["id"]){
             <?php 
             if(isset($liked_movies)) {
                 while ($movie = $liked_movies->fetch_assoc()) {
-                    echo card($movie, $image_starter);
+                    echo search_card($movie, $image_starter);
                 }
             }else{
                 echo '<p class="info_result_desc">მოწონებული ფილმები არ არის</p>';

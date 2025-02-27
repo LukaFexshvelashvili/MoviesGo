@@ -23,72 +23,37 @@ foreach ($slider_array as $movie) {
     ?>
         <div class="mg_slider_card <?php echo $ind == 1 ? "mg_slider_card_active" : "" ?>">
             <div class="mg_slider_shadow"></div>
+            <div class="mg_slider_shadow_side"></div>
 
             <img loading="lazy" src="<?php echo $image_starter.$movie['thumbnail_url'] ?>"
                 alt="<?php echo $image_starter.$movie['name_eng'] ?> thumbnail" class="mg_slider_img">
             <div class="mg_slider_info container">
                 <div class="slider_card_start">
+                    <div class="slider_card_addons">
+                        <div class="s_type">ფილმი</div>
+                        <div class="s_year">2024</div>
+                        <div class="s_imdb">IMDb: 7.6</div>
+                    </div>
                     <div class="slider_card_title"><?php echo $movie['name'] ?></div>
-                    <div class="slider_card_title title_eng"><?php echo $movie['name_eng'] ?></div>
+                    <div class="slider_card_title s_title_eng"><?php echo $movie['name_eng'] ?></div>
+                    <div class="slider_card_description"><?php echo $movie['description'] ?></div>
+                    <div class="mg_slider_actions ">
+                        <a href="./watch?id=<?php echo $movie['id'] ?>" class="mg_slider_icon mg_slider_play">
+                            ყურება
+                        </a>
+                        <div data-movie="<?php echo $movie['id'] ?>"
+                            class="mg_slider_icon mg_slider_bookmark <?php echo (is_bookmark_exists($movie['id']) ? "bookmarked" : "") ?> ">
 
-                </div>
-                <div class="slider_main_row">
-                    <div class="slider_card_row">
-                        <div class="info_card_inline">
-                            <div class="info_texter">
-                                <span>ტიპი</span>
-                                <p><?php echo get_movie_type($movie['type']) ?></p>
-                            </div>
-                        </div>
-                        <div class="info_card_inline">
-                            <div class="info_texter">
-                                <span>წელი</span>
-                                <p><?php echo $movie['year'] ?></p>
-                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill="none" stroke="var(--iconlow)" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z"></path>
+                            </svg>
                         </div>
 
-                        <div class="info_card_inline info_card_inline_imdb">
-                            <div class="info_texter">
-                                <span class="imdb">IMDB</span>
-                                <p><?php echo number_format($movie['imdb'], 1) ?></p>
-                            </div>
-                        </div>
-                        <div class="drop">
-
-                            <div class="info_card_inline ">
-                                <div class="info_texter">
-                                    <span>რეჟისორი</span>
-                                    <p><?php echo $movie['creator'] ?></p>
-                                </div>
-                            </div>
-                            <div class="info_card_inline">
-                                <div class="info_texter">
-                                    <span>ქვეყანა</span>
-                                    <p><?php echo $movie['country'] ?></p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="mg_slider_actions ">
-                <div data-movie="<?php echo $movie['id'] ?>"
-                    class="mg_slider_icon mg_slider_bookmark <?php echo (is_bookmark_exists($movie['id']) ? "bookmarked" : "") ?> ">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path fill="none" stroke="var(--iconlow)" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" d="M16 3H8a2 2 0 0 0-2 2v16l6-3l6 3V5a2 2 0 0 0-2-2Z"></path>
-                    </svg>
-                </div>
-                <a href="./watch?id=<?php echo $movie['id'] ?>" class="mg_slider_icon mg_slider_play">
 
-                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M12.5 5.40192C14.5 6.55662 14.5 9.44338 12.5 10.5981L5 14.9282C3 16.0829 0.5 14.6395 0.5 12.3301V3.66987C0.5 1.36047 3 -0.0829034 5 1.0718L12.5 5.40192Z"
-                            fill="white" />
-                    </svg>
-
-                </a>
-            </div>
         </div>
 
         <?php

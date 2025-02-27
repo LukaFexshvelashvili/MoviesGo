@@ -3,7 +3,7 @@
   font-feature-settings: "case";
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   margin: 70px 0;
 }
 
@@ -15,15 +15,22 @@
   .mg_cardslider_start {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     color: var(--texthead);
-    font-size: 18px;
+    font-size: 17px;
     letter-spacing: 1px;
-    div {
-      height: 36px;
-      aspect-ratio: 1 / 1;
-      border-radius: 8px;
+    position: relative;
+    padding-bottom: 14px;
+    margin-bottom: 6px;
+    &::before {
+      position: absolute;
+      content: "";
+      height: 3px;
+      width: 30px;
+      border-radius: 5px;
       background-color: var(--main);
+      bottom: 0;
+      left: 0;
     }
   }
   .mg_cardslider_end {
@@ -43,7 +50,7 @@
   display: flex;
   align-items: center;
   overflow-x: auto;
-  gap: 15px;
+  gap: 10px;
 }
 .mg_cardslider_wide_row {
   gap: 10px;
