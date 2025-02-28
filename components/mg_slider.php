@@ -26,13 +26,13 @@ foreach ($slider_array as $movie) {
             <div class="mg_slider_shadow_side"></div>
 
             <img loading="lazy" src="<?php echo $image_starter.$movie['thumbnail_url'] ?>"
-                alt="<?php echo $image_starter.$movie['name_eng'] ?> thumbnail" class="mg_slider_img">
+                alt="<?php echo $image_starter.$movie['name_eng'] ?> banner" class="mg_slider_img">
             <div class="mg_slider_info container">
                 <div class="slider_card_start">
                     <div class="slider_card_addons">
-                        <div class="s_type">ფილმი</div>
-                        <div class="s_year">2024</div>
-                        <div class="s_imdb">IMDb: 7.6</div>
+                        <div class="s_type"><?php echo get_movie_type($movie['type']) ?></div>
+                        <div class="s_year"><?php echo $movie['year'] ?></div>
+                        <div class="s_imdb">IMDb: <?php echo number_format($movie['imdb'], 1) ?></div>
                     </div>
                     <div class="slider_card_title"><?php echo $movie['name'] ?></div>
                     <div class="slider_card_title s_title_eng"><?php echo $movie['name_eng'] ?></div>

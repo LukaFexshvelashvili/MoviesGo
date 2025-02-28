@@ -1,9 +1,9 @@
 :root {
-  --main: rgb(245, 0, 79);
-  --mainshadow: rgba(245, 0, 78, 0.3);
-  --mainhover: rgb(253, 50, 114);
-  --mainclear: rgba(245, 0, 78, 0.1);
-  --mainclearhover: rgba(245, 0, 78, 0.15);
+  --main: rgb(211, 0, 67);
+  --mainshadow: rgba(211, 0, 67, 0.3);
+  --mainhover: rgb(196, 0, 62);
+  --mainclear: rgba(211, 0, 67, 0.1);
+  --mainclearhover: rgba(211, 0, 67, 0.15);
   --purewhite: rgb(255, 255, 255);
   --white: rgba(255, 255, 255, 0.9);
   --whiteclear: rgba(255, 255, 255, 0.05);
@@ -20,7 +20,7 @@
   --sbuttonhover: #292929;
   --navbg: #181818;
   --secondblack: #212121;
-  --secondblackhover: #292929;
+  --secondblackhover: #252525;
   --pbutton: #1f1f1f;
   --pbuttonhover: #252525;
   --secondbg: #202020;

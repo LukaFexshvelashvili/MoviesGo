@@ -288,7 +288,7 @@ exit;
                 element.classList.add("genre_active");
             }
         }
-    }, 100);
+    }, 1000);
 
     Object.keys(players).forEach((id) => {
         if (id != 1) {

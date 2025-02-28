@@ -1,12 +1,9 @@
-const mg_slider = document.querySelector(".mg_slider");
+const popular_slider = document.querySelector(".popular_slider");
 
-const mg_slider_left = document.querySelector(".mg_slider_left");
-const mg_slider_right = document.querySelector(".mg_slider_right");
-const mg_slider_row = document.querySelector(".mg_slider_row");
-const mg_slider_indicators = document.querySelector(".mg_slider_indicators");
-
-mg_slider_left.addEventListener("click", () => changeSlider("left"));
-mg_slider_right.addEventListener("click", () => changeSlider("right"));
+const popular_slider_row = document.querySelector(".popular_slider_row");
+const popular_slider_indicators = document.querySelector(
+  ".popular_slider_indicators"
+);
 
 function initializeSlider() {
   let userSlided = false;
@@ -26,7 +23,7 @@ function initializeSlider() {
     if (!notUser) {
       userSlided = true;
     }
-    let maxSlider = mg_slider_row.children.length;
+    let maxSlider = popular_slider_row.children.length;
     if (slide === "right") {
       if (activeSlider < maxSlider - 1) {
         activeSlider++;
@@ -41,19 +38,23 @@ function initializeSlider() {
       }
     }
 
-    Array.from(mg_slider_row.children).forEach((item) =>
-      item.classList.remove("mg_slider_card_active")
+    Array.from(popular_slider_row.children).forEach((item) =>
+      item.classList.remove("popular_slider_card_active")
     );
-    mg_slider_row.children[activeSlider].classList.add("mg_slider_card_active");
+    popular_slider_row.children[activeSlider].classList.add(
+      "popular_slider_card_active"
+    );
 
     changeIndicators();
   }
   function changeActiveSlide(id) {
     activeSlider = id;
-    Array.from(mg_slider_row.children).forEach((item) =>
-      item.classList.remove("mg_slider_card_active")
+    Array.from(popular_slider_row.children).forEach((item) =>
+      item.classList.remove("popular_slider_card_active")
     );
-    mg_slider_row.children[activeSlider].classList.add("mg_slider_card_active");
+    popular_slider_row.children[activeSlider].classList.add(
+      "popular_slider_card_active"
+    );
     changeIndicators();
   }
 
@@ -64,14 +65,14 @@ function initializeSlider() {
   let isMouseDown = false;
 
   // Touch Events
-  mg_slider.addEventListener(
+  popular_slider.addEventListener(
     "touchstart",
     (e) => {
       startSwipe(e.touches[0].clientX);
     },
     { passive: true }
   );
-  mg_slider.addEventListener(
+  popular_slider.addEventListener(
     "touchend",
     (e) => {
       endSwipe(e.changedTouches[0].clientX);
@@ -80,7 +81,7 @@ function initializeSlider() {
   );
 
   // Mouse Events
-  mg_slider.addEventListener(
+  popular_slider.addEventListener(
     "mousedown",
     (e) => {
       isMouseDown = true;
@@ -89,7 +90,7 @@ function initializeSlider() {
     { passive: true }
   );
 
-  mg_slider.addEventListener(
+  popular_slider.addEventListener(
     "mouseup",
     (e) => {
       if (isMouseDown) {
@@ -118,16 +119,16 @@ function initializeSlider() {
     }
   }
   function changeIndicators() {
-    const indicators = Array.from(mg_slider_indicators.children);
+    const indicators = Array.from(popular_slider_indicators.children);
     indicators.forEach((item) =>
-      item.classList.remove("mg_slider_indicator_active")
+      item.classList.remove("popular_slider_indicator_active")
     );
 
-    indicators[activeSlider].classList.add("mg_slider_indicator_active");
+    indicators[activeSlider].classList.add("popular_slider_indicator_active");
   }
   // ${item.genres.map((genre) => `<div>${genre}</div>`).join("")}
   function initializePlayer() {
-    const indicators = Array.from(mg_slider_indicators.children);
+    const indicators = Array.from(popular_slider_indicators.children);
     indicators.forEach((item, index) => {
       item.addEventListener("click", () => {
         changeActiveSlide(index);
@@ -136,15 +137,17 @@ function initializeSlider() {
   }
 
   function initializeBookmarks() {
-    if (!localStorage.getItem("mg_bookmarks")) {
-      localStorage.setItem("mg_bookmarks", JSON.stringify([]));
+    if (!localStorage.getItem("popular_bookmarks")) {
+      localStorage.setItem("popular_bookmarks", JSON.stringify([]));
     }
   }
   initializeBookmarks();
 
-  const mg_slider_bookmarks = document.querySelectorAll(".mg_slider_bookmark");
+  const popular_slider_bookmarks = document.querySelectorAll(
+    ".popular_slider_bookmark"
+  );
 
-  mg_slider_bookmarks.forEach((item) => {
+  popular_slider_bookmarks.forEach((item) => {
     item.addEventListener("click", function () {
       let movie_id = this.getAttribute("data-movie");
       if (movie_id) {

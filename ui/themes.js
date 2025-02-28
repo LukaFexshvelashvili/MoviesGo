@@ -1,11 +1,11 @@
 export const color_list = [
   {
     id: 0,
-    main: "rgb(245, 0, 79)",
-    mainshadow: "rgba(245, 0, 78, 0.3)",
-    mainhover: "rgb(253, 50, 114)",
-    mainclear: "rgba(245, 0, 78, 0.1)",
-    mainclearhover: "rgba(245, 0, 78, 0.15)",
+    main: "rgb(211, 0, 67)",
+    mainshadow: "rgba(211, 0, 67, 0.3)",
+    mainhover: "rgb(196, 0, 62)",
+    mainclear: "rgba(211, 0, 67, 0.1)",
+    mainclearhover: "rgba(211, 0, 67, 0.15)",
   },
   {
     id: 1,

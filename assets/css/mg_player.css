@@ -670,15 +670,7 @@ a {
   justify-content: center;
   position: absolute;
   left: 0;
-  bottom: 25px;
-  height: 55px;
-  aspect-ratio: 16/9;
-  background-color: rgb(34, 34, 34);
-  border-radius: 10px;
-}
-.mg_timeline_helper video {
-  height: 100%;
-  width: 100%;
+  bottom: 20px;
   border-radius: 10px;
 }
 .mg_timeline_helper p {
@@ -907,11 +899,6 @@ a {
     height: 0;
     width: 0;
     bottom: 25px;
-  }
-  .mg_timeline_helper video {
-    display: none;
-    height: 0%;
-    width: 0%;
   }
   .mg_play_pause_full {
     pointer-events: none;

@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 .mg_slider_info .s_year,
 .mg_slider_info .s_type,
@@ -133,7 +133,6 @@
   color: var(--texthead);
   border: 2px solid var(--texthead);
   background-color: rgba(0, 0, 0, 0.5);
-  margin-bottom: 10px;
   opacity: 0.8;
   font-family: msemibold;
 }

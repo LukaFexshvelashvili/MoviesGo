@@ -287,7 +287,7 @@ exit;
                 element.classList.add("genre_active");
             }
         }
-    }, 100);
+    }, 1000);
     </script>
     <script>
     const mg_ai_web_loader = document.querySelector(".mg_ai_web_loader");

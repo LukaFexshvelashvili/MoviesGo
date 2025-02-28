@@ -2,6 +2,8 @@
 include_once "../server/connection.php";
 include_once "../components/card.php";
 include_once "../components/card_wide.php";
+include_once "../components/assets/types.php";
+
 
 $sql = "
 (SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 0 ORDER BY year DESC LIMIT 3 )
@@ -75,7 +77,7 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
 
     <!-- & MAIN SLIDER -->
     <?php include_once "../components/mg_slider.php" ?>
-    <script type="module" src="../assets/engines/mg_slider.js"></script>
+    <script src="../assets/engines/mg_slider.js"></script>
 
     <!-- & CARD SLIDERS -->
     <div class="container index_cont">
@@ -120,6 +122,73 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
 
         <!-- ბოლოს ნანახი -->
 
+
+
+    </div>
+
+
+
+    <div class="news">
+        <div class="container">
+            <div class="head_starter">
+                <p>სიახლე</p>
+            </div>
+            <div class="news_row">
+                <div class="news_row_col">
+                    <div class="news_card left_shadow">
+                        <div class="news_shadow "></div>
+                        <div class="news_card_info">
+                            <p>სონიკი 3</p>
+                            <p>SONIC 3</p>
+                        </div>
+                        <img src="http://localhost/moviesgo/v1/uploads/29/tW5lvdJ.webp" alt="sonic 3 banner">
+                    </div>
+                    <div class="news_card left_shadow">
+                        <div class="news_shadow "></div>
+                        <div class="news_card_info">
+                            <p>სონიკი 3</p>
+                            <p>SONIC 3</p>
+                        </div>
+                        <img src="http://localhost/moviesgo/v1/uploads/17/tAdCxUT.webp" alt="sonic 3 banner">
+                    </div>
+                </div>
+                <div class="news_row_center">
+                    <div class="news_card bottom_shadow">
+                        <div class="news_shadow "></div>
+                        <img src="http://localhost/moviesgo/v1/uploads/36/tMCJ9Wv.webp" alt="sonic 3 banner">
+                        <div class="news_card_info">
+                            <p>სონიკი 3</p>
+                            <p>SONIC 3</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="news_row_col">
+                    <div class="news_card right_shadow">
+                        <div class="news_shadow "></div>
+                        <img src="http://localhost/moviesgo/v1/uploads/28/tSO124n.webp" alt="sonic 3 banner">
+                        <div class="news_card_info">
+                            <p>სონიკი 3</p>
+                            <p>SONIC 3</p>
+                        </div>
+                    </div>
+                    <div class="news_card right_shadow">
+                        <div class="news_shadow "></div>
+                        <img src="http://localhost/moviesgo/v1/uploads/42/t4hIIyT.webp" alt="sonic 3 banner">
+                        <div class="news_card_info">
+                            <p>სონიკი 3</p>
+                            <p>SONIC 3</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="conatiner">
         <div class="categories">
             <div class="head_starter">
                 <p>კატეგორიები</p>
@@ -192,68 +261,11 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
 
             </div>
         </div>
-
     </div>
 
+    <?php include_once "./home/popular_block.php" ?>
+    <script src="../assets/engines/popular_slider.js"></script>
 
-
-    <div class="news">
-        <div class="container">
-            <div class="head_starter">
-                <p>სიახლე</p>
-            </div>
-            <div class="news_row">
-                <div class="news_row_col">
-                    <div class="news_card left_shadow">
-                        <div class="news_shadow "></div>
-                        <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
-                        </div>
-                        <img src="http://localhost/moviesgo/v1/uploads/29/tW5lvdJ.webp" alt="sonic 3 banner">
-                    </div>
-                    <div class="news_card left_shadow">
-                        <div class="news_shadow "></div>
-                        <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
-                        </div>
-                        <img src="http://localhost/moviesgo/v1/uploads/17/tAdCxUT.webp" alt="sonic 3 banner">
-                    </div>
-                </div>
-                <div class="news_row_center">
-                    <div class="news_card bottom_shadow">
-                        <div class="news_shadow "></div>
-                        <img src="http://localhost/moviesgo/v1/uploads/36/tMCJ9Wv.webp" alt="sonic 3 banner">
-                        <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="news_row_col">
-                    <div class="news_card right_shadow">
-                        <div class="news_shadow "></div>
-                        <img src="http://localhost/moviesgo/v1/uploads/28/tSO124n.webp" alt="sonic 3 banner">
-                        <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
-                        </div>
-                    </div>
-                    <div class="news_card right_shadow">
-                        <div class="news_shadow "></div>
-                        <img src="http://localhost/moviesgo/v1/uploads/42/t4hIIyT.webp" alt="sonic 3 banner">
-                        <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <?php include_once "../components/footer.php" ?>
     <?php include_once "../components/endpage.php" ?>

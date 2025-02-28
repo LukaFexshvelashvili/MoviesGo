@@ -617,17 +617,8 @@ a {
   justify-content: center;
   position: absolute;
   left: 0;
-  bottom: 25px;
-  height: 55px;
-  aspect-ratio: 16 / 9;
-  background-color: rgb(34, 34, 34);
+  bottom: 20px;
   border-radius: 10px;
-
-  video {
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-  }
   p {
     position: absolute;
     bottom: 0;
@@ -854,11 +845,6 @@ a {
     height: 0;
     width: 0;
     bottom: 25px;
-    video {
-      display: none;
-      height: 0%;
-      width: 0%;
-    }
   }
   .mg_play_pause_full {
     pointer-events: none;
