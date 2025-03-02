@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 70px 0;
+  margin: 50px 0;
 }
 
 .mg_cardslider_info {
@@ -55,7 +55,7 @@
   display: flex;
   align-items: center;
   overflow-x: auto;
-  gap: 10px;
+  gap: 15px;
 }
 
 .mg_cardslider_wide_row {
@@ -67,6 +67,9 @@
 }
 
 @media (max-width: 600px) {
+  .mg_cardslider {
+    margin: 40px 0;
+  }
   .mg_cardslider_row {
     gap: 10px;
   }
@@ -89,5 +92,10 @@
   }
   .mg_cardslider_info .mg_cardslider_end .mg_cardslider_button svg {
     height: 14px;
+  }
+}
+@media (max-width: 460px) {
+  .mg_cardslider_info .mg_cardslider_start {
+    font-size: 15px;
   }
 }/*# sourceMappingURL=mg_cardslider.css.map */

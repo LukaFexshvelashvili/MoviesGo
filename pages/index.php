@@ -6,13 +6,13 @@ include_once "../components/assets/types.php";
 
 
 $sql = "
-(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 0 ORDER BY year DESC LIMIT 3 )
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 0 ORDER BY year DESC LIMIT 8 )
 UNION ALL
-(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 1 ORDER BY year DESC LIMIT 3 )
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 1 ORDER BY year DESC LIMIT 8 )
 UNION ALL
-(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 2 ORDER BY year DESC LIMIT 3 )
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 2 ORDER BY year DESC LIMIT 8 )
 UNION ALL
-(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 3 ORDER BY year DESC LIMIT 3 ) ;
+(SELECT id, genres, description, poster_url, thumbnail_url, subtitle, name, name_eng, imdb, type, year, country, creator FROM movies WHERE type = 3 ORDER BY year DESC LIMIT 8 ) ;
 ";
 
 $movies_fetch = mysqli_query($conn, $sql);
@@ -33,7 +33,6 @@ foreach ($movies_list as $movie) {
         case 3:
             $movies_by_type["animes"][] = $movie;
             break;
-       
     }
 }
 
@@ -81,7 +80,46 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
 
     <!-- & CARD SLIDERS -->
     <div class="container index_cont">
-        <div class="mg_cardslider">
+
+        <?php
+        if (isset($watch_history)) {
+        ?>
+        <div class="mg_cardslider mg_cardslider_starter">
+            <div class="mg_cardslider_info">
+                <div class="mg_cardslider_start">
+
+                    განაგრძე ყურება
+                </div>
+                <div class="mg_cardslider_end">
+                    <div class="mg_cardslider_button cnt mg_cardslider_left">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                    <div class="mg_cardslider_button cnt mg_cardslider_right">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="mg_cardslider_row">
+                <?php
+                    while ($data = mysqli_fetch_assoc($watch_history)) {
+                        echo card($data, $image_starter);
+                    }
+                    ?>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
+        <!-- ჟანრები -->
+        <!-- <div class="mg_cardslider">
             <div class="mg_cardslider_info">
                 <div class="mg_cardslider_start">
                     ჟანრები
@@ -105,23 +143,20 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
             </div>
             <div class="mg_cardslider_row">
                 <?php
-                         if(isset($movies_by_type['series']) && !empty($movies_by_type['series'])) {
-                            foreach ($movies_list as $data) {
-                                ?>
+                if (isset($movies_by_type['series']) && !empty($movies_by_type['series'])) {
+                    foreach ($movies_list as $data) {
+                ?>
                 <div class="genre_card">
                     <div class="darken"></div>
-                    <img src="<?php echo $image_starter.$data['thumbnail_url'] ?>" alt="movie banner">
+                    <img src="<?php echo $image_starter . $data['thumbnail_url'] ?>" alt="movie banner">
                     <p>სათავგადასავლო</p>
                 </div>
                 <?php
-                            } 
-                        } 
+                    }
+                }
                 ?>
             </div>
-        </div>
-
-        <!-- ბოლოს ნანახი -->
-
+        </div> -->
 
 
     </div>
@@ -138,27 +173,30 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
                     <div class="news_card left_shadow">
                         <div class="news_shadow "></div>
                         <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
+                            <p><?php echo $movies_by_type["animations"][0]['name'] ?></p>
+                            <p><?php echo $movies_by_type["animations"][0]['name_eng'] ?></p>
                         </div>
-                        <img src="http://localhost/moviesgo/v1/uploads/29/tW5lvdJ.webp" alt="sonic 3 banner">
+                        <img src="<?php echo $image_starter.$movies_by_type["animations"][0]['thumbnail_url'] ?>"
+                            alt="<?php echo $movies_by_type["animations"][0]['name_eng'] ?> banner">
                     </div>
                     <div class="news_card left_shadow">
                         <div class="news_shadow "></div>
                         <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
+                            <p><?php echo $movies_by_type["animations"][1]['name'] ?></p>
+                            <p><?php echo $movies_by_type["animations"][1]['name_eng'] ?></p>
                         </div>
-                        <img src="http://localhost/moviesgo/v1/uploads/17/tAdCxUT.webp" alt="sonic 3 banner">
+                        <img src="<?php echo $image_starter.$movies_by_type["animations"][1]['thumbnail_url'] ?>"
+                            alt="<?php echo $movies_by_type["animations"][1]['name_eng'] ?> banner">
                     </div>
                 </div>
                 <div class="news_row_center">
                     <div class="news_card bottom_shadow">
                         <div class="news_shadow "></div>
-                        <img src="http://localhost/moviesgo/v1/uploads/36/tMCJ9Wv.webp" alt="sonic 3 banner">
+                        <img src="<?php echo $image_starter.$movies_by_type["animations"][2]['thumbnail_url'] ?>"
+                            alt="<?php echo $movies_by_type["animations"][2]['name_eng'] ?> banner">
                         <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
+                            <p><?php echo $movies_by_type["animations"][2]['name'] ?></p>
+                            <p><?php echo $movies_by_type["animations"][2]['name_eng'] ?></p>
                         </div>
                     </div>
 
@@ -166,18 +204,20 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
                 <div class="news_row_col">
                     <div class="news_card right_shadow">
                         <div class="news_shadow "></div>
-                        <img src="http://localhost/moviesgo/v1/uploads/28/tSO124n.webp" alt="sonic 3 banner">
+                        <img src="<?php echo $image_starter.$movies_by_type["movies"][3]['thumbnail_url'] ?>"
+                            alt="<?php echo $movies_by_type["movies"][3]['name_eng'] ?> banner">
                         <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
+                            <p><?php echo $movies_by_type["movies"][3]['name'] ?></p>
+                            <p><?php echo $movies_by_type["movies"][3]['name_eng'] ?></p>
                         </div>
                     </div>
                     <div class="news_card right_shadow">
                         <div class="news_shadow "></div>
-                        <img src="http://localhost/moviesgo/v1/uploads/42/t4hIIyT.webp" alt="sonic 3 banner">
+                        <img src="<?php echo $image_starter.$movies_by_type["movies"][4]['thumbnail_url'] ?>"
+                            alt="<?php echo $movies_by_type["movies"][4]['name_eng'] ?> banner">
                         <div class="news_card_info">
-                            <p>სონიკი 3</p>
-                            <p>SONIC 3</p>
+                            <p><?php echo $movies_by_type["movies"][4]['name'] ?></p>
+                            <p><?php echo $movies_by_type["movies"][4]['name_eng'] ?></p>
                         </div>
                     </div>
                 </div>
@@ -187,8 +227,14 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
     </div>
 
 
+    <!-- პოპულარულები -->
+    <?php include_once "./home/popular_block.php" ?>
+    <script src="../assets/engines/popular_slider.js"></script>
 
-    <div class="conatiner">
+
+
+    <!-- კატეგორიები -->
+    <div class="container">
         <div class="categories">
             <div class="head_starter">
                 <p>კატეგორიები</p>
@@ -240,7 +286,7 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
 
 
                     </div>
-                    <p>ანიმავიები</p>
+                    <p>ანიმაციები</p>
                 </a>
 
                 <a href="search?type=3" class="category_card">
@@ -263,8 +309,157 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
         </div>
     </div>
 
-    <?php include_once "./home/popular_block.php" ?>
-    <script src="../assets/engines/popular_slider.js"></script>
+
+    <!-- ფილმები -->
+    <div class="container">
+        <div class="mg_cardslider">
+            <div class="mg_cardslider_info">
+                <div class="mg_cardslider_start">
+                    ფილმები
+                </div>
+                <div class="mg_cardslider_end">
+                    <div class="mg_cardslider_button cnt mg_cardslider_left">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                    <div class="mg_cardslider_button cnt mg_cardslider_right">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="mg_cardslider_row">
+                <?php
+                if (isset($movies_by_type['movies']) && !empty($movies_by_type['movies'])) {
+                    foreach ($movies_by_type['movies'] as $data) {
+                        echo card($data, $image_starter);
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- ანიმეები -->
+    <div class="animes_row">
+        <img src="../assets/images/animebg.jpg" class="decor_bg" />
+        <div class="container">
+            <div class="mg_cardslider">
+                <div class="mg_cardslider_info">
+                    <div class="mg_cardslider_start">
+
+                        ანიმეები
+                    </div>
+                    <div class="mg_cardslider_end">
+                        <div class="mg_cardslider_button cnt mg_cardslider_left">
+                            <svg width="9" height="16" viewBox="0 0 9 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
+                                    fill="var(--main)" />
+                            </svg>
+                        </div>
+                        <div class="mg_cardslider_button cnt mg_cardslider_right">
+                            <svg width="9" height="16" viewBox="0 0 9 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
+                                    fill="var(--main)" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mg_cardslider_row">
+                    <?php
+                    if (isset($movies_by_type['animes']) && !empty($movies_by_type['animes'])) {
+                        foreach ($movies_by_type['animes'] as $data) {
+                            echo card($data, $image_starter);
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- სერიალები -->
+    <div class="container">
+        <div class="mg_cardslider">
+            <div class="mg_cardslider_info">
+                <div class="mg_cardslider_start">
+                    სერიალები
+                </div>
+                <div class="mg_cardslider_end">
+                    <div class="mg_cardslider_button cnt mg_cardslider_left">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                    <div class="mg_cardslider_button cnt mg_cardslider_right">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="mg_cardslider_row">
+                <?php
+                if (isset($movies_by_type['series']) && !empty($movies_by_type['series'])) {
+                    foreach ($movies_by_type['series'] as $data) {
+                        echo card($data, $image_starter);
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- ანიმაციები -->
+    <div class="container">
+        <div class="mg_cardslider">
+            <div class="mg_cardslider_info">
+                <div class="mg_cardslider_start">
+                    ანიმაციები
+                </div>
+                <div class="mg_cardslider_end">
+                    <div class="mg_cardslider_button cnt mg_cardslider_left">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.379685 8.62033L6.79762 15.0383C6.9173 15.158 7.05938 15.2529 7.21575 15.3177C7.37212 15.3824 7.53972 15.4158 7.70897 15.4158C8.05079 15.4158 8.37861 15.28 8.62032 15.0383C8.74 14.9186 8.83493 14.7765 8.8997 14.6201C8.96447 14.4638 8.99781 14.2962 8.99781 14.1269C8.99781 13.7851 8.86202 13.4573 8.62032 13.2156L3.10089 7.70899L8.62032 2.20239C8.74063 2.08306 8.83612 1.9411 8.90128 1.78468C8.96645 1.62826 9 1.46049 9 1.29104C9 1.12159 8.96645 0.953821 8.90128 0.797404C8.83612 0.640987 8.74063 0.499022 8.62032 0.379696C8.50099 0.259387 8.35902 0.163893 8.20261 0.0987262C8.04619 0.0335607 7.87842 1.14093e-05 7.70897 1.14093e-05C7.53952 1.14093e-05 7.37175 0.0335607 7.21533 0.0987262C7.05891 0.163893 6.91695 0.259387 6.79762 0.379696L0.379685 6.79764C0.259376 6.91697 0.163882 7.05893 0.0987154 7.21535C0.0335498 7.37177 5.36442e-07 7.53954 5.36442e-07 7.70899C5.36442e-07 7.87844 0.0335498 8.04621 0.0987154 8.20262C0.163882 8.35904 0.259376 8.50101 0.379685 8.62033Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                    <div class="mg_cardslider_button cnt mg_cardslider_right">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.62032 6.79544L2.20238 0.377493C2.0827 0.257813 1.94062 0.162878 1.78425 0.0981076C1.62788 0.0333372 1.46028 0 1.29103 0C0.94921 0 0.621387 0.135788 0.379683 0.377493C0.260003 0.497173 0.165067 0.639254 0.100297 0.795623C0.0355269 0.951992 0.00219149 1.11959 0.00219149 1.28884C0.00219149 1.63066 0.137979 1.95848 0.379683 2.20019L5.89911 7.70679L0.379683 13.2134C0.259374 13.3327 0.163883 13.4747 0.0987171 13.6311C0.033551 13.7875 0 13.9553 0 14.1247C0 14.2942 0.033551 14.462 0.0987171 14.6184C0.163883 14.7748 0.259374 14.9167 0.379683 15.0361C0.499009 15.1564 0.640976 15.2519 0.797393 15.317C0.95381 15.3822 1.12158 15.4158 1.29103 15.4158C1.46048 15.4158 1.62825 15.3822 1.78467 15.317C1.94109 15.2519 2.08305 15.1564 2.20238 15.0361L8.62032 8.61813C8.74062 8.49881 8.83612 8.35684 8.90129 8.20042C8.96645 8.04401 9 7.87623 9 7.70679C9 7.53734 8.96645 7.36956 8.90129 7.21315C8.83612 7.05673 8.74062 6.91476 8.62032 6.79544Z"
+                                fill="var(--main)" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="mg_cardslider_row">
+                <?php
+                if (isset($movies_by_type['animations']) && !empty($movies_by_type['animations'])) {
+                    foreach ($movies_by_type['animations'] as $data) {
+                        echo card($data, $image_starter);
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
 
 
     <?php include_once "../components/footer.php" ?>
@@ -274,6 +469,7 @@ if (isset($_SESSION['watch_history']) && !empty($_SESSION['watch_history'])) {
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script type="module" src="../ui/mg_engine.js"></script>
     <script src="../assets/engines/nav.js"></script>
+    <script src="../assets/engines/home.js"></script>
     <script src="../assets/engines/mg_cardslider_wide.js"></script>
     <script src="../assets/engines/mg_cardslider.js"></script>
     <script src="../assets/engines/card.js"></script>

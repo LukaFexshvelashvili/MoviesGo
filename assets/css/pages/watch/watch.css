@@ -129,6 +129,7 @@
 
 .movie_card_info {
   width: 100%;
+  overflow: hidden;
   position: relative;
   font-family: mmedium;
   display: flex;
@@ -253,12 +254,14 @@
   align-items: start;
   gap: 3px;
   width: 100%;
+  overflow: hidden;
 }
 .movie_card_info .info_texter p,
 .movie_card_info .info_texter a {
   font-size: 16px;
   display: inline-block;
   -webkit-box-orient: vertical;
+  max-width: 100%;
   overflow: hidden;
   white-space: nowrap;
   -webkit-line-clamp: 1;
@@ -978,6 +981,9 @@
     font-size: 14px;
   }
   .movie_card_info .info_texter p {
+    font-size: 14px;
+  }
+  .movie_card_info .info_texter a {
     font-size: 14px;
   }
   .movie_card_info .movie_card_information .info_card_inline span {

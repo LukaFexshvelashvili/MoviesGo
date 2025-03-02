@@ -296,6 +296,7 @@ a {
         border-radius: 5px;
         z-index: 0;
         background-color: rgba(255, 255, 255, 0.3);
+        pointer-events: none;
       }
       .mg_time_indicator::before {
         pointer-events: none;
@@ -617,7 +618,7 @@ a {
   justify-content: center;
   position: absolute;
   left: 0;
-  bottom: 20px;
+  bottom: 25px;
   border-radius: 10px;
   p {
     position: absolute;

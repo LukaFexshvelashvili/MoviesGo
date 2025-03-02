@@ -54,34 +54,38 @@ for ($i = 0; $i < count($slider_array); $i++) {
                 <div class="popular_card right_shadow">
                     <div class="popular_shadow "></div>
                     <div class="popular_card_info">
-                        <p>სონიკი 3</p>
-                        <p>SONIC 3</p>
+                        <p><?php echo $movies_by_type["movies"][4]['name'] ?></p>
+                        <p><?php echo $movies_by_type["movies"][4]['name_eng'] ?></p>
                     </div>
-                    <img src="http://localhost/moviesgo/v1/uploads/29/tW5lvdJ.webp" alt="sonic 3 banner">
+                    <img src="<?php echo $image_starter.$movies_by_type["movies"][4]['thumbnail_url'] ?>"
+                        alt="<?php echo $movies_by_type["movies"][4]['name_eng'] ?> banner">
                 </div>
                 <div class="popular_card right_shadow">
                     <div class="popular_shadow "></div>
                     <div class="popular_card_info">
-                        <p>სონიკი 3</p>
-                        <p>SONIC 3</p>
+                        <p><?php echo $movies_by_type["movies"][5]['name'] ?></p>
+                        <p><?php echo $movies_by_type["movies"][5]['name_eng'] ?></p>
                     </div>
-                    <img src="http://localhost/moviesgo/v1/uploads/36/tMCJ9Wv.webp" alt="sonic 3 banner">
+                    <img src="<?php echo $image_starter.$movies_by_type["movies"][5]['thumbnail_url'] ?>"
+                        alt="<?php echo $movies_by_type["movies"][5]['name_eng'] ?> banner">
                 </div>
                 <div class="popular_card right_shadow">
                     <div class="popular_shadow "></div>
                     <div class="popular_card_info">
-                        <p>სონიკი 3</p>
-                        <p>SONIC 3</p>
+                        <p><?php echo $movies_by_type["movies"][6]['name'] ?></p>
+                        <p><?php echo $movies_by_type["movies"][6]['name_eng'] ?></p>
                     </div>
-                    <img src="http://localhost/moviesgo/v1/uploads/42/t4hIIyT.webp" alt="sonic 3 banner">
+                    <img src="<?php echo $image_starter.$movies_by_type["movies"][6]['thumbnail_url'] ?>"
+                        alt="<?php echo $movies_by_type["movies"][6]['name_eng'] ?> banner">
                 </div>
                 <div class="popular_card right_shadow">
                     <div class="popular_shadow "></div>
                     <div class="popular_card_info">
-                        <p>სონიკი 3</p>
-                        <p>SONIC 3</p>
+                        <p><?php echo $movies_by_type["movies"][7]['name'] ?></p>
+                        <p><?php echo $movies_by_type["movies"][7]['name_eng'] ?></p>
                     </div>
-                    <img src="http://localhost/moviesgo/v1/uploads/28/tSO124n.webp" alt="sonic 3 banner">
+                    <img src="<?php echo $image_starter.$movies_by_type["movies"][7]['thumbnail_url'] ?>"
+                        alt="<?php echo $movies_by_type["movies"][7]['name_eng'] ?> banner">
                 </div>
             </div>
         </div>

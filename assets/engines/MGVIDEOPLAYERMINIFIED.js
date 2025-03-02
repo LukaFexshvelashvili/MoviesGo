@@ -27,9 +27,9 @@ const n = document.querySelector(".mg_error_block"),
   T = document.querySelector(".mg_skip_right_button"),
   w = document.querySelector(".mg_fullscreen"),
   b = document.querySelector("#mg_fullscreen_on_"),
-  M = document.querySelector("#mg_fullscreen_off_"),
-  k = document.querySelectorAll(".mg_speed_button"),
-  q = document.querySelector(".mg_controls"),
+  k = document.querySelector("#mg_fullscreen_off_"),
+  q = document.querySelectorAll(".mg_speed_button"),
+  M = document.querySelector(".mg_controls"),
   x = document.querySelector(".mg_download"),
   R = document.querySelector(".mg_frame"),
   A = document.querySelector(".mg_settings_block"),
@@ -38,11 +38,11 @@ const n = document.querySelector(".mg_error_block"),
   I = document.querySelectorAll(".mg_setting_choose"),
   O = document.querySelector("#active_setting_language"),
   G = document.querySelector("#active_setting_quality"),
-  Y = document.querySelector("#active_setting_speed"),
-  V = document.querySelector("#mg_settings_toggler"),
-  D = document.querySelector(".mg_skip_left"),
-  F = document.querySelector(".mg_skip_right"),
-  z = document.querySelector(".mg_languages"),
+  F = document.querySelector("#active_setting_speed"),
+  Y = document.querySelector("#mg_settings_toggler"),
+  V = document.querySelector(".mg_skip_left"),
+  z = document.querySelector(".mg_skip_right"),
+  D = document.querySelector(".mg_languages"),
   $ = document.querySelector(".mg_qualities"),
   B = document.querySelector(".mg_context_menu"),
   N = document.querySelector(".mg_player_eps_scroll"),
@@ -82,7 +82,7 @@ localStorage.getItem("mg_player_controls")
   ? ((K = JSON.parse(localStorage.getItem("mg_player_controls"))),
     (O.innerText = K.lang ? K.lang.toString() : "GEO"),
     (G.innerText = K.quality ? K.quality.toString() : "HD"),
-    (Y.innerText = K.speed ? K.speed.toString() : "1"))
+    (F.innerText = K.speed ? K.speed.toString() : "1"))
   : ((K = { lang: "GEO", volume: 1, speed: 1, quality: "HD" }),
     localStorage.setItem("mg_player_controls", JSON.stringify(K)));
 let ne = !1,
@@ -114,9 +114,9 @@ function setLoading(e) {
         MG_PLAYER.languages[K.lang]?.[K.quality] ||
         MG_PLAYER.languages.GEO?.[K.quality] ||
         MG_PLAYER.languages.GEO?.HD;
-      k.forEach((e) => {
+      q.forEach((e) => {
         e.innerHTML.trim() == K.speed &&
-          (k.forEach((e) => e.classList.remove("mg_button_active")),
+          (q.forEach((e) => e.classList.remove("mg_button_active")),
           e.classList.add("mg_button_active"));
       }),
         (function measureSoundHand(e) {
@@ -198,7 +198,7 @@ function setLoading(e) {
       K.quality == e ? " mg_button_active" : ""
     }'>${e}</div>`;
   for (const [e] of Object.entries(MG_PLAYER.languages))
-    z.innerHTML += `<div class='mg_button${
+    D.innerHTML += `<div class='mg_button${
       K.lang == e ? " mg_button_active" : ""
     }'>${e}</div>`;
 })(),
@@ -218,7 +218,7 @@ function setLoading(e) {
   e.addEventListener("click", function playerClick(e) {
     mouseMoving(),
       A.classList.contains("mg_settings_hidden") ||
-        q.contains(e.target) ||
+        M.contains(e.target) ||
         closeSettings();
   }),
   X.addEventListener("click", function openEpisodes() {
@@ -230,7 +230,7 @@ function setLoading(e) {
   e.addEventListener("touchmove", mouseMoving, { passive: !0 }),
   w.addEventListener("click", fullscreenOnOff),
   o.addEventListener("click", firstStart),
-  D.addEventListener("touchend", function skipLeftDbl(e) {
+  V.addEventListener("touchend", function skipLeftDbl(e) {
     e.preventDefault(),
       dbClick(
         () => {
@@ -241,7 +241,7 @@ function setLoading(e) {
       (E.innerHTML = formatTime(i.currentTime)),
       measureTime(i.currentTime);
   }),
-  F.addEventListener("touchend", function skipRightDbl(e) {
+  z.addEventListener("touchend", function skipRightDbl(e) {
     e.preventDefault(),
       dbClick(
         () => {
@@ -275,7 +275,7 @@ function setLoading(e) {
       saveControls({ volume: g.value / 100 }),
       (i.volume = g.value / 100);
   }),
-  V.addEventListener("click", function toggleSettings() {
+  Y.addEventListener("click", function toggleSettings() {
     A.classList.toggle("mg_settings_hidden");
   }),
   R.addEventListener("click", async function togglePIP() {
@@ -476,9 +476,9 @@ function onDragingTouch(e) {
     B.style.display = "none";
   });
 const re = Array.from($.children),
-  de = Array.from(z.children);
+  de = Array.from(D.children);
 function hideControls() {
-  q.classList.add("mg_controls_hidden"),
+  M.classList.add("mg_controls_hidden"),
     j.classList.contains("mg_player_eps_container_show") ||
       (Z.classList.add("mg_controls_hidden"), closeEpisodes()),
     e.classList.add("mg_hide_cursor"),
@@ -486,7 +486,7 @@ function hideControls() {
     closeSettings();
 }
 function showControls() {
-  q.classList.remove("mg_controls_hidden"),
+  M.classList.remove("mg_controls_hidden"),
     Z.classList.remove("mg_controls_hidden"),
     e.classList.remove("mg_hide_cursor"),
     c.classList.remove("mg_controls_hidden");
@@ -499,27 +499,30 @@ function closeSettings() {
     }, 200);
 }
 function fullscreenOnOff() {
-  !(function isFullscreen() {
-    return document.fullscreenElement === e;
-  })()
-    ? (e.requestFullscreen
+  isFullscreen()
+    ? (document.exitFullscreen
+        ? (screen.orientation && screen.orientation.unlock(),
+          document.exitFullscreen())
+        : document.mozCancelFullScreen
+        ? document.mozCancelFullScreen()
+        : document.webkitExitFullscreen
+        ? document.webkitExitFullscreen()
+        : document.msExitFullscreen && document.msExitFullscreen(),
+      (k.style.display = "none"),
+      (b.style.display = "block"))
+    : (e.requestFullscreen
         ? e.requestFullscreen()
         : e.mozRequestFullScreen
         ? e.mozRequestFullScreen()
         : e.webkitRequestFullscreen
         ? e.webkitRequestFullscreen()
         : e.msRequestFullscreen && e.msRequestFullscreen(),
+      screen.orientation && screen.orientation.lock("landscape").then(() => {}),
       (b.style.display = "none"),
-      (M.style.display = "block"))
-    : (document.exitFullscreen
-        ? document.exitFullscreen()
-        : document.mozCancelFullScreen
-        ? document.mozCancelFullScreen()
-        : document.webkitExitFullscreen
-        ? document.webkitExitFullscreen()
-        : document.msExitFullscreen && document.msExitFullscreen(),
-      (M.style.display = "none"),
-      (b.style.display = "block"));
+      (k.style.display = "block"));
+}
+function isFullscreen() {
+  return document.fullscreenElement === e;
 }
 function removeSeeTime() {
   (h.style.opacity = 0), (y.style.width = "0%");
@@ -591,17 +594,6 @@ function firstStart() {
     }, 50),
     changeControls("play");
 }
-function formatTime(e) {
-  const n = Math.floor(e / 3600),
-    t = Math.floor((e % 3600) / 60),
-    s = Math.floor(e % 60);
-  return n > 0
-    ? `${n}:${String(t).padStart(2, "0")}:${String(s).padStart(2, "0")}`
-    : `${t}:${String(s).padStart(2, "0")}`;
-}
-function percentageToTime(e) {
-  return i.duration && e ? (i.duration / 100) * e : i.currentTime;
-}
 re.forEach((e) => {
   e.addEventListener("click", () => {
     if (!e.classList.contains("mg_button_active")) {
@@ -632,13 +624,13 @@ re.forEach((e) => {
       }
     });
   }),
-  k.forEach((e) => {
+  q.forEach((e) => {
     e.addEventListener("click", () => {
       e.classList.contains("mg_button_active") ||
         ((i.playbackRate = e.innerText),
-        k.forEach((e) => e.classList.remove("mg_button_active")),
+        q.forEach((e) => e.classList.remove("mg_button_active")),
         saveControls({ speed: e.innerText }),
-        (Y.innerText = e.innerText),
+        (F.innerText = e.innerText),
         e.classList.add("mg_button_active"));
     });
   }),
@@ -658,6 +650,44 @@ re.forEach((e) => {
       P.forEach((e) => e.classList.add("mg_settings_column_hide")),
         P[0].classList.remove("mg_settings_column_hide");
     });
+  });
+function formatTime(e) {
+  const n = Math.floor(e / 3600),
+    t = Math.floor((e % 3600) / 60),
+    s = Math.floor(e % 60);
+  return n > 0
+    ? `${n}:${String(t).padStart(2, "0")}:${String(s).padStart(2, "0")}`
+    : `${t}:${String(s).padStart(2, "0")}`;
+}
+function percentageToTime(e) {
+  return i.duration && e ? (i.duration / 100) * e : i.currentTime;
+}
+window
+  .matchMedia("(orientation: landscape)")
+  .addEventListener("change", (n) => {
+    n.matches
+      ? (screen.orientation && screen.orientation.lock("landscape"),
+        te &&
+          (e.requestFullscreen
+            ? e.requestFullscreen()
+            : e.mozRequestFullScreen
+            ? e.mozRequestFullScreen()
+            : e.webkitRequestFullscreen
+            ? e.webkitRequestFullscreen()
+            : e.msRequestFullscreen && e.msRequestFullscreen(),
+          (b.style.display = "none"),
+          (k.style.display = "block")))
+      : (isFullscreen() &&
+          (document.exitFullscreen
+            ? document.exitFullscreen()
+            : document.mozCancelFullScreen
+            ? document.mozCancelFullScreen()
+            : document.webkitExitFullscreen
+            ? document.webkitExitFullscreen()
+            : document.msExitFullscreen && document.msExitFullscreen(),
+          (k.style.display = "none"),
+          (b.style.display = "block")),
+        screen.orientation && screen.orientation.unlock());
   });
 let ue,
   me = 0;
@@ -682,7 +712,7 @@ function saveControls({ lang: e, volume: n, speed: t, quality: s }) {
       (o.speed = t ?? o.speed),
       (O.innerText = e ? o.lang.toString() : "GEO"),
       (G.innerText = s ? o.quality.toString() : "HD"),
-      (Y.innerText = t ? o.speed.toString() : "1"),
+      (F.innerText = t ? o.speed.toString() : "1"),
       localStorage.setItem("mg_player_controls", JSON.stringify(o));
   }
 }

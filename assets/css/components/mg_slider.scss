@@ -76,7 +76,7 @@
   position: absolute;
   z-index: 5;
   align-items: center;
-  bottom: 40px;
+  bottom: 30px;
   right: 40px;
   gap: 8px;
   div {
@@ -103,8 +103,9 @@
 }
 
 .mg_slider_info {
-  font-feature-settings: "case";
+  padding-top: 70px;
 
+  font-feature-settings: "case";
   position: absolute;
   z-index: 4;
   left: 50%;
@@ -123,7 +124,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
   .s_year,
   .s_type,
@@ -131,10 +132,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 1px;
-    height: 30px;
-    padding: 0 20px;
+    height: 26px;
+    padding: 0 15px;
     color: var(--texthead);
     border: 2px solid var(--texthead);
     background-color: rgba(0, 0, 0, 0.5);
@@ -231,12 +232,90 @@
     }
   }
 }
+@media (max-width: 1540px) {
+  .mg_slider {
+    aspect-ratio: 16/5;
+  }
+}
+@media (max-width: 1200px) {
+  .mg_slider {
+    aspect-ratio: 16/4.5;
+  }
+  .mg_slider_info {
+    top: 20px;
+    padding-top: 60px;
+
+    .slider_card_start {
+      width: 100%;
+      max-width: unset;
+    }
+    .slider_card_description {
+      display: none;
+    }
+    .slider_card_title {
+      font-size: 16px;
+    }
+    .mg_slider_actions {
+      display: none;
+    }
+    .slider_card_addons {
+      gap: 6px;
+    }
+    .s_year,
+    .s_type,
+    .s_imdb {
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      height: 24px;
+      padding: 0 10px;
+      border-width: 1px;
+    }
+  }
+  .mg_slider_indicators {
+    bottom: 20px;
+    right: 20px;
+  }
+}
 
 @media (max-width: 992px) {
+  .mg_slider {
+    aspect-ratio: 16/5;
+  }
   .mg_slider_left,
   .mg_slider_right {
     display: none;
   }
 }
 @media (max-width: 768px) {
+  .mg_slider {
+    aspect-ratio: 16/6;
+    min-height: 200px;
+  }
+  .mg_slider_info {
+    top: 15px;
+    width: 100%;
+    padding-top: 55px;
+  }
+  .mg_slider_indicators {
+    gap: 6px;
+    bottom: 15px;
+    right: 15px;
+    div {
+      height: 8px;
+    }
+  }
+  .mg_slider_info {
+    .slider_card_title {
+      font-size: 14px;
+    }
+    .s_year,
+    .s_type,
+    .s_imdb {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      height: 22px;
+      padding: 0 8px;
+      border-width: 1px;
+    }
+  }
 }

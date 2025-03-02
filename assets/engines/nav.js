@@ -71,7 +71,7 @@ navinput.addEventListener("input", () => {
     } else {
       navsearch.innerHTML = '<p class="no_results">ძიება</p>';
     }
-  }, 300);
+  }, 150);
 });
 
 navinput.addEventListener("click", () => {
