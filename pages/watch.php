@@ -125,27 +125,28 @@ if ($_GET["id"]) {
                         if ($i == 1) {
                             if ($first_geo_src || $first_eng_src) {
                                 echo '<div data-player="' . $i . '" class="mg_player player_box video_players"></div>';
-                                $firstRend = true;
+                                $firstRend = false;
                             } elseif (!empty($players[$i]["GEO"]["HD"])) {
-                                echo '<div data-player="' . $i . '" class="iframe_players player_box iframe_player_box">
-                                  <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
-                                      class="iframe_players video_players" 
-                                      src="' . htmlspecialchars($players[$i]["GEO"]["HD"], ENT_QUOTES, 'UTF-8') . '" 
-                                      frameborder="0" allowfullscreen>
-                                  </iframe>
-                              </div>';
-                                $firstRend = true;
+                                
+                                echo '<div data-player="' . $i . '" class="iframe_players player_box  iframe_player_box">
+                                <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
+                                class="iframe_players video_players" 
+                                src="' . htmlspecialchars($players[$i]["GEO"]["HD"], ENT_QUOTES, 'UTF-8') . '" 
+                                frameborder="0" allowfullscreen>
+                                </iframe>
+                                </div>';
+                                $firstRend = false;
                             }
-                        } elseif (!$firstRend) {
-
+                        } elseif ($firstRend) {
+                            
                             echo '<div data-player="' . $i . '" class="iframe_players player_box iframe_player_box">
-                              <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
-                                  class="iframe_players video_players" 
-                                  src="' . htmlspecialchars($players[$i]["GEO"]["HD"], ENT_QUOTES, 'UTF-8') . '" 
-                                  frameborder="0" allowfullscreen>
-                              </iframe>
-                          </div>';
-                            $firstRend = true;
+                            <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
+                            class="iframe_players video_players" 
+                            src="' . htmlspecialchars($players[$i]["GEO"]["HD"], ENT_QUOTES, 'UTF-8') . '" 
+                            frameborder="0" allowfullscreen>
+                            </iframe>
+                            </div>';
+                            $firstRend = false;
                         } elseif (!empty($players[$i]["GEO"]["HD"])) {
                             echo '<div data-player="' . $i . '" class="iframe_players player_box iframe_player_box hidden_player">
                               <iframe sandbox="allow-scripts allow-same-origin" data-player="' . $i . '" 
@@ -202,14 +203,14 @@ if ($_GET["id"]) {
                             if ($i == 1) {
                                 if ($first_geo_src || $first_eng_src) {
                                     echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი 1</div>';
-                                    $firstRend = true;
+                                    $firstRend = false;
                                 } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
                                     echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი ' . $i . '</div>';
-                                    $firstRend = true;
+                                    $firstRend = false;
                                 }
-                            } elseif (!$firstRend) {
+                            } elseif ($firstRend) {
                                 echo '<div data-player-button="' . $i . '" class="cnt players_change_button active_player">ფლეიერი ' . $i . '</div>';
-                                $firstRend = true;
+                                $firstRend = false;
                             } elseif (!empty($players[$i]["GEO"]["HD"]) || !empty($players[$i]["ENG"]["HD"])) {
                                 echo '<div data-player-button="' . $i . '" class="cnt players_change_button">ფლეიერი ' . $i . '</div>';
                             }

@@ -277,7 +277,7 @@
 @media (max-width: 768px) {
   .mg_slider {
     aspect-ratio: 16/6;
-    min-height: 200px;
+    min-height: 250px;
   }
   .mg_slider_info {
     top: 15px;

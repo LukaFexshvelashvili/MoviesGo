@@ -35,8 +35,8 @@
   height: 65px;
   display: flex;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
   border-bottom: 2px solid transparent;
   backface-visibility: hidden;
   transform: translateZ(0);
@@ -779,6 +779,7 @@
     }
     .navinput {
       border-radius: 0px;
+      background-color: var(--navbg);
     }
     .searchnavinput,
     .nav_mb_search_close {

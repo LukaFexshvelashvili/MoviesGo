@@ -149,4 +149,37 @@ document.addEventListener("DOMContentLoaded", () => {
       mg_web_loader.remove();
     });
   }
+  startHeartbeat();
+  sendSessionStatus("enter"); // Notify server that the user is back
 });
+
+// SESSION
+
+function sendSessionStatus(status) {
+  const data = new URLSearchParams();
+  data.append("status", status);
+
+  navigator.sendBeacon(server_start_local + "user/session.php", data);
+}
+let heartbeatInterval;
+
+function startHeartbeat() {
+  heartbeatInterval = setInterval(() => {
+    sendSessionStatus("enter");
+  }, 40000); // Send a heartbeat every 30 seconds
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    stopHeartbeat(); // User switched tabs, apps, or closed the browser
+  } else {
+    startHeartbeat(); // User returned to the page
+    sendSessionStatus("enter"); // Notify server that the user is back
+  }
+});
+
+function stopHeartbeat() {
+  clearInterval(heartbeatInterval);
+  sendSessionStatus("leave");
+}
+window.addEventListener("beforeunload", stopHeartbeat);

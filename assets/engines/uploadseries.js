@@ -43,7 +43,7 @@ function changeValues(answer) {
   year.value = answer.Year;
   country.value = answer.Country;
   imdb.value = answer.imdbRating;
-  creator.value = answer.Director_eng;
+  creator.value = answer.Writer_eng;
   actors.value = answer.Actors_eng;
   description.value = answer.Plot;
   ai_suggestion.innerText = `AI შემოთავაზება: ${answer.Genre}`;
@@ -98,7 +98,7 @@ async function sendAIrequest() {
           Title_eng: data.Title,
           ...translatedAnswer,
           Actors_eng: data.Actors,
-          Director_eng: data.Director,
+          Writer_eng: data.Writer,
         });
       },
       "json"
